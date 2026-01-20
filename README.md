@@ -38,7 +38,7 @@ git --version
 
 1️⃣ Clone the Repository
 
-git clone <repository-url>
+git clone https://github.com/Immortalsoul21/sriandcotechnosolution-frontend.git
 cd sriandcotechnosolution-frontend
 
 
