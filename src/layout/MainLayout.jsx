@@ -1,14 +1,12 @@
+import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 import { Outlet } from 'react-router-dom';
 
 export default function MainLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="h-14 flex items-center px-6 bg-white shadow">
-        <h1 className="text-lg font-semibold">
-          Sri & Co Techno Solution
-        </h1>
-      </header>
+        <Navbar />
 
       {/* Page content */}
       <main className="flex-1">
@@ -17,7 +15,7 @@ export default function MainLayout() {
 
       {/* Footer */}
       <footer className="h-12 flex items-center justify-center text-sm text-gray-500">
-        © {new Date().getFullYear()} Sri & Co Techno Solution
+        <Footer />
       </footer>
     </div>
   );
