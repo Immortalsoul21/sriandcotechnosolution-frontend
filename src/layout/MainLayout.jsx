@@ -6,7 +6,7 @@ export default function MainLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-        <Navbar />
+      <Navbar />
 
       {/* Page content */}
       <main className="flex-1">
@@ -14,7 +14,7 @@ export default function MainLayout() {
       </main>
 
       {/* Footer */}
-      <footer className="h-12 flex items-center justify-center text-sm text-gray-500">
+      <footer>
         <Footer />
       </footer>
     </div>
