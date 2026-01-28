@@ -27,10 +27,10 @@ const ProductSection = ({ title, products, category }) => {
         </button>
       </div>
 
-      <div className="overflow-x-auto scrollbar-hide py-2">
-        <div className="flex lg:grid lg:grid-cols-6 gap-4 py-6 px-1">
-          {products.slice(0, 6).map(product => (
-            <div key={product.id} className="flex-shrink-0 w-64 lg:w-full">
+      <div className="overflow-x-auto scrollbar-hide -mx-4 px-4 py-2">
+        <div className="flex gap-6 py-4">
+          {products.slice(0, 10).map(product => (
+            <div key={product.id} className="flex-shrink-0 w-80">
               <ProductCard product={product} onClick={handleProductClick} />
             </div>
           ))}

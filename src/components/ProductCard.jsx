@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 const ProductCard = ({ product, onClick }) => (
     <div
         onClick={() => onClick(product)}
-        className="group bg-white rounded-lg shadow-lg shadow-blue-900/5 overflow-hidden hover:shadow-2xl hover:shadow-blue-900/15 transition-all duration-300 cursor-pointer h-64 flex flex-col"
+        className="group bg-white rounded-lg shadow-lg shadow-blue-900/5 overflow-hidden hover:shadow-2xl hover:shadow-blue-900/15 transition-all duration-300 cursor-pointer h-64  flex flex-col"
     >
         <div className={`relative h-44 group-hover:h-full transition-all duration-500 ${product.bgColor || 'bg-gray-200'} flex items-center justify-center overflow-hidden`}>
             {product.badge && (

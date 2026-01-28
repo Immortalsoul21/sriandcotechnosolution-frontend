@@ -1,47 +1,88 @@
 export const productsData = {
-  electronics: [
-    {
-      id: 1,
-      name: 'Wireless Headphones Pro',
-      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop',
-      rating: 4.8,
-      badge: 'Popular',
-      bgColor: 'bg-blue-600'
-    },
-    {
-      id: 2,
-      name: 'Smart Watch Series X',
-      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop',
-      rating: 4.9,
-      badge: 'New',
-      bgColor: 'bg-gray-300'
-    },
-    {
-      id: 3,
-      name: 'Ultra HD Camera',
-      image: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop',
-      rating: 4.7,
-      badge: null,
-      bgColor: 'bg-gray-200'
-    },
-    {
-      id: 4,
-      name: 'Laptop Pro 15"',
-      image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=300&fit=crop',
-      rating: 4.9,
-      badge: 'Popular',
-      bgColor: 'bg-yellow-200'
-    },
-    {
-      id: 5,
-      name: 'Gaming Console',
-      image: 'https://images.unsplash.com/photo-1486401899868-0e435ed85128?w=400&h=300&fit=crop',
-      rating: 4.8,
-      badge: null,
-      bgColor: 'bg-gray-300'
-    }
-  ],
+electronics: [
+  {
+    id: 1,
+    name: 'Wireless Headphones Pro',
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop',
+    rating: 4.8,
+    badge: 'Popular',
+    bgColor: 'bg-blue-600'
+  },
+  {
+    id: 2,
+    name: 'Smart Watch Series X',
+    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop',
+    rating: 4.9,
+    badge: 'New',
+    bgColor: 'bg-gray-300'
+  },
+  {
+    id: 3,
+    name: 'Ultra HD Camera',
+    image: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop',
+    rating: 4.7,
+    badge: null,
+    bgColor: 'bg-gray-200'
+  },
+  {
+    id: 4,
+    name: 'Laptop Pro 15"',
+    image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=300&fit=crop',
+    rating: 4.9,
+    badge: 'Popular',
+    bgColor: 'bg-yellow-200'
+  },
+  {
+    id: 5,
+    name: 'Gaming Console',
+    image: 'https://images.unsplash.com/photo-1486401899868-0e435ed85128?w=400&h=300&fit=crop',
+    rating: 4.8,
+    badge: null,
+    bgColor: 'bg-gray-300'
+  },
 
+  // 🔽 New Items
+  {
+    id: 6,
+    name: 'Bluetooth Speaker Max',
+    image: 'https://images.unsplash.com/photo-1585386959984-a41552231693?w=400&h=300&fit=crop',
+    rating: 4.6,
+    badge: 'Popular',
+    bgColor: 'bg-indigo-300'
+  },
+  {
+    id: 7,
+    name: 'Noise Cancelling Earbuds',
+    image: 'https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=400&h=300&fit=crop',
+    rating: 4.8,
+    badge: 'New',
+    bgColor: 'bg-green-200'
+  },
+  {
+    id: 8,
+    name: '4K Smart TV',
+    image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&h=300&fit=crop',
+    rating: 4.7,
+    badge: null,
+    bgColor: 'bg-gray-100'
+  },
+  {
+    id: 9,
+    name: 'Mechanical Keyboard',
+    image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop',
+    rating: 4.9,
+    badge: 'Popular',
+    bgColor: 'bg-purple-200'
+  },
+  {
+    id: 10,
+    name: 'Wireless Mouse Pro',
+    image: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400&h=300&fit=crop',
+    rating: 4.6,
+    badge: null,
+    bgColor: 'bg-gray-200'
+  }
+],
   fashion: [
     {
       id: 101,
