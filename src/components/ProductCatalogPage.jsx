@@ -2,30 +2,28 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import FilterBar from "./FilterBar";
 import ProductCard from "./ProductCard";
-import { getCategoryProducts, getCategoryTitle } from "@/data/products";
+import { products, categories, subcategories } from "@/data/products1";
 
 const ProductCatalogPage = () => {
   const { category } = useParams();
   const navigate = useNavigate();
-  const products = getCategoryProducts(category);
-  const categoryTitle = getCategoryTitle(category);
 
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const categoryData = categories.find(c => c.categoryId === category);
+  const categoryTitle = categoryData ? categoryData.value : category;
+  const initialProducts = products.filter(p => p.categoryId === category);
+  const categorySubcategories = subcategories.filter(s => s.categoryId === category);
+
+  const [filteredProducts, setFilteredProducts] = useState(initialProducts);
 
   useEffect(() => {
-    setFilteredProducts(products);
+    setFilteredProducts(products.filter(p => p.categoryId === category));
   }, [category]);
 
   const handleFilterChange = (filters) => {
-    let filtered = [...products];
+    let filtered = products.filter(p => p.categoryId === category);
 
-    if (filters.rating !== 'all') {
-      const minRating = parseFloat(filters.rating);
-      filtered = filtered.filter(p => p.rating >= minRating);
-    }
-
-    if (filters.badge !== 'all') {
-      filtered = filtered.filter(p => p.badge === filters.badge);
+    if (filters.subcategoryId && filters.subcategoryId !== 'all') {
+      filtered = filtered.filter(p => p.subcategoryId === filters.subcategoryId);
     }
 
     setFilteredProducts(filtered);
@@ -65,6 +63,7 @@ const ProductCatalogPage = () => {
             <FilterBar
               onFilterChange={handleFilterChange}
               productCount={filteredProducts.length}
+              subcategories={categorySubcategories}
             />
           </div>
         </div>

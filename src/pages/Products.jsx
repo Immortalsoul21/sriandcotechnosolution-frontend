@@ -1,5 +1,5 @@
 import ProductSection from '@/components/ProductSection';
-import { productsData, getCategoryTitle } from '@/data/products';
+import { categories, products } from '@/data/products1';
 import React from 'react'
 
 const Products = () => {
@@ -13,12 +13,12 @@ const Products = () => {
 
       {/* Categories Section */}
       <div className="pb-24 space-y-16 pl-12 sm:pl-20 lg:pl-32 pr-6">
-        {Object.keys(productsData).map((categoryKey) => (
+        {categories.map((cat) => (
           <ProductSection
-            key={categoryKey}
-            title={getCategoryTitle(categoryKey)}
-            products={productsData[categoryKey]}
-            category={categoryKey}
+            key={cat.categoryId}
+            title={cat.value}
+            products={products.filter(p => p.categoryId === cat.categoryId)}
+            category={cat.categoryId}
           />
         ))}
       </div>
