@@ -2,13 +2,25 @@ import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "./ProductCard";
 
+/**
+ * ProductSection Component
+ * Renders a horizontal scrolling row of products for a given category.
+ */
 const ProductSection = ({ title, products, category }) => {
   const navigate = useNavigate();
 
+  /**
+   * handleViewAll
+   * Navigates to the full catalog page for this specific category.
+   */
   const handleViewAll = () => {
     navigate(`/products/${category}`);
   };
 
+  /**
+   * handleProductClick
+   * Navigates to the individual product detail page.
+   */
   const handleProductClick = (product) => {
     const productSlug = product.name.toLowerCase().replace(/\s+/g, '-');
     navigate(`/products/${category}/${productSlug}`, { state: { product } });
@@ -37,13 +49,14 @@ const ProductSection = ({ title, products, category }) => {
         </div>
       </div>
 
+      {/* Utility styles to hide native scrollbars while keeping functionality */}
       <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
         .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
         }
       `}</style>
     </div>

@@ -1,3 +1,10 @@
+/**
+ * Product Data Schema & Store
+ * This file contains the primary product data, category definitions, 
+ * and subcategory mappings for the application.
+ */
+
+// Master list of top-level categories
 export const categories = [
   { categoryId: "electronics", value: "Electronics" },
   { categoryId: "fashion", value: "Fashion" },
@@ -6,7 +13,7 @@ export const categories = [
   { categoryId: "fitness", value: "Fitness" }
 ];
 
-
+// Subcategories mapped to their parent categoryId
 export const subcategories = [
   // Electronics
   { subcategoryId: "audio", value: "Audio", categoryId: "electronics" },
@@ -243,7 +250,7 @@ export const products = [
 
   // ================= HOME, BOOKS, FITNESS =================
   // (Pattern is consistent — you can safely scale this)
-    // ================= HOME & LIVING =================
+  // ================= HOME & LIVING =================
   // Furniture (5)
   {
     id: 21,

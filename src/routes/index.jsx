@@ -7,17 +7,26 @@ import Products from '@/pages/Products';
 import ProductCatalogPage from '@/components/ProductCatalogPage';
 import ProductDetailPage from '@/components/ProductDetailPage';
 
+/**
+ * Application Router Configuration
+ * Defines the main routing structure using React Router's data API.
+ */
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout />,
+    element: <MainLayout />, // Wraps children with Navbar/Footer
     children: [
+      // Redirect root to home
       { index: true, element: <Navigate to="home" replace /> },
+
+      // Top-level pages
       { path: 'home', element: <Home /> },
       { path: 'features', element: <Features /> },
-      { path: 'products', element: <Products /> },
-      { path: 'products/:category', element: <ProductCatalogPage /> },
-      { path: 'products/:category/:productSlug', element: <ProductDetailPage /> },
+
+      // Product-related routes
+      { path: 'products', element: <Products /> }, // Root product page (categories overview)
+      { path: 'products/:category', element: <ProductCatalogPage /> }, // Category listing
+      { path: 'products/:category/:productSlug', element: <ProductDetailPage /> }, // Product details
     ],
   },
 ]);
