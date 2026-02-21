@@ -1,9 +1,21 @@
-export default function Home() {
+import React from 'react';
+import HeroCarousel from "../components/Herocarousel";
+import AboutCompany from "../components/Aboutcompany ";
+import ProductCategories from "../components/Productcategories ";
+import TopSellingProducts from "../components/Topsellingproducts ";
+import Newsletter from "../components/Newsletter ";
+import BrandMarquee from "../components/Brandmarquee "
+const Home = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-red-100">
-      <h1 className="text-3xl font-bold text-green-600">
-        Home Page Loaded ✅
-      </h1>
+    <div className="min-h-screen">
+      <HeroCarousel />
+      <AboutCompany />
+      <ProductCategories />
+      <TopSellingProducts />
+      <Newsletter />
+      <BrandMarquee />
     </div>
   );
-}
+};
+
+export default Home;
