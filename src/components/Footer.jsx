@@ -57,7 +57,7 @@ const Footer = () => {
                     {/* Product Categories */}
                     <div>
                         <h3 className="text-white text-base font-semibold mb-4">Product Categories</h3>
-                        <div className="space-y-12 text-sm">
+                        <div className="space-y-2 text-sm">
                             <div><a href="#" className="hover:text-white transition">RF & Microwave</a></div>
                             <div><a href="#" className="hover:text-white transition">Electronic Components</a></div>
                             <div><a href="#" className="hover:text-white transition">Test & Measurement</a></div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import { Link } from 'react-router-dom'; // 1. Import Link
+import { Link, NavLink } from 'react-router-dom';
 import SearchBar from './Searchbar';
 import logo from '../assets/logo-fotor - Copy.png';
 
@@ -8,15 +8,14 @@ const Navbar = () => {
   const [searchText, setSearchText] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // 2. Define your links and paths here
-  const navLinks = [
-    { name: 'Home', path: '/home' },
-    { name: 'Features', path: '/features' },
-    { name: 'Collection', path: '#' }, // Placeholder
-    { name: 'Shop', path: '#' },       // Placeholder
-    { name: 'About Us', path: '/about' }, // This connects to your new page
-    { name: 'Contact Us', path: '#' }, // Placeholder
+  const navItems = [
+    { label: 'Home', path: '/home' },
+    { label: 'About Us', path: '/about' },
+    { label: 'Products', path: '/products' },
+    { label: 'Services', path: '/services' },
+    { label: 'Careers', path: '/careers' },
   ];
+
 
   return (
     <div className="w-full">
@@ -24,9 +23,8 @@ const Navbar = () => {
       <div className="bg-white px-6 py-5 shadow-sm">
         <div className="w-full flex items-center gap-6">
 
-          {/* --- LOGO SECTION --- */}
-          {/* Wrapped in Link so clicking logo goes Home */}
-          <Link to="/home" className="flex items-center gap-3 w-64 flex-shrink-0">
+          {/* --- LOGO SECTION (Fixed Width) --- */}
+          <Link to="/home" className="flex items-center gap-3 w-64 flex-shrink-0 cursor-pointer">
             <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-md overflow-hidden">
               <img src={logo} alt="Sri and Co Logo" className="w-full h-full object-cover" />
             </div>
@@ -77,16 +75,18 @@ const Navbar = () => {
         <div className="w-full px-6">
           <ul className="flex flex-col lg:flex-row lg:items-center justify-between">
             <div className="flex flex-col lg:flex-row lg:gap-4">
-              {/* 3. Map over the new navLinks array */}
-              {navLinks.map((item) => (
-                <li key={item.name} className="border-b lg:border-b-0 border-gray-800">
-                  <Link
+              {navItems.map((item) => (
+                <li key={item.label} className="border-b lg:border-b-0 border-gray-800">
+                  <NavLink
                     to={item.path}
-                    className="block px-6 py-4 hover:bg-gray-800 cursor-pointer transition-colors text-base font-medium whitespace-nowrap"
-                    onClick={() => setIsMenuOpen(false)} // Closes menu when clicked on mobile
+                    className={({ isActive }) =>
+                      `block px-6 py-4 hover:bg-gray-800 transition-colors text-base font-medium whitespace-nowrap ${isActive ? 'text-blue-400 lg:bg-gray-800' : 'text-white'
+                      }`
+                    }
+                    onClick={() => setIsMenuOpen(false)}
                   >
-                    {item.name}
-                  </Link>
+                    {item.label}
+                  </NavLink>
                 </li>
               ))}
             </div>
