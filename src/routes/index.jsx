@@ -3,6 +3,9 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Home from '@/pages/Home';
 import MainLayout from '@/layout/MainLayout';
 import Features from '@/pages/Features';
+import Services from '@/pages/Services';
+
+
 import Products from '@/pages/Products';
 import ProductCatalogPage from '@/components/ProductCatalogPage';
 import ProductDetailPage from '@/components/ProductDetailPage';
@@ -25,6 +28,7 @@ export const router = createBrowserRouter([
       // Top-level pages
       { path: 'home', element: <Home /> },
       { path: 'features', element: <Features /> },
+      { path: 'services', element: <Services /> },
 
       // Product-related routes
       { path: 'products', element: <Products /> }, // Root product page (categories overview)
