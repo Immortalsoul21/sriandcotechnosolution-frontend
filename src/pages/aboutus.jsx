@@ -111,7 +111,7 @@ const AboutUs = () => {
       `}</style>
 
             {/* --- Background Layer --- */}
-            <div className="fixed top-0 left-0 w-full h-full z-0 overflow-hidden pointer-events-none bg-[#EDE9E9]">
+            <div className="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden pointer-events-none bg-[#EDE9E9]">
                 <div className="absolute rounded-full filter blur-[80px] opacity-40 animate-float w-[600px] h-[600px] bg-[rgba(2,176,244,0.59)] -top-[200px] -left-[100px]"></div>
                 <div className="absolute rounded-full filter blur-[80px] opacity-40 animate-float w-[500px] h-[500px] bg-[rgba(76,29,149,0.3)] -bottom-[100px] -right-[100px] [animation-delay:-5s]"></div>
                 <div className="absolute rounded-full filter blur-[80px] animate-float w-[300px] h-[300px] bg-[#2563EB] top-[40%] left-[30%] opacity-20 [animation-duration:25s]"></div>
