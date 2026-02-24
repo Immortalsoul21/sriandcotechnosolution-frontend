@@ -28,21 +28,21 @@ const ProductSection = ({ title, products, category }) => {
 
   return (
     <div className="">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-lg md:text-xl font-bold text-gray-900">{title}</h2>
         <button
           onClick={handleViewAll}
-          className="flex items-center gap-1 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-colors"
+          className="flex items-center gap-1 text-xs md:text-sm font-semibold text-gray-800 hover:text-blue-600 transition-colors"
         >
           View All
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="w-3 h-3 md:w-4 md:h-4" />
         </button>
       </div>
 
       <div className="overflow-x-auto scrollbar-hide -mx-4 px-4 py-2">
-        <div className="flex gap-6 py-4">
+        <div className="flex gap-4 md:gap-6 py-4">
           {products.slice(0, 10).map(product => (
-            <div key={product.id} className="flex-shrink-0 w-80">
+            <div key={product.id} className="flex-shrink-0 w-64 md:w-80">
               <ProductCard product={product} onClick={handleProductClick} />
             </div>
           ))}

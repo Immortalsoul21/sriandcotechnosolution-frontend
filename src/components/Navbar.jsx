@@ -23,19 +23,21 @@ const Navbar = () => {
       <div className="bg-white px-6 py-5 shadow-sm">
         <div className="w-full flex items-center gap-6">
 
-          {/* --- LOGO SECTION (Fixed Width) --- */}
-          <Link to="/home" className="flex items-center gap-3 w-64 flex-shrink-0 cursor-pointer">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-md overflow-hidden">
+          {/* --- LOGO SECTION (Responsive) --- */}
+          <Link to="/home" className="flex items-center gap-2 sm:gap-3 w-auto lg:w-64 flex-shrink-0 cursor-pointer">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-md overflow-hidden flex-shrink-0">
               <img src={logo} alt="Sri and Co Logo" className="w-full h-full object-cover" />
             </div>
-            <div>
-              <div className="font-bold text-gray-900 text-xl leading-tight whitespace-nowrap">Sri and Co</div>
-              <div className="font-medium text-gray-600 text-base whitespace-nowrap">Techno Solutions</div>
+            <div className="min-w-0">
+              <div className="font-bold text-gray-900 text-lg sm:text-xl leading-tight whitespace-nowrap overflow-hidden text-ellipsis">Sri and Co</div>
+              <div className="font-medium text-gray-600 text-sm sm:text-base whitespace-nowrap overflow-hidden text-ellipsis">Techno Solutions</div>
             </div>
           </Link>
 
-          {/* --- SEARCH BAR --- */}
-          <SearchBar />
+          {/* --- SEARCH BAR (Hidden on mobile) --- */}
+          <div className="hidden lg:block flex-1">
+            <SearchBar />
+          </div>
 
           {/* --- LOGIN/REGISTER --- */}
           <div className="hidden lg:flex items-center gap-3 text-gray-700 text-base w-48 justify-end flex-shrink-0">
