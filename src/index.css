@@ -11,3 +11,19 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
+
+/* ---------------- OEM LOGO MARQUEE ANIMATION ---------------- */
+
+@keyframes oem-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-oem-scroll {
+  animation: oem-scroll 28s linear infinite;
+}

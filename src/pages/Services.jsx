@@ -6,8 +6,29 @@ import Pricing from "../assets/Pricing.png";
 import Quick from "../assets/Quick.png";
 import Import from "../assets/Import .png";
 import Independent from "../assets/Independent Distribution.png";
+import Aracion from "../assets/aracion.png";
+import Entuple from "../assets/entuple.png";
+import Evonik from "../assets/evonik.png";
+import Fairview from "../assets/fairview-microwave.png";
+import Pasternack from "../assets/pasternack.png";
+import TE from "../assets/te.png";
+import USMicrowave from "../assets/us-microwave.png";
+import Vistan from "../assets/vistan-nextgen.png";
+import YIC from "../assets/yic.png";
 
 const images = [Quick, Import, MOQ, Pricing, Independent];
+
+const oems = [
+    Aracion,
+    Entuple,
+    Evonik,
+    Fairview,
+    Pasternack,
+    TE,
+    USMicrowave,
+    Vistan,
+    YIC,
+];
 
 export default function Service() {
     const [current, setCurrent] = useState(0);
@@ -21,7 +42,7 @@ export default function Service() {
         setCurrent((prev) => (prev + 1) % images.length);
     };
 
-    // Auto-rotate every 5 seconds
+    /* ---------- Auto Rotate ---------- */
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrent((prev) => (prev + 1) % images.length);
@@ -30,7 +51,6 @@ export default function Service() {
         return () => clearInterval(interval);
     }, []);
 
-    // Helper to loop indexes safely
     const getImage = (offset) => {
         return images[(current + offset + images.length) % images.length];
     };
@@ -80,8 +100,8 @@ export default function Service() {
                         <button
                             onClick={prevSlide}
                             className="absolute left-[-100px] top-1/2 -translate-y-1/2 z-50
-               w-12 h-12 rounded-full bg-white/70 backdrop-blur-md
-               flex items-center justify-center text-2xl shadow-md hover:bg-white"
+              w-12 h-12 rounded-full bg-white/70 backdrop-blur-md
+              flex items-center justify-center text-2xl shadow-md hover:bg-white"
                         >
                             ‹
                         </button>
@@ -90,66 +110,81 @@ export default function Service() {
                         <button
                             onClick={nextSlide}
                             className="absolute right-[-100px] top-1/2 -translate-y-1/2 z-50
-               w-12 h-12 rounded-full bg-white/70 backdrop-blur-md
-               flex items-center justify-center text-2xl shadow-md hover:bg-white"
+              w-12 h-12 rounded-full bg-white/70 backdrop-blur-md
+              flex items-center justify-center text-2xl shadow-md hover:bg-white"
                         >
                             ›
                         </button>
 
-                        {/* Slides (Clipped safely) */}
+                        {/* Slides */}
                         <div className="relative w-full h-full overflow-hidden">
 
-
-                            {/* Far Left */}
                             <CarouselFrame
                                 img={getImage(-2)}
                                 className="-translate-x-[160%] opacity-40 z-10 w-[400px] h-[250px]"
                             />
 
-                            {/* Left */}
                             <CarouselFrame
                                 img={getImage(-1)}
                                 className="-translate-x-[550px] opacity-70 z-40 w-[500px] h-[350px]"
                             />
 
-                            {/* Center */}
                             <CarouselFrame
                                 img={getImage(0)}
                                 className="-translate-x-1/2 z-50 w-[600px] h-[400px]"
                             />
 
-                            {/* Right */}
                             <CarouselFrame
                                 img={getImage(1)}
                                 className="translate-x-[50px] opacity-70 z-40 w-[500px] h-[350px]"
                             />
 
-                            {/* Far Right */}
                             <CarouselFrame
                                 img={getImage(2)}
                                 className="translate-x-[60%] opacity-40 z-10 w-[400px] h-[250px]"
                             />
-                        </div>
 
+                        </div>
                     </div>
 
-                    <p
-                        className="
-        mt-[35px]
-        text-[24px]
-        italic
-        text-[#3E0D7D]
-        font-['Inter']
-        opacity-100
-        tracking-normal
-        text-center
-    "
-                    >
+                    <p className="mt-[35px] text-[24px] italic text-[#3E0D7D] text-center">
                         Experience the future of component sourcing today.
                     </p>
 
                 </div>
             </div>
+
+            {/* OEM PARTNERS MARQUEE */}
+            <div className="bg-white mt-[120px] py-16 overflow-hidden">
+
+                <h2 className="text-center text-[42px] font-bold mb-12">
+                    <span className="text-[#3036AE]">O</span>EM Partners
+                </h2>
+
+                <div className="relative w-full overflow-hidden">
+
+                    <div className="flex gap-24 animate-oem-scroll w-max hover:[animation-play-state:paused]">
+
+                        {[...oems, ...oems].map((logo, index) => (
+                            <div
+                                key={index}
+                                className="flex items-center justify-center min-w-[220px] h-[90px]"
+                            >
+                                <img
+                                    src={logo}
+                                    alt="OEM logo"
+                                    className="max-h-[70px] max-w-[160px] object-contain scale-125 grayscale hover:grayscale-0 hover:scale-[1.35] transition duration-300"
+                                    draggable="false"
+                                />
+                            </div>
+                        ))}
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </section>
     );
 }
@@ -160,15 +195,15 @@ function CarouselFrame({ img, className }) {
     return (
         <div
             className={`
-                absolute top-1/2 left-1/2
-                -translate-y-1/2
-                rounded-2xl
-                overflow-hidden
-                backdrop-blur-md
-                bg-[#3E0D7D]/20
-                transition-all duration-700 ease-in-out
-                ${className}
-            `}
+        absolute top-1/2 left-1/2
+        -translate-y-1/2
+        rounded-2xl
+        overflow-hidden
+        backdrop-blur-md
+        bg-[#3E0D7D]/20
+        transition-all duration-700 ease-in-out
+        ${className}
+      `}
         >
             <img
                 src={img}
