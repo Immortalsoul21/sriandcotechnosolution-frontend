@@ -4,6 +4,7 @@ import Home from '@/pages/Home';
 import MainLayout from '@/layout/MainLayout';
 import Features from '@/pages/Features';
 import Services from '@/pages/Services';
+import Careers from '@/pages/Careers';
 
 
 import Products from '@/pages/Products';
@@ -37,6 +38,7 @@ export const router = createBrowserRouter([
 
 
       { path: 'about', element: <AboutUs /> },
+      { path: 'careers', element: <Careers /> },
     ],
   },
 ]);
