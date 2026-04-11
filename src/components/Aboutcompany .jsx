@@ -6,7 +6,7 @@ const features = [
   { icon: '🌐', title: 'Global Reach',   description: 'Reliable shipping and logistics across 150+ countries worldwide.' },
   { icon: '✅', title: 'Quality Assured', description: 'Sourced from authorized manufacturers and certified suppliers.' },
   { icon: '⏱️', title: 'Fast Delivery',  description: 'Same-day shipping on all in-stock items with quick turnaround.' },
-  { icon: '👨‍💼', title: 'Expert Support', description: 'Technical team ready to assist with product selection and specs.' },
+  { icon: '👨‍💼', title: 'Expert Support', description: 'Technical team ready to assist with product selection and specifications.' },
 ];
 
 const AboutCompany = () => {
