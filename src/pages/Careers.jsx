@@ -122,7 +122,7 @@ const Careers = () => {
                             </ul>
                             {/* Apply Button */}
                             <a
-                                href="https://forms.gle/iejw11hDbaLrRfMo6"
+                                href="https://forms.gle/kAUCokaEEmsyynXh7"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-block w-full text-center bg-[#0B1221] text-white py-4 rounded-xl font-bold hover:bg-[#2563EB] transition-colors duration-300 shadow-lg shadow-blue-900/10"
