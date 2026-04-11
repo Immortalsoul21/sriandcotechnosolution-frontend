@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+
 
 /**
  * ProductCard Component
@@ -31,10 +31,6 @@ const ProductCard = ({ product, onClick }) => (
         {/* Bottom Section: Summary Info (Hides on hover to show full image) */}
         <div className="p-3 flex-grow flex flex-col items-center justify-center pb-4 transition-all duration-300 group-hover:h-0 group-hover:p-0 group-hover:opacity-0 group-hover:pointer-events-none overflow-hidden">
             <h3 className="text-sm font-medium text-gray-800 mb-1 truncate w-full text-center">{product.name}</h3>
-            <div className="flex items-center justify-center">
-                <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                <span className="ml-1 text-xs text-gray-600 font-medium">{product.rating}</span>
-            </div>
         </div>
     </div>
 );

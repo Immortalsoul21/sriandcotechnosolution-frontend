@@ -8,38 +8,33 @@ import SearchBar from './Searchbar';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  /* ── Mobile search state ─────────────────────────────────────────────── */
   const [mobileQuery,   setMobileQuery]   = useState('');
   const [mobileResults, setMobileResults] = useState([]);
   const [mobileOpen,    setMobileOpen]    = useState(false);
-  const [mobileCat,     setMobileCat]     = useState(null);   // null = All
+  const [mobileCat,     setMobileCat]     = useState(null);
   const [mobileCatOpen, setMobileCatOpen] = useState(false);
 
   const mobileWrapperRef = useRef(null);
   const navigate         = useNavigate();
 
+  // ── "Services" removed ────────────────────────────────────────────────────
   const navItems = [
     { label: 'Home',     path: '/home' },
     { label: 'About Us', path: '/about' },
     { label: 'Products', path: '/products' },
-    { label: 'Services', path: '/services' },
     { label: 'Features', path: '/features' },
   ];
 
-  /* ── Mobile filter ───────────────────────────────────────────────────── */
   useEffect(() => {
     const q = mobileQuery.trim().toLowerCase();
     if (!q) { setMobileResults([]); setMobileOpen(false); return; }
-
     let pool = products;
     if (mobileCat) pool = pool.filter((p) => p.categoryId === mobileCat.categoryId);
-
     const matched = pool.filter((p) => p.name.toLowerCase().includes(q)).slice(0, 6);
     setMobileResults(matched);
     setMobileOpen(matched.length > 0);
   }, [mobileQuery, mobileCat]);
 
-  /* ── Close on outside click ──────────────────────────────────────────── */
   useEffect(() => {
     const handler = (e) => {
       if (mobileWrapperRef.current && !mobileWrapperRef.current.contains(e.target)) {
@@ -49,6 +44,14 @@ const Navbar = () => {
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  // Close mobile menu when viewport goes desktop-width
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const handler = (e) => { if (e.matches) setIsMenuOpen(false); };
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
   }, []);
 
   const goToProduct = (product) => {
@@ -62,85 +65,69 @@ const Navbar = () => {
   return (
     <div className="w-full sticky top-0 z-50 shadow-md">
 
-      {/* ── Top Header ────────────────────────────────────────────────────── */}
-      <div className="bg-white px-4 sm:px-6 py-3 sm:py-5">
+      {/* ── Top Header ───────────────────────────────────────────────────── */}
+      <div className="bg-white px-4 sm:px-6 py-3 sm:py-4">
         <div className="w-full flex items-center gap-3 sm:gap-6">
 
           {/* Logo */}
-          <Link to="/home" className="flex items-center gap-2 sm:gap-3 flex-shrink-0 cursor-pointer">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-600 flex items-center
-                            justify-center shadow-md flex-shrink-0">
-              <span className="text-white font-bold text-xs sm:text-sm">SC</span>
+          <Link to="/home" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            {/*  TEXT FALLBACK — swap with <img src={logo} …/> once asset is available */}
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-blue-600 flex items-center
+                            justify-center shadow-md flex-shrink-0 ring-2 ring-blue-100">
+              <span className="text-white font-extrabold text-[10px] sm:text-xs tracking-tight">STS</span>
             </div>
             <div className="min-w-0">
-              <div className="font-bold text-gray-900 text-base sm:text-xl leading-tight whitespace-nowrap">
-                Sri and Co
+              <div className="font-bold text-gray-900 text-sm sm:text-lg leading-tight whitespace-nowrap">
+                Shreyanko
               </div>
-              <div className="font-medium text-gray-500 text-xs sm:text-sm whitespace-nowrap">
+              <div className="font-medium text-gray-500 text-[10px] sm:text-xs whitespace-nowrap">
                 Techno Solutions
               </div>
             </div>
           </Link>
 
           {/* Desktop SearchBar */}
-          <div className="hidden lg:block flex-1">
+          <div className="hidden lg:block flex-1 min-w-0">
             <SearchBar />
           </div>
 
           {/* Mobile Hamburger */}
           <button
-            className="lg:hidden p-2 text-gray-700 flex-shrink-0 ml-auto"
+            className="lg:hidden p-2 text-gray-700 flex-shrink-0 ml-auto rounded-md
+                       hover:bg-gray-100 active:bg-gray-200 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* ── Mobile Search — same original style ───────────────────────── */}
-        <div className="lg:hidden mt-4" ref={mobileWrapperRef}>
-
-          {/* Input row — border border-gray-300 rounded-lg overflow-hidden shadow-sm */}
+        {/* ── Mobile Search ─────────────────────────────────────────────── */}
+        <div className="lg:hidden mt-3" ref={mobileWrapperRef}>
           <div className="flex border border-gray-300 rounded-lg overflow-hidden shadow-sm bg-white">
             <input
               type="text"
               placeholder={mobileCat ? `Search in ${mobileCat.value}…` : 'Search Product'}
               value={mobileQuery}
               onChange={(e) => setMobileQuery(e.target.value)}
-              className="flex-1 px-4 py-3 outline-none text-gray-700 text-sm bg-white min-w-0"
+              className="flex-1 px-3 py-2.5 outline-none text-gray-700 text-sm bg-white min-w-0"
               autoComplete="off"
             />
-
-            {/* Vertical divider */}
-            <div className="w-px bg-gray-300 my-2 flex-shrink-0" />
-
-            {/* Category picker */}
+            <div className="w-px bg-gray-200 my-2 flex-shrink-0" />
             <button
-              onMouseDown={(e) => {
-                e.preventDefault();
-                setMobileCatOpen((p) => !p);
-                setMobileOpen(false);
-              }}
-              className="flex items-center justify-between gap-1 px-3 py-3 text-gray-700
-                         hover:bg-gray-50 transition-colors focus:outline-none w-28 flex-shrink-0"
+              onMouseDown={(e) => { e.preventDefault(); setMobileCatOpen((p) => !p); setMobileOpen(false); }}
+              className="flex items-center gap-1 px-3 py-2.5 text-gray-700
+                         hover:bg-gray-50 transition-colors w-24 flex-shrink-0"
             >
-              <span className="text-sm truncate flex-1 text-left">
+              <span className="text-xs truncate flex-1 text-left">
                 {mobileCat ? mobileCat.value : 'All'}
               </span>
-              <ChevronDown className={`w-4 h-4 text-gray-500 flex-shrink-0 transition-transform duration-200
-                                       ${mobileCatOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-3.5 h-3.5 text-gray-500 flex-shrink-0 transition-transform ${mobileCatOpen ? 'rotate-180' : ''}`} />
             </button>
-
-            {/* Vertical divider */}
-            <div className="w-px bg-gray-300 my-2 flex-shrink-0" />
-
-            {/* Search button */}
+            <div className="w-px bg-gray-200 my-2 flex-shrink-0" />
             <button
-              onMouseDown={(e) => {
-                e.preventDefault();
-                if (mobileResults.length > 0) setMobileOpen(true);
-              }}
-              className="px-5 py-3 bg-gray-900 text-white text-sm font-medium
+              onMouseDown={(e) => { e.preventDefault(); if (mobileResults.length > 0) setMobileOpen(true); }}
+              className="px-4 py-2.5 bg-gray-900 text-white text-xs font-medium
                          hover:bg-gray-700 transition-colors flex-shrink-0"
             >
               Search
@@ -149,19 +136,15 @@ const Navbar = () => {
 
           {/* Mobile category dropdown */}
           {mobileCatOpen && (
-            <div className="mt-1 bg-white rounded-xl shadow-xl border border-gray-100
-                            overflow-hidden z-[110] relative">
+            <div className="mt-1 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[110] relative">
               <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
-                <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
-                  Filter by Category
-                </span>
+                <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Filter by Category</span>
               </div>
-              <ul className="py-1">
+              <ul className="py-1 max-h-60 overflow-y-auto">
                 <li>
                   <button
                     onMouseDown={(e) => { e.preventDefault(); setMobileCat(null); setMobileCatOpen(false); }}
-                    className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors
-                                ${!mobileCat ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
+                    className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${!mobileCat ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
                   >
                     All Categories
                     {!mobileCat && <Check className="w-3.5 h-3.5 text-blue-600" />}
@@ -171,16 +154,10 @@ const Navbar = () => {
                   <li key={cat.categoryId}>
                     <button
                       onMouseDown={(e) => { e.preventDefault(); setMobileCat(cat); setMobileCatOpen(false); }}
-                      className={`w-full flex items-center justify-between px-4 py-2.5 text-sm
-                                  border-t border-gray-50 transition-colors
-                                  ${mobileCat?.categoryId === cat.categoryId
-                                    ? 'bg-blue-50 text-blue-600 font-semibold'
-                                    : 'text-gray-700 hover:bg-gray-50'}`}
+                      className={`w-full flex items-center justify-between px-4 py-2.5 text-sm border-t border-gray-50 transition-colors ${mobileCat?.categoryId === cat.categoryId ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
                     >
                       {cat.value}
-                      {mobileCat?.categoryId === cat.categoryId && (
-                        <Check className="w-3.5 h-3.5 text-blue-600" />
-                      )}
+                      {mobileCat?.categoryId === cat.categoryId && <Check className="w-3.5 h-3.5 text-blue-600" />}
                     </button>
                   </li>
                 ))}
@@ -190,29 +167,24 @@ const Navbar = () => {
 
           {/* Mobile results dropdown */}
           {mobileOpen && (
-            <div className="mt-1 bg-white rounded-xl shadow-xl border border-gray-100
-                            overflow-hidden z-[100] relative">
+            <div className="mt-1 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[100] relative">
               <div className="px-4 py-1.5 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
                 <span className="text-xs text-gray-400">
                   {mobileResults.length} result{mobileResults.length !== 1 ? 's' : ''}
                   {mobileCat && <span className="text-blue-500 font-semibold ml-1">in {mobileCat.value}</span>}
                 </span>
                 {mobileCat && (
-                  <button
-                    onMouseDown={(e) => { e.preventDefault(); setMobileCat(null); }}
-                    className="text-[10px] text-gray-400 hover:text-red-500 transition-colors flex items-center gap-0.5"
-                  >
+                  <button onMouseDown={(e) => { e.preventDefault(); setMobileCat(null); }}
+                          className="text-[10px] text-gray-400 hover:text-red-500 flex items-center gap-0.5">
                     <X className="w-3 h-3" /> Clear
                   </button>
                 )}
               </div>
-              <ul>
+              <ul className="max-h-64 overflow-y-auto">
                 {mobileResults.map((product) => (
                   <li key={product.id}>
-                    <button
-                      onMouseDown={() => goToProduct(product)}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-blue-50 transition-colors"
-                    >
+                    <button onMouseDown={() => goToProduct(product)}
+                            className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-blue-50 transition-colors">
                       <div className={`w-8 h-8 rounded-lg overflow-hidden flex-shrink-0 ${product.bgColor || 'bg-gray-200'}`}>
                         <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
                       </div>
@@ -238,8 +210,7 @@ const Navbar = () => {
       <nav className={`bg-gray-900 text-white ${isMenuOpen ? 'block' : 'hidden'} lg:block`}>
         <div className="w-full px-4 sm:px-6">
           <ul className="flex flex-col lg:flex-row lg:items-center justify-between">
-
-            <div className="flex flex-col lg:flex-row lg:gap-1">
+            <div className="flex flex-col lg:flex-row lg:gap-0">
               {navItems.map((item) => (
                 <li key={item.label} className="border-b lg:border-b-0 border-gray-800">
                   <NavLink
@@ -286,7 +257,6 @@ const Navbar = () => {
           </ul>
         </div>
       </nav>
-
     </div>
   );
 };

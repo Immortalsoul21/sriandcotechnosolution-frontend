@@ -3,22 +3,23 @@ import { Link } from 'react-router-dom';
 import { Linkedin, Send, Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
+    // ── "Services" removed ────────────────────────────────────────────────
     const quickLinks = [
         { label: 'Home',     path: '/home' },
         { label: 'About Us', path: '/about' },
-        { label: 'Services', path: '/services' },
         { label: 'Products', path: '/products' },
         { label: 'Features', path: '/features' },
         { label: 'Careers',  path: '/careers' },
     ];
 
+    // ── Updated to match real product categories ───────────────────────────
     const productCategories = [
-        { label: 'RF & Microwave',        path: '/products/electronics' },
-        { label: 'Electronic Components', path: '/products/electronics' },
-        { label: 'Fitness & Wellness',    path: '/products/fitness' },
-        { label: 'Home & Living',         path: '/products/home' },
-        { label: 'Books',                 path: '/products/books' },
-        { label: 'Fashion',               path: '/products/fashion' },
+        { label: 'RF & Microwave Components', path: '/products/rf-microwave' },
+        { label: 'Test & Measurement',        path: '/products/test-measurement' },
+        { label: 'Sensors & Measurement',     path: '/products/sensors' },
+        { label: 'Thin Film & Electronics',   path: '/products/thin-film' },
+        { label: 'Antennas',                  path: '/products/antennas' },
+        { label: 'Capabilities & Support',    path: '/products/capabilities' },
     ];
 
     return (
@@ -31,19 +32,19 @@ const Footer = () => {
                     {/* Company Info */}
                     <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full
-                                            flex items-center justify-center relative overflow-hidden flex-shrink-0">
-                                <svg width="48" height="48" viewBox="0 0 48 48" className="absolute">
-                                    <path d="M24 4 L24 44 Q34 39 38 24 Q34 9 24 4 Z" fill="#3b82f6" />
-                                </svg>
-                                <div className="text-xl sm:text-2xl font-bold text-blue-600 relative z-10">S</div>
+                            {/* Logo placeholder — swap with <img> when asset available */}
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-full
+                                            flex items-center justify-center flex-shrink-0
+                                            ring-2 ring-blue-500/30 shadow-lg">
+                                <span className="text-white font-extrabold text-xs sm:text-sm tracking-tight">STS</span>
                             </div>
-                            <h2 className="text-white text-xl sm:text-2xl font-bold whitespace-nowrap">
-                                Sri and Co
+                            <h2 className="text-white text-lg sm:text-xl font-bold whitespace-nowrap">
+                                Shreyanko Techno<br />
+                                <span className="font-normal text-gray-400 text-sm">Solutions</span>
                             </h2>
                         </div>
 
-                        <p className="text-sm text-gray-400 leading-relaxed mb-6 max-w-[220px]">
+                        <p className="text-sm text-gray-400 leading-relaxed mb-6 max-w-[240px]">
                             Leading distributor of RF, Microwave &amp; Electronic Components for
                             Aerospace, Defence &amp; Industrial sectors.
                         </p>
@@ -127,8 +128,8 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center gap-2">
                                 <Mail size={16} className="text-blue-500 flex-shrink-0" />
-                                <a href="mailto:info@sriandco.com" className="hover:text-white transition">
-                                    info@sriandco.com
+                                <a href="mailto:info@shreyanko.com" className="hover:text-white transition">
+                                    info@shreyanko.com
                                 </a>
                             </li>
                         </ul>
@@ -138,11 +139,11 @@ const Footer = () => {
 
             {/* ── Bottom Bar ────────────────────────────────────────────────── */}
             <div className="border-t border-gray-800 bg-slate-950/50">
-                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
+                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-5">
                     <div className="flex flex-col lg:flex-row justify-between items-center
-                                    gap-4 text-xs sm:text-sm">
+                                    gap-3 text-xs sm:text-sm">
                         <p className="text-gray-500 order-3 lg:order-1">
-                            © {new Date().getFullYear()} Sri &amp; Co. All rights reserved.
+                            © {new Date().getFullYear()} Shreyanko Techno Solutions. All rights reserved.
                         </p>
                         <p className="text-center lg:flex-1 text-gray-400 max-w-2xl order-1 lg:order-2">
                             Leading distributor of RF, Microwave &amp; Electronic Components
