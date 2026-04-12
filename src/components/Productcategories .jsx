@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const categories = [
@@ -12,7 +12,7 @@ const categories = [
   },
   {
     categoryId: 'electronics-sensors',
-    title: 'Electronics — Sensors',
+    title: 'Electronics & Sensors',
     description: 'Precision sensing solutions for temperature, pressure, RF, and environmental measurement.',
     subcategories: ['Temperature Sensors', 'Pressure Sensors', 'RF Sensors', 'Environmental Sensors'],
     gradientFrom: '#059669', gradientTo: '#0f766e',
@@ -52,102 +52,217 @@ const categories = [
   },
 ];
 
-// Card size scales with viewport
 const CategoryCard = ({ cat, onClick }) => {
   const [imgError, setImgError] = useState(false);
-  const MAX_SUBS = 4;
+  const MAX_SUBS = 3;
   const shown = cat.subcategories.slice(0, MAX_SUBS);
   const extra = cat.subcategories.length - MAX_SUBS;
 
   return (
     <div
       onClick={onClick}
-      className="group relative flex-shrink-0 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer select-none"
-      style={{ width: 'clamp(140px, 38vw, 220px)', height: 'clamp(140px, 38vw, 220px)' }}
+      className="group relative rounded-2xl overflow-hidden cursor-pointer select-none flex-shrink-0
+                 w-[72vw] sm:w-[44vw] md:w-auto md:flex-1"
+      style={{ minWidth: 0, aspectRatio: '3/4' }}
     >
+      {/* Background */}
       {!imgError ? (
         <img
           src={cat.image}
           alt={cat.title}
           onError={() => setImgError(true)}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           draggable={false}
         />
       ) : (
-        <div className="absolute inset-0"
-             style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }} />
+        <div
+          className="absolute inset-0"
+          style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
+        />
       )}
 
-      {/* Scrim */}
-      <div className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-0"
-           style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.80) 50%, rgba(0,0,0,0.20) 100%)' }} />
+      {/* Colour tint overlay using card's own gradient for brand feel */}
+      <div
+        className="absolute inset-0 opacity-30"
+        style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
+      />
 
-      {/* Base */}
-      <div className="absolute inset-0 flex flex-col justify-end p-2.5 sm:p-4 transition-opacity duration-300 group-hover:opacity-0">
-        <h3 className="text-white font-semibold text-[10px] sm:text-sm leading-snug mb-0.5 sm:mb-1 drop-shadow">
+      {/* Permanent dark scrim — heavier at bottom */}
+      <div
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.90) 40%, rgba(0,0,0,0.10) 100%)' }}
+      />
+
+      {/* ── BASE STATE ── */}
+      <div className="absolute inset-0 flex flex-col justify-end p-3.5 sm:p-4
+                      transition-opacity duration-300 group-hover:opacity-0">
+        <span
+          className="mb-2 self-start text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest
+                     px-2 py-0.5 rounded-full border border-white/25 text-white/60"
+        >
+          {cat.subcategories.length} subcategories
+        </span>
+        <h3
+          className="text-white font-bold leading-tight drop-shadow"
+          style={{ fontSize: 'clamp(13px, 2.2vw, 18px)', letterSpacing: '-0.01em' }}
+        >
           {cat.title}
         </h3>
-        <p className="text-white/75 text-[9px] sm:text-[11px] leading-relaxed line-clamp-2 drop-shadow hidden sm:block">
+        <p className="mt-1 text-white/60 leading-relaxed line-clamp-2 hidden sm:block"
+           style={{ fontSize: 'clamp(9px, 1vw, 11px)' }}>
           {cat.description}
         </p>
       </div>
 
-      {/* Hover */}
+      {/* ── HOVER STATE ── */}
       <div
-        className="absolute inset-0 flex flex-col justify-between p-2.5 sm:p-4
+        className="absolute inset-0 flex flex-col justify-between p-3.5 sm:p-4
                    opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0
-                   transition-all duration-300 ease-out rounded-xl sm:rounded-2xl"
-        style={{ background: 'rgba(0,0,0,0.70)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}
+                   transition-all duration-300 ease-out"
+        style={{
+          background: 'rgba(0,0,0,0.78)',
+          backdropFilter: 'blur(14px)',
+          WebkitBackdropFilter: 'blur(14px)',
+        }}
       >
-        <h3 className="text-white font-semibold text-[10px] sm:text-sm leading-snug">{cat.title}</h3>
+        {/* Accent bar */}
+        <div
+          className="h-0.5 w-8 rounded-full mb-3"
+          style={{ background: `linear-gradient(90deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
+        />
 
-        <ul className="flex-1 mt-1.5 sm:mt-3 space-y-1 sm:space-y-1.5 overflow-hidden">
-          {shown.map((sub, i) => (
-            <li key={i} className="flex items-center gap-1.5 sm:gap-2">
-              <span className="flex-shrink-0 rounded-full" style={{ width: 3, height: 3, background: 'rgba(255,255,255,0.55)' }} />
-              <span className="text-white/90 text-[8px] sm:text-[10.5px] leading-tight">{sub}</span>
-            </li>
-          ))}
-          {extra > 0 && <li className="text-white/40 text-[8px] sm:text-[10px] pl-3">+{extra} more</li>}
-        </ul>
+        <div className="flex-1 flex flex-col">
+          <h3
+            className="text-white font-bold leading-tight mb-3"
+            style={{ fontSize: 'clamp(13px, 2.2vw, 18px)', letterSpacing: '-0.01em' }}
+          >
+            {cat.title}
+          </h3>
 
-        <span className="inline-flex items-center gap-1 mt-1.5 sm:mt-2 self-start text-[9px] sm:text-[10px] font-semibold text-white
-                         border border-white/35 rounded-lg px-2 py-0.5 hover:bg-white/15 transition-colors">
-          View all →
-        </span>
+          <ul className="space-y-1.5 sm:space-y-2 flex-1">
+            {shown.map((sub, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span
+                  className="flex-shrink-0 mt-1.5 rounded-full"
+                  style={{
+                    width: 3, height: 3,
+                    background: cat.gradientFrom,
+                    boxShadow: `0 0 4px ${cat.gradientFrom}`,
+                  }}
+                />
+                <span className="text-white/80 leading-snug"
+                      style={{ fontSize: 'clamp(8px, 1vw, 11px)' }}>
+                  {sub}
+                </span>
+              </li>
+            ))}
+            {extra > 0 && (
+              <li className="text-white/35 pl-3.5" style={{ fontSize: 'clamp(8px, 0.9vw, 10px)' }}>
+                +{extra} more
+              </li>
+            )}
+          </ul>
+        </div>
+
+        <div
+          className="mt-3 inline-flex items-center gap-1.5 self-start font-semibold text-white
+                     border border-white/25 rounded-lg px-2.5 py-1 hover:bg-white/10 transition-colors"
+          style={{ fontSize: 'clamp(9px, 1vw, 11px)' }}
+        >
+          Explore →
+        </div>
       </div>
     </div>
   );
 };
 
 const ProductCategories = () => {
-  const navigate = useNavigate();
+  const navigate   = useNavigate();
+  const scrollRef  = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Track scroll position to update dots
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const onScroll = () => {
+      const scrollLeft = el.scrollLeft;
+      const cardWidth  = el.scrollWidth / categories.length;
+      const idx        = Math.round(scrollLeft / cardWidth);
+      setActiveIndex(Math.min(idx, categories.length - 1));
+    };
+
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const scrollTo = (i) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.scrollWidth / categories.length;
+    el.scrollTo({ left: cardWidth * i, behavior: 'smooth' });
+  };
 
   return (
-    <section className="py-10 sm:py-12 bg-gray-50">
-      <div className="container mx-auto px-3 sm:px-6">
+    <section className="py-10 sm:py-14 bg-gray-50">
+      <div className="container mx-auto px-4 sm:px-6">
 
-        <div className="text-center mb-5 sm:mb-8">
-          <h2 className="text-xl sm:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
+        {/* Header */}
+        <div className="text-center mb-6 sm:mb-10">
+          <p className="text-xs sm:text-sm font-semibold text-sky-600 uppercase tracking-widest mb-1 sm:mb-2">
+            What we offer
+          </p>
+          <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
             Our Product Range
           </h2>
-          <p className="text-gray-500 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-500 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             Specialised components and solutions across RF, microwave, sensors, chambers, and
             advanced materials — engineered for performance-critical applications.
           </p>
         </div>
 
-        <div className="flex gap-2.5 sm:gap-4 overflow-x-auto pb-3 sm:pb-4"
-             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        {/* Card grid — desktop: all 6 in a row | mobile: horizontal scroll */}
+        <div
+          ref={scrollRef}
+          className="flex gap-3 sm:gap-3 md:gap-4
+                     overflow-x-auto md:overflow-x-visible
+                     pb-2 md:pb-0
+                     snap-x snap-mandatory md:snap-none"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+        >
           {categories.map((cat) => (
-            <CategoryCard key={cat.categoryId} cat={cat} onClick={() => navigate('/products')} />
+            <div key={cat.categoryId} className="snap-start md:flex-1 min-w-0">
+              <CategoryCard
+                cat={cat}
+                onClick={() => navigate(`/products/${cat.categoryId}`)}
+              />
+            </div>
           ))}
         </div>
 
-        <div className="text-center mt-5 sm:mt-8">
+        {/* Scroll indicator dots — mobile only */}
+        <div className="flex md:hidden justify-center gap-1.5 mt-4">
+          {categories.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => scrollTo(i)}
+              aria-label={`Go to ${categories[i].title}`}
+              className="transition-all duration-300 rounded-full"
+              style={{
+                width:  i === activeIndex ? 20 : 6,
+                height: 6,
+                background: i === activeIndex ? '#0284c7' : '#cbd5e1',
+              }}
+            />
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-6 sm:mt-10">
           <button
             onClick={() => navigate('/products')}
-            className="px-6 sm:px-8 py-2.5 sm:py-3 bg-gray-900 text-white rounded-lg font-semibold text-sm
+            className="px-7 sm:px-9 py-2.5 sm:py-3 bg-gray-900 text-white rounded-lg font-semibold text-sm
                        transition-all duration-300 hover:bg-sky-600 hover:shadow-lg hover:-translate-y-0.5"
           >
             Browse All Products →
