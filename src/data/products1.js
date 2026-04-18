@@ -10,7 +10,7 @@ export const categories = [
   { categoryId: "RF & Microwave Components and Solutions", value: "RF & Microwave Components and Solutions" },
   { categoryId: "Test & Measurement Solutions", value: "Test & Measurement Solutions" },
   { categoryId: "RF, Microwave & Electronic Components Thin Film Circuits", value: "RF, Microwave & Electronic Components Thin Film Circuits" },
-  { categoryId: "Sri & Co Manufacture Product", value: "Sri & Co Manufacture Product" },
+
   /*
     { categoryId: "Electronics", value: "Electronics" },
     { categoryId: "Rapid Control Prototyping", value: "Rapid Control Prototyping" },
