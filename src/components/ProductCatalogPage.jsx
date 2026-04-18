@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import FilterBar from "./FilterBar";
 import ProductCard from "./ProductCard";
-import { products, categories, subcategories } from "@/data/products1";
+import { products, categories, subcategories, subSubcategories } from "@/data/products2";
 
 /**
  * ProductCatalogPage Component
@@ -13,35 +13,49 @@ const ProductCatalogPage = () => {
   const { category } = useParams();
   const navigate = useNavigate();
 
-  // Find category metadata and filter products/subcategories for the initial load
+  // Find category metadata
   const categoryData = categories.find(c => c.categoryId === category);
   const categoryTitle = categoryData ? categoryData.value : category;
-  const initialProducts = products.filter(p => p.categoryId === category);
+
+  // Filter options for the current category
   const categorySubcategories = subcategories.filter(s => s.categoryId === category);
+  const categorySubSubcategories = subSubcategories ? subSubcategories.filter(ss => ss.categoryId === category) : [];
 
-  // State for products that match the current filters
-  const [filteredProducts, setFilteredProducts] = useState(initialProducts);
+  // State for filters
+  const [selectedSubcategory, setSelectedSubcategory] = useState('all');
+  const [selectedSubSubcategory, setSelectedSubSubcategory] = useState('all');
 
-  // Reset filters and products when category changes
+  // Identify if currently selected subcategory has 3 levels
+  const selectedSubObj = categorySubcategories.find(s => s.subcategoryId === selectedSubcategory);
+  const hasLevel3 = selectedSubObj?.hasSubSubcategories || false;
+
+  // Available SubSubcategories based on selection
+  const availableSubSubcategories = hasLevel3 
+    ? categorySubSubcategories.filter(ss => ss.subcategoryId === selectedSubcategory)
+    : [];
+
+  // Reset filters when category changes
   useEffect(() => {
-    setFilteredProducts(products.filter(p => p.categoryId === category));
+    setSelectedSubcategory('all');
+    setSelectedSubSubcategory('all');
   }, [category]);
 
-  /**
-   * handleFilterChange
-   * Triggered when a subcategory is selected in the FilterBar.
-   * Filters the master product list based on the selected subcategory.
-   */
-  const handleFilterChange = (filters) => {
-    let filtered = products.filter(p => p.categoryId === category);
+  // If subcategory changes, reset the subSubcategory
+  useEffect(() => {
+    setSelectedSubSubcategory('all');
+  }, [selectedSubcategory]);
 
-    // Filter by subcategory if one is selected (not 'all')
-    if (filters.subcategoryId && filters.subcategoryId !== 'all') {
-      filtered = filtered.filter(p => p.subcategoryId === filters.subcategoryId);
+  // Derived filtered products
+  const filteredProducts = products.filter(p => {
+    if (p.categoryId !== category) return false;
+    if (selectedSubcategory !== 'all') {
+      if (p.subcategoryId !== selectedSubcategory) return false;
+      if (hasLevel3 && selectedSubSubcategory !== 'all') {
+        if (p.subSubcategoryId !== selectedSubSubcategory) return false;
+      }
     }
-
-    setFilteredProducts(filtered);
-  };
+    return true;
+  });
 
   /**
    * handleProductClick
@@ -76,18 +90,32 @@ const ProductCatalogPage = () => {
 
       {/* Main Catalog Content */}
       <div className="w-full px-6 py-8">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{categoryTitle}</h1>
             <p className="text-gray-500 mt-1 font-medium">{filteredProducts.length} products</p>
           </div>
-          {/* Filter Dropdown */}
-          <div className="flex-shrink-0">
+          {/* Filter Dropdowns */}
+          <div className="flex flex-wrap gap-4 items-center flex-shrink-0">
             <FilterBar
-              onFilterChange={handleFilterChange}
-              productCount={filteredProducts.length}
-              subcategories={categorySubcategories}
+              value={selectedSubcategory}
+              onChange={setSelectedSubcategory}
+              options={categorySubcategories}
+              defaultLabel="All Categories"
+              idKey="subcategoryId"
+              labelKey="value"
             />
+
+            {hasLevel3 && (
+              <FilterBar
+                value={selectedSubSubcategory}
+                onChange={setSelectedSubSubcategory}
+                options={availableSubSubcategories}
+                defaultLabel="All Types"
+                idKey="subSubcategoryId"
+                labelKey="value"
+              />
+            )}
           </div>
         </div>
 

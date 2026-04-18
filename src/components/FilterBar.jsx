@@ -1,64 +1,65 @@
-import { useState } from "react";
-import { Filter, X, ChevronRight } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { X, ChevronRight } from "lucide-react";
 
 /**
  * FilterBar Component
- * A compact dropdown for selecting subcategories within a category.
- * @param {Function} onFilterChange - Callback when a new filter is selected.
- * @param {Array} subcategories - List of subcategories to display.
+ * A compact dropdown for selecting options (like subcategories).
  */
-const FilterBar = ({ onFilterChange, subcategories = [] }) => {
-    // UI states
+const FilterBar = ({ value, onChange, options = [], defaultLabel = "All Products", idKey = "subcategoryId", labelKey = "value" }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedSub, setSelectedSub] = useState('all');
+    const dropdownRef = useRef(null);
 
-    /**
-     * handleSubSelect
-     * Updates the selected subcategory and notifies parent component.
-     * @param {string} subId - The ID of the selected subcategory (or 'all').
-     */
-    const handleSubSelect = (subId) => {
-        setSelectedSub(subId);
-        onFilterChange({ subcategoryId: subId });
-        setIsOpen(false); // Close dropdown after selection
+    // Close on click outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const handleSelect = (id) => {
+        onChange(id);
+        setIsOpen(false);
     };
 
-    // Find the label for the currently selected filter
-    const selectedLabel = subcategories.find(s => s.subcategoryId === selectedSub)?.value || 'All Products';
+    const selectedLabel = options.find(o => o[idKey] === value)?.[labelKey] || defaultLabel;
 
     return (
-        <div className="relative inline-block text-left w-64">
+        <div className="relative inline-block text-left w-64" ref={dropdownRef}>
             {/* Dropdown Trigger Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-full flex items-center justify-between bg-[#1a2230] text-gray-300 px-4 py-2.5 rounded hover:bg-[#252f3f] transition-colors border border-gray-700 shadow-sm"
             >
                 <span className="text-sm font-medium truncate">
-                    {selectedSub === 'all' ? 'Filter products...' : selectedLabel}
+                    {value === 'all' || !value ? defaultLabel : selectedLabel}
                 </span>
                 {isOpen ? <X className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
             </button>
 
             {/* Dropdown Menu Overlay */}
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-full bg-white rounded-lg shadow-2xl z-50 border border-gray-100 overflow-hidden origin-top-right">
+                <div className="absolute right-0 mt-2 w-full bg-white rounded-lg shadow-2xl z-50 border border-gray-100 overflow-hidden origin-top-right max-h-60 overflow-y-auto">
                     <div className="py-1">
                         {/* Default 'All' Option */}
                         <button
-                            onClick={() => handleSubSelect('all')}
-                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${selectedSub === 'all' ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
+                            onClick={() => handleSelect('all')}
+                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${value === 'all' || !value ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
                         >
-                            All Products
+                            {defaultLabel}
                         </button>
 
-                        {/* Category specific subcategories */}
-                        {subcategories.map(sub => (
+                        {/* Options */}
+                        {options.map(opt => (
                             <button
-                                key={sub.subcategoryId}
-                                onClick={() => handleSubSelect(sub.subcategoryId)}
-                                className={`w-full text-left px-4 py-3 text-sm transition-colors border-t border-gray-50 ${selectedSub === sub.subcategoryId ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
+                                key={opt[idKey]}
+                                onClick={() => handleSelect(opt[idKey])}
+                                className={`w-full text-left px-4 py-3 text-sm transition-colors border-t border-gray-50 ${value === opt[idKey] ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
                             >
-                                {sub.value}
+                                {opt[labelKey]}
                             </button>
                         ))}
                     </div>

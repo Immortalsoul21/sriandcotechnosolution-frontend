@@ -1,5 +1,5 @@
 import ProductSection from '@/components/ProductSection';
-import { categories, products } from '@/data/products1';
+import { categories, products } from '@/data/products2';
 import React from 'react'
 
 /**
