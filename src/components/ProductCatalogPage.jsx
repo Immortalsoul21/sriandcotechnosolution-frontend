@@ -78,10 +78,10 @@ const ProductCatalogPage = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Page Sticky Header */}
       <div className="bg-white shadow-sm">
-        <div className="px-6 py-6">
+        <div className="px-4 sm:px-6 py-4 sm:py-6">
           <button
             onClick={handleBackClick}
-            className="flex items-center text-blue-600 hover:text-blue-700 font-semibold"
+            className="flex items-center text-sm sm:text-base text-blue-600 hover:text-blue-700 font-semibold transition-colors"
           >
             ← Back to Home
           </button>
@@ -89,14 +89,14 @@ const ProductCatalogPage = () => {
       </div>
 
       {/* Main Catalog Content */}
-      <div className="w-full px-6 py-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+      <div className="w-full px-4 sm:px-6 py-6 sm:py-8">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6 md:mb-8 gap-4 lg:gap-6">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{categoryTitle}</h1>
-            <p className="text-gray-500 mt-1 font-medium">{filteredProducts.length} products</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">{categoryTitle}</h1>
+            <p className="text-gray-500 mt-1 sm:mt-2 text-sm sm:text-base font-medium">{filteredProducts.length} products</p>
           </div>
           {/* Filter Dropdowns */}
-          <div className="flex flex-wrap gap-4 items-center flex-shrink-0">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 items-stretch sm:items-center flex-shrink-0 w-full lg:w-auto">
             <FilterBar
               value={selectedSubcategory}
               onChange={setSelectedSubcategory}
@@ -122,7 +122,7 @@ const ProductCatalogPage = () => {
         {/* Dynamic Products Grid */}
         <div className="w-full">
           {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-8 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3 sm:gap-4 md:gap-6">
               {filteredProducts.map(product => (
                 <ProductCard
                   key={product.id}
