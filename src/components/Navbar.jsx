@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, Check } from 'lucide-react';
+import { Menu, X, ChevronDown, Check, Search } from 'lucide-react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { products, categories } from '@/data/products1';
 import SearchBar from './Searchbar';
@@ -30,59 +30,67 @@ const SOCIAL = [
     bg: 'bg-pink-600 hover:bg-pink-700',
     path: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z',
   },
+  {
+    label: 'X / Twitter',
+    url: 'https://x.com/sriandcotechno',
+    bg: 'bg-black hover:bg-gray-800',
+    path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',
+  },
 ];
 
-const SocialIcons = ({ size = 'sm' }) => {
+const NAV_ITEMS = [
+  { label: 'Home',           path: '/home' },
+  { label: 'About Us',       path: '/about' },
+  { label: 'Products',       path: '/products' },
+  { label: 'News & Updates',       path: '/features' },
+];
+
+export const SocialIcons = ({ size = 'sm' }) => {
   const open = (url) => window.open(url, '_blank', 'noopener,noreferrer');
   const sm = size === 'sm';
-
   return (
-    <div className={`flex items-center ${sm ? 'gap-2 sm:gap-2.5' : 'gap-2 sm:gap-3'}`}>
+    <div className={`flex items-center ${sm ? 'gap-1.5 sm:gap-2' : 'gap-2 sm:gap-3'}`}>
       {SOCIAL.map((s) => (
         <button
           key={s.label}
           onClick={() => open(s.url)}
           aria-label={s.label}
-          className={`${sm ? 'w-6 h-6 sm:w-7 sm:h-7' : 'w-7 h-7 sm:w-9 sm:h-9'} rounded-full ${s.bg} flex items-center justify-center transition-all hover:scale-110 shadow cursor-pointer`}
+          className={`
+            ${sm ? 'w-6 h-6 sm:w-7 sm:h-7' : 'w-7 h-7 sm:w-9 sm:h-9'}
+            rounded-full ${s.bg} flex items-center justify-center
+            transition-all duration-200 hover:scale-110 hover:-translate-y-0.5
+            shadow-sm cursor-pointer
+          `}
         >
           <svg className={`${sm ? 'w-3 h-3 sm:w-3.5 sm:h-3.5' : 'w-3.5 h-3.5 sm:w-4 sm:h-4'} fill-white`} viewBox="0 0 24 24">
             <path d={s.path} />
           </svg>
         </button>
       ))}
-      {/* X / Twitter */}
-      <button
-        onClick={() => open('https://x.com/sriandcotechno')}
-        aria-label="X / Twitter"
-        className={`${sm ? 'w-6 h-6 sm:w-7 sm:h-7' : 'w-7 h-7 sm:w-9 sm:h-9'} rounded-full bg-black hover:bg-gray-700 flex items-center justify-center transition-all hover:scale-110 shadow cursor-pointer`}
-      >
-        <svg className={`${sm ? 'w-3 h-3 sm:w-3.5 sm:h-3.5' : 'w-3.5 h-3.5 sm:w-4 sm:h-4'} fill-white`} viewBox="0 0 24 24">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-        </svg>
-      </button>
     </div>
   );
 };
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen]       = useState(false);
-  const [mobileQuery, setMobileQuery]     = useState('');
+  const [isMenuOpen,    setIsMenuOpen]    = useState(false);
+  const [mobileQuery,   setMobileQuery]   = useState('');
   const [mobileResults, setMobileResults] = useState([]);
-  const [mobileOpen, setMobileOpen]       = useState(false);
-  const [mobileCat, setMobileCat]         = useState(null);
+  const [mobileOpen,    setMobileOpen]    = useState(false);
+  const [mobileCat,     setMobileCat]     = useState(null);
   const [mobileCatOpen, setMobileCatOpen] = useState(false);
+  const [scrolled,      setScrolled]      = useState(false);
 
   const mobileWrapperRef = useRef(null);
   const navigate         = useNavigate();
 
-  const navItems = [
-    { label: 'Home',           path: '/home' },
-    { label: 'About Us',       path: '/about' },
-    { label: 'Products',       path: '/products' },
-    { label: 'Features',       path: '/features' },
-    { label: 'News & Updates', path: '/news' },
-  ];
+  /* scroll shadow */
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 4);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
 
+  /* mobile search */
   useEffect(() => {
     const q = mobileQuery.trim().toLowerCase();
     if (!q) { setMobileResults([]); setMobileOpen(false); return; }
@@ -93,21 +101,23 @@ const Navbar = () => {
     setMobileOpen(matched.length > 0);
   }, [mobileQuery, mobileCat]);
 
+  /* outside click */
   useEffect(() => {
-    const handler = (e) => {
+    const h = (e) => {
       if (mobileWrapperRef.current && !mobileWrapperRef.current.contains(e.target)) {
         setMobileOpen(false); setMobileCatOpen(false);
       }
     };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    document.addEventListener('mousedown', h);
+    return () => document.removeEventListener('mousedown', h);
   }, []);
 
+  /* close mobile menu on lg */
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
-    const handler = (e) => { if (e.matches) setIsMenuOpen(false); };
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
+    const h  = (e) => { if (e.matches) setIsMenuOpen(false); };
+    mq.addEventListener('change', h);
+    return () => mq.removeEventListener('change', h);
   }, []);
 
   const goToProduct = (product) => {
@@ -117,87 +127,113 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full sticky top-0 z-50 shadow-md">
+    <div className={`w-full sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-lg' : 'shadow-md'}`}>
 
-      {/* Top bar */}
-      <div className="bg-white px-3 sm:px-6 py-2.5 sm:py-4">
-        <div className="w-full flex items-center gap-2 sm:gap-6">
+      {/* ── TOP BAR ─────────────────────────────────────────────────── */}
+      <div className="bg-white border-b border-gray-100 px-3 sm:px-6 py-2.5 sm:py-3.5">
+        <div className="max-w-[1400px] mx-auto flex items-center gap-2 sm:gap-6">
 
           {/* Logo */}
-          <Link to="/home" className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
-            <img src={logo} alt="Sri and Co logo"
-                 className="w-8 h-8 sm:w-11 sm:h-11 rounded-full object-cover flex-shrink-0 shadow-md ring-2 ring-sky-100" />
+          <Link to="/home" className="flex items-center gap-2 sm:gap-3 flex-shrink-0 group">
+            <div className="relative">
+              <img
+                src={logo}
+                alt="Sri and Co logo"
+                className="w-9 h-9 sm:w-11 sm:h-11 rounded-full object-cover flex-shrink-0
+                           shadow-md ring-2 ring-sky-100 group-hover:ring-sky-300 transition-all duration-300"
+              />
+              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-white" />
+            </div>
             <div className="min-w-0">
-              <div className="font-bold text-gray-900 text-xs sm:text-lg leading-tight whitespace-nowrap">Sri and Co</div>
-              <div className="font-medium text-gray-500 text-[9px] sm:text-xs whitespace-nowrap">Techno Solutions</div>
+              <div className="font-bold text-gray-900 text-xs sm:text-base leading-tight whitespace-nowrap tracking-tight">
+                Sri and Co
+              </div>
+              <div className="text-gray-400 text-[9px] sm:text-[11px] whitespace-nowrap tracking-wider uppercase font-medium">
+                Techno Solutions
+              </div>
             </div>
           </Link>
 
           {/* Desktop search */}
-          <div className="hidden lg:block flex-1 min-w-0">
+          <div className="hidden lg:block flex-1 min-w-0 max-w-2xl">
             <SearchBar />
+          </div>
+
+          {/* Desktop social */}
+          <div className="hidden lg:flex items-center gap-3 flex-shrink-0 ml-auto">
+            <SocialIcons size="sm" />
           </div>
 
           {/* Hamburger */}
           <button
-            className="lg:hidden p-1.5 sm:p-2 text-gray-700 flex-shrink-0 ml-auto rounded-md hover:bg-gray-100 transition-colors"
+            className="lg:hidden ml-auto p-1.5 sm:p-2 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            {isMenuOpen
+              ? <X size={20} strokeWidth={2} />
+              : <Menu size={20} strokeWidth={2} />}
           </button>
         </div>
 
-        {/* Mobile search bar */}
-        <div className="lg:hidden mt-2" ref={mobileWrapperRef}>
-          <div className="flex border border-gray-300 rounded-lg overflow-hidden shadow-sm bg-white">
+        {/* ── MOBILE SEARCH ──────────────────────────────────────────── */}
+        <div className="lg:hidden mt-2.5 max-w-[1400px] mx-auto" ref={mobileWrapperRef}>
+          <div className="flex border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm focus-within:border-sky-400 focus-within:shadow-sky-100 focus-within:shadow-md transition-all">
+            <div className="flex items-center pl-3 text-gray-400 flex-shrink-0">
+              <Search size={14} />
+            </div>
             <input
               type="text"
-              placeholder={mobileCat ? `Search in ${mobileCat.value}…` : 'Search Product'}
+              placeholder={mobileCat ? `Search in ${mobileCat.value}…` : 'Search products…'}
               value={mobileQuery}
               onChange={(e) => setMobileQuery(e.target.value)}
-              className="flex-1 px-2.5 py-2 outline-none text-gray-700 text-xs bg-white min-w-0"
+              className="flex-1 px-2 py-2 outline-none text-gray-700 text-xs bg-transparent min-w-0"
               autoComplete="off"
             />
-            <div className="w-px bg-gray-200 my-1.5 flex-shrink-0" />
+            <div className="w-px bg-gray-100 my-1.5 flex-shrink-0" />
             <button
               onMouseDown={(e) => { e.preventDefault(); setMobileCatOpen(p => !p); setMobileOpen(false); }}
-              className="flex items-center gap-0.5 px-2 py-2 text-gray-700 hover:bg-gray-50 transition-colors w-20 flex-shrink-0"
+              className="flex items-center gap-1 px-2.5 py-2 text-gray-600 hover:bg-gray-50 transition-colors w-[76px] flex-shrink-0"
             >
-              <span className="text-[10px] truncate flex-1 text-left">{mobileCat ? mobileCat.value : 'All'}</span>
-              <ChevronDown className={`w-3 h-3 text-gray-500 flex-shrink-0 transition-transform ${mobileCatOpen ? 'rotate-180' : ''}`} />
+              <span className="text-[10px] truncate flex-1 text-left font-medium">
+                {mobileCat ? mobileCat.value : 'All'}
+              </span>
+              <ChevronDown className={`w-3 h-3 text-gray-400 flex-shrink-0 transition-transform duration-200 ${mobileCatOpen ? 'rotate-180' : ''}`} />
             </button>
-            <div className="w-px bg-gray-200 my-1.5 flex-shrink-0" />
             <button
               onMouseDown={(e) => { e.preventDefault(); if (mobileResults.length > 0) setMobileOpen(true); }}
-              className="px-3 py-2 bg-gray-900 text-white text-[10px] font-medium hover:bg-gray-700 transition-colors flex-shrink-0"
+              className="px-3.5 py-2 bg-sky-600 text-white text-[10px] font-semibold hover:bg-sky-700 transition-colors flex-shrink-0"
             >
-              Search
+              Go
             </button>
           </div>
 
           {/* Mobile category dropdown */}
           {mobileCatOpen && (
-            <div className="mt-1 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[110] relative">
-              <div className="px-3 py-1.5 bg-gray-50 border-b border-gray-100">
-                <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide">Filter by Category</span>
+            <div className="mt-1.5 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[110] relative animate-[fadeSlideDown_0.15s_ease]">
+              <div className="px-3 py-2 bg-gray-50 border-b border-gray-100">
+                <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Filter by Category</span>
               </div>
-              <ul className="py-0.5 max-h-52 overflow-y-auto">
+              <ul className="py-1 max-h-52 overflow-y-auto">
                 <li>
                   <button
                     onMouseDown={(e) => { e.preventDefault(); setMobileCat(null); setMobileCatOpen(false); }}
-                    className={`w-full flex items-center justify-between px-3 py-2 text-xs transition-colors ${!mobileCat ? 'bg-sky-50 text-sky-600 font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
+                    className={`w-full flex items-center justify-between px-3 py-2.5 text-xs transition-colors
+                      ${!mobileCat ? 'bg-sky-50 text-sky-600 font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
                   >
-                    All Categories {!mobileCat && <Check className="w-3 h-3 text-sky-600" />}
+                    All Categories
+                    {!mobileCat && <Check className="w-3 h-3 text-sky-500" />}
                   </button>
                 </li>
                 {categories.map(cat => (
                   <li key={cat.categoryId}>
                     <button
                       onMouseDown={(e) => { e.preventDefault(); setMobileCat(cat); setMobileCatOpen(false); }}
-                      className={`w-full flex items-center justify-between px-3 py-2 text-xs border-t border-gray-50 transition-colors ${mobileCat?.categoryId === cat.categoryId ? 'bg-sky-50 text-sky-600 font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
+                      className={`w-full flex items-center justify-between px-3 py-2.5 text-xs border-t border-gray-50 transition-colors
+                        ${mobileCat?.categoryId === cat.categoryId ? 'bg-sky-50 text-sky-600 font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
                     >
-                      {cat.value} {mobileCat?.categoryId === cat.categoryId && <Check className="w-3 h-3 text-sky-600" />}
+                      {cat.value}
+                      {mobileCat?.categoryId === cat.categoryId && <Check className="w-3 h-3 text-sky-500" />}
                     </button>
                   </li>
                 ))}
@@ -207,33 +243,37 @@ const Navbar = () => {
 
           {/* Mobile results */}
           {mobileOpen && (
-            <div className="mt-1 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[100] relative">
-              <div className="px-3 py-1.5 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
+            <div className="mt-1.5 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[100] relative">
+              <div className="px-3 py-2 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
                 <span className="text-[10px] text-gray-400">
                   {mobileResults.length} result{mobileResults.length !== 1 ? 's' : ''}
                   {mobileCat && <span className="text-sky-500 font-semibold ml-1">in {mobileCat.value}</span>}
                 </span>
                 {mobileCat && (
-                  <button onMouseDown={(e) => { e.preventDefault(); setMobileCat(null); }}
-                          className="text-[10px] text-gray-400 hover:text-red-500 flex items-center gap-0.5">
+                  <button
+                    onMouseDown={(e) => { e.preventDefault(); setMobileCat(null); }}
+                    className="text-[10px] text-gray-400 hover:text-red-400 flex items-center gap-0.5 transition-colors"
+                  >
                     <X className="w-3 h-3" /> Clear
                   </button>
                 )}
               </div>
-              <ul className="max-h-56 overflow-y-auto">
+              <ul className="max-h-56 overflow-y-auto divide-y divide-gray-50">
                 {mobileResults.map(product => (
                   <li key={product.id}>
-                    <button onMouseDown={() => goToProduct(product)}
-                            className="w-full flex items-center gap-2.5 px-3 py-2 text-left hover:bg-sky-50 transition-colors">
-                      <div className={`w-7 h-7 rounded-lg overflow-hidden flex-shrink-0 ${product.bgColor || 'bg-gray-200'}`}>
+                    <button
+                      onMouseDown={() => goToProduct(product)}
+                      className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-sky-50 transition-colors"
+                    >
+                      <div className={`w-8 h-8 rounded-lg overflow-hidden flex-shrink-0 ${product.bgColor || 'bg-gray-100'}`}>
                         <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-xs text-gray-800 truncate font-medium">{product.name}</p>
-                        <p className="text-[10px] text-gray-400 capitalize">{product.categoryId} · {product.subcategoryId}</p>
+                        <p className="text-[10px] text-gray-400 capitalize mt-0.5">{product.categoryId} · {product.subcategoryId}</p>
                       </div>
                       {product.badge && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 bg-purple-100 text-purple-600 rounded-full flex-shrink-0">
+                        <span className="text-[9px] font-bold px-2 py-0.5 bg-sky-100 text-sky-700 rounded-full flex-shrink-0">
                           {product.badge}
                         </span>
                       )}
@@ -246,18 +286,23 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Nav bar */}
+      {/* ── NAV BAR ─────────────────────────────────────────────────── */}
       <nav className={`bg-gray-900 text-white ${isMenuOpen ? 'block' : 'hidden'} lg:block`}>
-        <div className="w-full px-3 sm:px-6">
-          <ul className="flex flex-col lg:flex-row lg:items-center justify-between">
-            <div className="flex flex-col lg:flex-row lg:gap-0">
-              {navItems.map(item => (
-                <li key={item.label} className="border-b lg:border-b-0 border-gray-800">
+        <div className="max-w-[1400px] mx-auto px-3 sm:px-6">
+          <ul className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+
+            <div className="flex flex-col lg:flex-row">
+              {NAV_ITEMS.map((item, i) => (
+                <li key={item.label} className="border-b lg:border-b-0 border-gray-800/60">
                   <NavLink
                     to={item.path}
                     className={({ isActive }) =>
-                      `block px-4 sm:px-5 py-3 sm:py-3.5 hover:bg-gray-800 transition-colors text-xs sm:text-sm font-medium whitespace-nowrap
-                       ${isActive ? 'text-sky-400 bg-gray-800' : 'text-white'}`
+                      `relative block px-4 sm:px-5 py-3 sm:py-3.5 text-xs sm:text-sm font-medium
+                       whitespace-nowrap transition-colors duration-200
+                       hover:bg-gray-800 hover:text-sky-300
+                       ${isActive
+                         ? 'text-sky-400 bg-gray-800 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-sky-400 lg:after:block'
+                         : 'text-gray-200'}`
                     }
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -267,8 +312,8 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Social icons in nav */}
-            <li className="px-4 sm:px-5 py-3 sm:py-3.5 flex-shrink-0 border-t lg:border-t-0 border-gray-800">
+            {/* Social — mobile only (desktop is in top bar) */}
+            <li className="lg:hidden px-4 py-3 border-t border-gray-800/60">
               <SocialIcons size="sm" />
             </li>
           </ul>

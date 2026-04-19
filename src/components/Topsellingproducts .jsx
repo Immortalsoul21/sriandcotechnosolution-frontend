@@ -1,14 +1,13 @@
 import React from 'react';
 import ProductCard from "./ProductCard";
+import { products } from '@/data/products1';
+
+const CATEGORY_ID = "Sri & Co Manufacture Product";
 
 const InHouseProducts = () => {
-  const products = [
-    { id: 1, name: 'Low Noise Amplifier (LNA) 1', description: "LNR50-TwinS Offers Don't Want To Miss. Enjoy Discounts On a Wide Range Of Products.", cagr: 5, image: null },
-    { id: 2, name: 'Low Noise Amplifier (LNA) 2', description: "LNR50-TwinS Offers Don't Want To Miss. Enjoy Discounts On a Wide Range Of Products.", cagr: 5, image: null },
-    { id: 3, name: 'Low Noise Amplifier (LNA) 3', description: "LNR50-TwinS Offers Don't Want To Miss. Enjoy Discounts On a Wide Range Of Products.", cagr: 5, image: null },
-    { id: 4, name: 'Low Noise Amplifier (LNA) 4', description: "LNR50-TwinS Offers Don't Want To Miss. Enjoy Discounts On a Wide Range Of Products.", cagr: 5, image: null },
-    { id: 5, name: 'Low Noise Amplifier (LNA) 5', description: "LNR50-TwinS Offers Don't Want To Miss. Enjoy Discounts On a Wide Range Of Products.", cagr: 5, image: null },
-  ];
+  const inHouseProducts = products.filter(p => p.categoryId === CATEGORY_ID);
+
+  if (inHouseProducts.length === 0) return null;
 
   return (
     <section className="py-10 sm:py-12 bg-white">
@@ -29,16 +28,19 @@ const InHouseProducts = () => {
           with rigorous quality standards for mission-critical applications.
         </p>
 
-        <div className="overflow-x-auto -mx-3 sm:-mx-4 px-3 sm:px-4"
-             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div
+          className="overflow-x-auto -mx-3 sm:-mx-4 px-3 sm:px-4"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           <div className="flex gap-3 sm:gap-8 pb-3 sm:pb-4">
-            {products.map((product) => (
+            {inHouseProducts.map((product) => (
               <div key={product.id} className="flex-shrink-0" style={{ width: 'clamp(200px, 55vw, 300px)' }}>
                 <ProductCard product={product} />
               </div>
             ))}
           </div>
         </div>
+
       </div>
     </section>
   );
