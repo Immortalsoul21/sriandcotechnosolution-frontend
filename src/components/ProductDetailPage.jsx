@@ -37,10 +37,10 @@ const ProductDetailPage = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <button
             onClick={handleBack}
-            className="flex items-center text-blue-600 hover:text-blue-700 font-semibold"
+            className="flex items-center text-sm sm:text-base text-blue-600 hover:text-blue-700 font-semibold transition-colors"
           >
             ← Back to Products
           </button>
@@ -48,8 +48,8 @@ const ProductDetailPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Left Side - Images */}
           <div>
             {/* Main Image */}
@@ -69,7 +69,7 @@ const ProductDetailPage = () => {
           </div>
           {/* Right Side - Product Details & Specifications */}
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
               {product.name}
             </h1>
 

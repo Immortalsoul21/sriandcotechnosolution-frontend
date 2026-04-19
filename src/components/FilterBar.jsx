@@ -28,7 +28,7 @@ const FilterBar = ({ value, onChange, options = [], defaultLabel = "All Products
     const selectedLabel = options.find(o => o[idKey] === value)?.[labelKey] || defaultLabel;
 
     return (
-        <div className="relative inline-block text-left w-64" ref={dropdownRef}>
+        <div className="relative inline-block text-left w-full sm:w-64" ref={dropdownRef}>
             {/* Dropdown Trigger Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}

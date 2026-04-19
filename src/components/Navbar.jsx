@@ -21,22 +21,24 @@ const Navbar = () => {
   return (
     <div className="w-full">
       {/* Top Header Section */}
-      <div className="bg-white px-6 py-5 shadow-sm">
-        <div className="w-full flex items-center gap-6">
+      <div className="bg-white px-4 sm:px-6 py-3 sm:py-5 shadow-sm">
+        <div className="w-full flex items-center justify-between lg:justify-start lg:gap-6">
 
           {/* --- LOGO SECTION (Fixed Width) --- */}
-          <Link to="/home" className="flex items-center gap-3 w-64 flex-shrink-0 cursor-pointer">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-md overflow-hidden">
+          <Link to="/home" className="flex items-center gap-2 sm:gap-3 lg:w-64 flex-shrink-0 cursor-pointer">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-md overflow-hidden flex-shrink-0">
               <img src={logo} alt="Sri and Co Logo" className="w-full h-full object-cover" />
             </div>
-            <div>
-              <div className="font-bold text-gray-900 text-xl leading-tight whitespace-nowrap">Sri and Co</div>
-              <div className="font-medium text-gray-600 text-base whitespace-nowrap">Techno Solutions</div>
+            <div className="min-w-0">
+              <div className="font-bold text-gray-900 text-lg sm:text-xl leading-tight whitespace-nowrap truncate">Sri and Co</div>
+              <div className="font-medium text-gray-600 text-sm sm:text-base whitespace-nowrap truncate">Techno Solutions</div>
             </div>
           </Link>
 
           {/* --- SEARCH BAR (Flexible) --- */}
-          <SearchBar />
+          <div className="hidden lg:block flex-1 min-w-0">
+            <SearchBar />
+          </div>
 
           {/* --- LOGIN/REGISTER (Fixed Width) --- */}
           <div className="hidden lg:flex items-center gap-3 text-gray-700 text-base w-48 justify-end flex-shrink-0">
@@ -55,14 +57,14 @@ const Navbar = () => {
         </div>
 
         {/* --- MOBILE SEARCH BAR (Visible only on small screens) --- */}
-        <div className="lg:hidden mt-4">
+        <div className="lg:hidden mt-3 sm:mt-4 w-full">
           <div className="flex border border-gray-300 rounded-lg overflow-hidden shadow-sm">
             <input
               type="text"
               placeholder="Search Product"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              className="flex-1 px-4 py-3 outline-none text-gray-700 text-sm bg-white"
+              className="flex-1 px-4 py-3 outline-none text-gray-700 text-sm bg-white min-w-0"
             />
             <button className="px-6 py-3 bg-gray-900 text-white text-sm font-medium flex-shrink-0">
               search
