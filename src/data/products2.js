@@ -393,7 +393,7 @@ export const products = [
   {
     id: 1,
     productId: "SMA-1001",
-    name: "Standard SMA Male Connector",
+    name: "SMA Connectors(male-female)",
     description: "High-frequency SMA coaxial RF connector with threaded interface. Reliable performance DC to 18 GHz. Used in telecoms, Wi-Fi antennas, and RF systems.",
     image: "/images/product/RF & Microwave Components and Solutions/RF Connectors & Adapters/SMA Connectors.png",
     categoryId: "RF & Microwave Components and Solutions",
@@ -402,7 +402,7 @@ export const products = [
   {
     id: 2,
     productId: "N-TYPE-M-11G",
-    name: "N-Type Male Connector",
+    name: "N-Type Connectors(male-female)",
     description: "Durable, weatherproof, medium-size RF connector with threaded coupling. High-power applications up to 11 GHz.",
     image: "/images/product/RF & Microwave Components and Solutions/RF Connectors & Adapters/N-Type Connectors.png",
     categoryId: "RF & Microwave Components and Solutions",
@@ -411,7 +411,7 @@ export const products = [
   {
     id: 3,
     productId: "BNC-M-4G",
-    name: "BNC Male Connector",
+    name: "BNC Connectors(male-female)",
     description: "Quick connect/disconnect RF connector with bayonet mount. Used in video, radio, and lab test equipment up to 4 GHz.",
     image: "/images/product/RF & Microwave Components and Solutions/RF Connectors & Adapters/BNC Connectors.png",
     categoryId: "RF & Microwave Components and Solutions",
@@ -420,7 +420,7 @@ export const products = [
   {
     id: 4,
     productId: "TNC-M-11G",
-    name: "TNC Male Connector",
+    name: "TNC Connectors(male-female)",
     description: "Threaded BNC variant with superior stability in high-vibration environments. Operates up to 11 GHz.",
     image: "/images/product/RF & Microwave Components and Solutions/RF Connectors & Adapters/TNC Connectors.png",
     categoryId: "RF & Microwave Components and Solutions",
@@ -429,7 +429,7 @@ export const products = [
   {
     id: 5,
     productId: "SMP-F-40G",
-    name: "SMP / SMPM Female Connector",
+    name: "SMP / SMPM Connectors(male-female)",
     description: "Subminiature push-on connector for high-density board-to-board applications. SMP to 40 GHz, SMPM to 65 GHz.",
     image: "/images/product/RF & Microwave Components and Solutions/RF Connectors & Adapters/SMP  SMPM Connectors.png",
     categoryId: "RF & Microwave Components and Solutions",
@@ -438,7 +438,7 @@ export const products = [
   {
     id: 6,
     productId: "MMCX-M-6G",
-    name: "MMCX / MCX Male Connector",
+    name: "MMCX / MCX Connectors(male-female)",
     description: "Micro-miniature snap-on coaxial connectors for GPS and Wi-Fi hardware up to 6 GHz.",
     image: "/images/product/RF & Microwave Components and Solutions/RF Connectors & Adapters/MMCX  MCX Connectors.png",
     categoryId: "RF & Microwave Components and Solutions",
@@ -447,7 +447,7 @@ export const products = [
   {
     id: 7,
     productId: "K-TYPE-292-40G",
-    name: "2.92 mm (K-Type) Precision Connector",
+    name: "2.92 mm (K-Type) Connectors(male-female)",
     description: "Precision connector up to 40 GHz. Intermatable with SMA and 3.5 mm connectors.",
     image: "/images/product/RF & Microwave Components and Solutions/RF Connectors & Adapters/2.92 mm (K-Type) Precision.png",
     categoryId: "RF & Microwave Components and Solutions",
@@ -456,7 +456,7 @@ export const products = [
   {
     id: 8,
     productId: "24MM-M-50G",
-    name: "2.4 mm Male Connector",
+    name: "2.4 mm Connectors(male-female)",
     description: "Rugged precision connector up to 50 GHz. Mechanically incompatible with SMA to prevent damage. Used in aerospace and test labs.",
     image: "/images/product/RF & Microwave Components and Solutions/RF Connectors & Adapters/2.4 mm Connectors.png",
     categoryId: "RF & Microwave Components and Solutions",
@@ -465,7 +465,7 @@ export const products = [
   {
     id: 9,
     productId: "185MM-M-65G",
-    name: "1.85 mm (V-Type) Connector",
+    name: "1.85 mm (V-Type) Connectors(male-female)",
     description: "Ultra-high-frequency precision connector operational up to 65 GHz. Used in mmWave test and measurement applications.",
     image: "/images/product/RF & Microwave Components and Solutions/RF Connectors & Adapters/1.85 mm (V) Connectors.png",
     categoryId: "RF & Microwave Components and Solutions",
@@ -1549,7 +1549,7 @@ export const products = [
   {
     id: 116,
     productId: "MAT-SOLIMIDE",
-    name: "Solimide Foam",
+    name: "Solimide",
     description: "Open-cell polyimide foam offering excellent thermal insulation and flame resistance for aerospace and defence applications.",
     image: "/images/product/Special Materials/Materials/Solimide Foam 1.png",
     categoryId: "Special Materials",
@@ -1567,7 +1567,7 @@ export const products = [
   {
     id: 118,
     productId: "MAT-ROHACELL",
-    name: "Rohacell Foam Core",
+    name: "Rohacell",
     description: "Rigid polymethacrylimide (PMI) structural foam core for sandwich composite panels in radome and aerospace structures.",
     image: "/images/product/Special Materials/Materials/Rohacell.png",
     categoryId: "Special Materials",

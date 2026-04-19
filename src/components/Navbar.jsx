@@ -57,32 +57,25 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full">
-      {/* Top Header Section */}
-      <div className="bg-white px-4 sm:px-6 py-3 sm:py-5 shadow-sm">
-        <div className="w-full flex items-center justify-between lg:justify-start lg:gap-6">
+    <div className="w-full sticky top-0 z-50 shadow-md">
 
-          {/* --- LOGO SECTION (Fixed Width) --- */}
-          <Link to="/home" className="flex items-center gap-2 sm:gap-3 lg:w-64 flex-shrink-0 cursor-pointer">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-md overflow-hidden flex-shrink-0">
-              <img src={logo} alt="Sri and Co Logo" className="w-full h-full object-cover" />
-            </div>
+      {/* Top bar */}
+      <div className="bg-white px-3 sm:px-6 py-2.5 sm:py-4">
+        <div className="w-full flex items-center gap-2 sm:gap-6">
+
+          {/* Logo */}
+          <Link to="/home" className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
+            <img src={logo} alt="Sri and Co logo"
+                 className="w-8 h-8 sm:w-11 sm:h-11 rounded-full object-cover flex-shrink-0 shadow-md ring-2 ring-sky-100" />
             <div className="min-w-0">
-              <div className="font-bold text-gray-900 text-lg sm:text-xl leading-tight whitespace-nowrap truncate">Sri and Co</div>
-              <div className="font-medium text-gray-600 text-sm sm:text-base whitespace-nowrap truncate">Techno Solutions</div>
+              <div className="font-bold text-gray-900 text-xs sm:text-lg leading-tight whitespace-nowrap">Sri and Co</div>
+              <div className="font-medium text-gray-500 text-[9px] sm:text-xs whitespace-nowrap">Techno Solutions</div>
             </div>
           </Link>
 
-          {/* --- SEARCH BAR (Flexible) --- */}
+          {/* Desktop search */}
           <div className="hidden lg:block flex-1 min-w-0">
             <SearchBar />
-          </div>
-
-          {/* --- LOGIN/REGISTER (Fixed Width) --- */}
-          <div className="hidden lg:flex items-center gap-3 text-gray-700 text-base w-48 justify-end flex-shrink-0">
-            <button className="hover:text-blue-600 transition-colors font-medium whitespace-nowrap">Login</button>
-            <span className="text-gray-400">|</span>
-            <button className="hover:text-blue-600 transition-colors font-medium whitespace-nowrap">Register</button>
           </div>
 
           {/* Hamburger */}
@@ -95,15 +88,16 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* --- MOBILE SEARCH BAR (Visible only on small screens) --- */}
-        <div className="lg:hidden mt-3 sm:mt-4 w-full">
-          <div className="flex border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+        {/* Mobile search bar */}
+        <div className="lg:hidden mt-2" ref={mobileWrapperRef}>
+          <div className="flex border border-gray-300 rounded-lg overflow-hidden shadow-sm bg-white">
             <input
               type="text"
-              placeholder="Search Product"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              className="flex-1 px-4 py-3 outline-none text-gray-700 text-sm bg-white min-w-0"
+              placeholder={mobileCat ? `Search in ${mobileCat.value}…` : 'Search Product'}
+              value={mobileQuery}
+              onChange={(e) => setMobileQuery(e.target.value)}
+              className="flex-1 px-2.5 py-2 outline-none text-gray-700 text-xs bg-white min-w-0"
+              autoComplete="off"
             />
             <div className="w-px bg-gray-200 my-1.5 flex-shrink-0" />
             <button

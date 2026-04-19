@@ -1,5 +1,4 @@
 import { AlertTriangle } from "lucide-react";
-import { AlertTriangle } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const ProductDetailPage = () => {
