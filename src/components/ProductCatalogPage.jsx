@@ -2,30 +2,55 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import FilterBar from "./FilterBar";
 import ProductCard from "./ProductCard";
-import { products, categories, subcategories } from "@/data/products1";
+import { products, categories, subcategories, subSubcategories } from "@/data/products2";
 
 const ProductCatalogPage = () => {
   const { category } = useParams();
   const navigate = useNavigate();
 
+  // Find category metadata
   const categoryData = categories.find(c => c.categoryId === category);
   const categoryTitle = categoryData ? categoryData.value : category;
-  const initialProducts = products.filter(p => p.categoryId === category);
+
+  // Filter options for the current category
   const categorySubcategories = subcategories.filter(s => s.categoryId === category);
+  const categorySubSubcategories = subSubcategories ? subSubcategories.filter(ss => ss.categoryId === category) : [];
 
-  const [filteredProducts, setFilteredProducts] = useState(initialProducts);
+  // State for filters
+  const [selectedSubcategory, setSelectedSubcategory] = useState('all');
+  const [selectedSubSubcategory, setSelectedSubSubcategory] = useState('all');
 
+  // Identify if currently selected subcategory has 3 levels
+  const selectedSubObj = categorySubcategories.find(s => s.subcategoryId === selectedSubcategory);
+  const hasLevel3 = selectedSubObj?.hasSubSubcategories || false;
+
+  // Available SubSubcategories based on selection
+  const availableSubSubcategories = hasLevel3 
+    ? categorySubSubcategories.filter(ss => ss.subcategoryId === selectedSubcategory)
+    : [];
+
+  // Reset filters when category changes
   useEffect(() => {
-    setFilteredProducts(products.filter(p => p.categoryId === category));
+    setSelectedSubcategory('all');
+    setSelectedSubSubcategory('all');
   }, [category]);
 
-  const handleFilterChange = (filters) => {
-    let filtered = products.filter(p => p.categoryId === category);
-    if (filters.subcategoryId && filters.subcategoryId !== 'all') {
-      filtered = filtered.filter(p => p.subcategoryId === filters.subcategoryId);
+  // If subcategory changes, reset the subSubcategory
+  useEffect(() => {
+    setSelectedSubSubcategory('all');
+  }, [selectedSubcategory]);
+
+  // Derived filtered products
+  const filteredProducts = products.filter(p => {
+    if (p.categoryId !== category) return false;
+    if (selectedSubcategory !== 'all') {
+      if (p.subcategoryId !== selectedSubcategory) return false;
+      if (hasLevel3 && selectedSubSubcategory !== 'all') {
+        if (p.subSubcategoryId !== selectedSubSubcategory) return false;
+      }
     }
-    setFilteredProducts(filtered);
-  };
+    return true;
+  });
 
   const handleProductClick = (product) => {
     const productSlug = product.name.toLowerCase().replace(/\s+/g, '-');
@@ -38,43 +63,51 @@ const ProductCatalogPage = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Page Header */}
       <div className="bg-white shadow-sm">
-        <div className="px-3 sm:px-6 py-3 sm:py-6">
+        <div className="px-4 sm:px-6 py-4 sm:py-6">
           <button
             onClick={handleBackClick}
-            className="flex items-center text-sky-600 hover:text-sky-700 font-semibold text-sm sm:text-base"
+            className="flex items-center text-sm sm:text-base text-blue-600 hover:text-blue-700 font-semibold transition-colors"
           >
             ← Back to Home
           </button>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="w-full px-3 sm:px-6 py-4 sm:py-8">
-
-        {/* Title row — stays on one line, shrinks on mobile */}
-        <div className="flex items-center justify-between mb-4 sm:mb-8 gap-2">
-          <div className="min-w-0">
-            <h1 className="text-base sm:text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight truncate">
-              {categoryTitle}
-            </h1>
-            <p className="text-gray-500 mt-0.5 text-xs sm:text-sm font-medium">
-              {filteredProducts.length} products
-            </p>
+      {/* Main Catalog Content */}
+      <div className="w-full px-4 sm:px-6 py-6 sm:py-8">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6 md:mb-8 gap-4 lg:gap-6">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">{categoryTitle}</h1>
+            <p className="text-gray-500 mt-1 sm:mt-2 text-sm sm:text-base font-medium">{filteredProducts.length} products</p>
           </div>
-          {/* Filter — shrinks on mobile */}
-          <div className="flex-shrink-0 scale-[0.82] sm:scale-100 origin-right">
+          {/* Filter Dropdowns */}
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 items-stretch sm:items-center flex-shrink-0 w-full lg:w-auto">
             <FilterBar
-              onFilterChange={handleFilterChange}
-              productCount={filteredProducts.length}
-              subcategories={categorySubcategories}
+              value={selectedSubcategory}
+              onChange={setSelectedSubcategory}
+              options={categorySubcategories}
+              defaultLabel="All Categories"
+              idKey="subcategoryId"
+              labelKey="value"
             />
+
+            {hasLevel3 && (
+              <FilterBar
+                value={selectedSubSubcategory}
+                onChange={setSelectedSubSubcategory}
+                options={availableSubSubcategories}
+                defaultLabel="All Types"
+                idKey="subSubcategoryId"
+                labelKey="value"
+              />
+            )}
           </div>
         </div>
 
         {/* Products Grid */}
         <div className="w-full">
           {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3 sm:gap-4 md:gap-6">
               {filteredProducts.map(product => (
                 <ProductCard
                   key={product.id}

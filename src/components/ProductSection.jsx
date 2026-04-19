@@ -26,12 +26,10 @@ const ProductSection = ({ title, products, category }) => {
         </button>
       </div>
 
-      {/* Horizontal scroll row */}
-      <div className="overflow-x-auto -mx-3 sm:-mx-4 px-3 sm:px-4 py-1 sm:py-2"
-           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-        <div className="flex gap-2.5 sm:gap-4 md:gap-6 pb-2 sm:pb-4">
+      <div className="overflow-x-auto scrollbar-hide -mx-4 px-4 py-2">
+        <div className="flex gap-4 md:gap-6 py-4">
           {products.slice(0, 10).map(product => (
-            <div key={product.id} className="flex-shrink-0" style={{ width: 'clamp(140px, 38vw, 320px)' }}>
+            <div key={product.id} className="flex-shrink-0 w-44 sm:w-56 md:w-72 lg:w-80">
               <ProductCard product={product} onClick={handleProductClick} />
             </div>
           ))}
