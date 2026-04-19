@@ -1,4 +1,5 @@
 import { AlertTriangle } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const ProductDetailPage = () => {
@@ -14,10 +15,10 @@ const ProductDetailPage = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-500 text-lg mb-4">Product not found</p>
+          <p className="text-gray-500 text-base mb-4">Product not found</p>
           <button
             onClick={() => navigate('/home')}
-            className="text-blue-600 hover:text-blue-700 font-semibold"
+            className="text-sky-600 hover:text-sky-700 font-semibold text-sm"
           >
             ← Back to Home
           </button>
@@ -52,9 +53,8 @@ const ProductDetailPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Left Side - Images */}
           <div>
-            {/* Main Image */}
-            <div className="bg-gray-200 rounded-lg overflow-hidden mb-4">
-              <div className="aspect-square flex items-center justify-center text-2xl font-semibold text-gray-700">
+            <div className="bg-gray-200 rounded-lg overflow-hidden">
+              <div className="aspect-square flex items-center justify-center">
                 <img
                   src={product.image}
                   alt={product.name}
@@ -127,6 +127,7 @@ const ProductDetailPage = () => {
                   </p>
                 </div>
               </div>
+
 
             </div>
           </div>

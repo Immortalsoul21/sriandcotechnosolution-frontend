@@ -8,8 +8,8 @@ export default function MainLayout() {
       {/* Header */}
       <Navbar />
 
-      {/* Page content */}
-      <main className="flex-1">
+      {/* Main Content - Force Full Width */}
+      <main className="flex-1 w-full relative flex flex-col">
         <Outlet />
       </main>
 

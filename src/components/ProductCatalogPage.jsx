@@ -4,12 +4,7 @@ import FilterBar from "./FilterBar";
 import ProductCard from "./ProductCard";
 import { products, categories, subcategories, subSubcategories } from "@/data/products2";
 
-/**
- * ProductCatalogPage Component
- * Displays a list of products for a specific category with filtering capabilities.
- */
 const ProductCatalogPage = () => {
-  // Get category from URL parameters
   const { category } = useParams();
   const navigate = useNavigate();
 
@@ -57,26 +52,16 @@ const ProductCatalogPage = () => {
     return true;
   });
 
-  /**
-   * handleProductClick
-   * Navigates to the individual product detail page.
-   */
   const handleProductClick = (product) => {
     const productSlug = product.name.toLowerCase().replace(/\s+/g, '-');
     navigate(`/products/${category}/${productSlug}`, { state: { product } });
   };
 
-  /**
-   * handleBackClick
-   * Navigates back to the main products listing page.
-   */
-  const handleBackClick = () => {
-    navigate('/products');
-  };
+  const handleBackClick = () => navigate('/products');
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Page Sticky Header */}
+      {/* Page Header */}
       <div className="bg-white shadow-sm">
         <div className="px-4 sm:px-6 py-4 sm:py-6">
           <button
@@ -119,7 +104,7 @@ const ProductCatalogPage = () => {
           </div>
         </div>
 
-        {/* Dynamic Products Grid */}
+        {/* Products Grid */}
         <div className="w-full">
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3 sm:gap-4 md:gap-6">
@@ -132,10 +117,9 @@ const ProductCatalogPage = () => {
               ))}
             </div>
           ) : (
-            /* Empty State */
-            <div className="text-center py-20">
-              <p className="text-gray-500 text-xl font-medium">No products found matching your filters.</p>
-              <p className="text-gray-400 mt-2">Try adjusting your filter criteria.</p>
+            <div className="text-center py-16">
+              <p className="text-gray-500 text-base sm:text-xl font-medium">No products found matching your filters.</p>
+              <p className="text-gray-400 mt-2 text-sm">Try adjusting your filter criteria.</p>
             </div>
           )}
         </div>

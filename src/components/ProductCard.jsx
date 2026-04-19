@@ -1,5 +1,6 @@
 
 
+
 /**
  * ProductCard Component
  * A reusable card for displaying brief product information with hover effects.

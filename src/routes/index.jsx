@@ -1,32 +1,81 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
-import Home from '@/pages/Home';
 import MainLayout from '@/layout/MainLayout';
-import Features from '@/pages/Features';
-import Products from '@/pages/Products';
-import ProductCatalogPage from '@/components/ProductCatalogPage';
-import ProductDetailPage from '@/components/ProductDetailPage';
 
-/**
- * Application Router Configuration
- * Defines the main routing structure using React Router's data API.
- */
+// Pages
+import Home     from '@/pages/Home';
+import Features from '@/pages/Features';
+import Services from '@/pages/Services';
+import AboutUs  from '@/pages/aboutus';
+import Products from '@/pages/Products';
+
+// Product sub-pages
+import ProductCatalogPage from '@/components/ProductCatalogPage';
+import ProductDetailPage  from '@/components/ProductDetailPage';
+
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout />, // Wraps children with Navbar/Footer
+    element: <MainLayout />,
     children: [
-      // Redirect root to home
       { index: true, element: <Navigate to="home" replace /> },
 
-      // Top-level pages
-      { path: 'home', element: <Home /> },
+      // Core pages
+      { path: 'home',     element: <Home /> },
+      { path: 'about',    element: <AboutUs /> },
       { path: 'features', element: <Features /> },
+      { path: 'services', element: <Services /> },
 
-      // Product-related routes
-      { path: 'products', element: <Products /> }, // Root product page (categories overview)
-      { path: 'products/:category', element: <ProductCatalogPage /> }, // Category listing
-      { path: 'products/:category/:productSlug', element: <ProductDetailPage /> }, // Product details
+      // Products hierarchy
+      { path: 'products',                        element: <Products /> },
+      { path: 'products/:category',              element: <ProductCatalogPage /> },
+      { path: 'products/:category/:productSlug', element: <ProductDetailPage /> },
+
+      // Careers placeholder — replace with real page when ready
+      {
+        path: 'careers',
+        element: (
+          <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+            <div className="text-center">
+              <div className="text-6xl mb-4">🚀</div>
+              <h1 className="text-3xl font-bold text-gray-900 mb-3">Careers</h1>
+              <p className="text-gray-500 text-lg mb-6">
+                We're growing! Check back soon for open positions.
+              </p>
+              <a
+                href="/home"
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold
+                           hover:bg-blue-700 transition-colors"
+              >
+                ← Back to Home
+              </a>
+            </div>
+          </div>
+        ),
+      },
+
+      // 404 catch-all
+      {
+        path: '*',
+        element: (
+          <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+            <div className="text-center">
+              <div className="text-8xl font-black text-gray-200 mb-4">404</div>
+              <h1 className="text-2xl font-bold text-gray-800 mb-3">Page Not Found</h1>
+              <p className="text-gray-500 mb-6">
+                The page you're looking for doesn't exist.
+              </p>
+              <a
+                href="/home"
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold
+                           hover:bg-blue-700 transition-colors"
+              >
+                ← Back to Home
+              </a>
+            </div>
+          </div>
+        ),
+      },
     ],
   },
 ]);

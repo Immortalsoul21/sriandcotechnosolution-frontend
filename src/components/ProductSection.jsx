@@ -2,40 +2,27 @@ import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "./ProductCard";
 
-/**
- * ProductSection Component
- * Renders a horizontal scrolling row of products for a given category.
- */
 const ProductSection = ({ title, products, category }) => {
   const navigate = useNavigate();
 
-  /**
-   * handleViewAll
-   * Navigates to the full catalog page for this specific category.
-   */
-  const handleViewAll = () => {
-    navigate(`/products/${category}`);
-  };
+  const handleViewAll = () => navigate(`/products/${category}`);
 
-  /**
-   * handleProductClick
-   * Navigates to the individual product detail page.
-   */
   const handleProductClick = (product) => {
     const productSlug = product.name.toLowerCase().replace(/\s+/g, '-');
     navigate(`/products/${category}/${productSlug}`, { state: { product } });
   };
 
   return (
-    <div className="">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+    <div>
+      {/* Section header */}
+      <div className="flex items-center justify-between mb-3 sm:mb-6">
+        <h2 className="text-sm sm:text-lg md:text-xl font-bold text-gray-900">{title}</h2>
         <button
           onClick={handleViewAll}
-          className="flex items-center gap-1 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-colors"
+          className="flex items-center gap-0.5 sm:gap-1 text-[11px] sm:text-sm font-semibold text-gray-800 hover:text-sky-600 transition-colors"
         >
           View All
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
         </button>
       </div>
 
@@ -49,15 +36,8 @@ const ProductSection = ({ title, products, category }) => {
         </div>
       </div>
 
-      {/* Utility styles to hide native scrollbars while keeping functionality */}
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none; /* IE and Edge */
-          scrollbar-width: none; /* Firefox */
-        }
+      <style>{`
+        .overflow-x-auto::-webkit-scrollbar { display: none; }
       `}</style>
     </div>
   );
