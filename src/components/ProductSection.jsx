@@ -9,7 +9,7 @@ const ProductSection = ({ title, products, category }) => {
   const handleViewAll = () => navigate(`/products/${category}`);
 
   const handleProductClick = (product) => {
-    const productSlug = product.name.toLowerCase().replace(/\s+/g, '-');
+    const productSlug = product.name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
     navigate(`/products/${category}/${productSlug}`, { state: { product } });
   };
 

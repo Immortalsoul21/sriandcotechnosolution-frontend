@@ -119,7 +119,7 @@ const Navbar = () => {
   }, []);
 
   const goToProduct = (product) => {
-    const slug = product.name.toLowerCase().replace(/\s+/g, '-');
+    const slug = product.name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
     setMobileQuery(''); setMobileOpen(false); setIsMenuOpen(false);
     navigate(`/products/${encodeURIComponent(product.categoryId)}/${slug}`, { state: { product } });
   };

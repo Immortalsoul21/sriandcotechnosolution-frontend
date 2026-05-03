@@ -58,7 +58,7 @@ const ProductCatalogPage = () => {
   });
 
   const handleProductClick = (product) => {
-    const productSlug = product.name.toLowerCase().replace(/\s+/g, '-');
+    const productSlug = product.name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
     navigate(`/products/${encodeURIComponent(decodedCategory)}/${productSlug}`, { state: { product } });
   };
 
