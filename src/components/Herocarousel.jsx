@@ -25,15 +25,37 @@ const slides = [
     pattern: 'grid',
   },
   {
-    badge: '⚡ Same-Day Dispatch',
-    title: 'Speed Without Compromise. Delivered To Your Doorstep.',
+    badge: '📡 Antenna Solutions',
+    title: 'High-Performance Antenna Systems For Every Mission.',
     description:
-      'In-stock items ship the same day. Our logistics network ensures your critical components arrive on schedule, so your production line never stops.',
-    accentColor: '#8b5cf6',
-    stat1: { value: 'Same Day', label: 'Shipping on Stock Items' },
-    stat2: { value: '99.8%', label: 'On-Time Delivery Rate' },
-    image: 'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1400&q=80',
+      'From military-grade phased arrays to precision microwave antennas, our components power the most critical communication and surveillance systems worldwide.',
+    accentColor: '#10b981',
+    stat1: { value: '5G+', label: 'Ready Components' },
+    stat2: { value: '40GHz+', label: 'Frequency Range' },
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Goldstone_Deep_Space_Communications_Complex.jpg/1280px-Goldstone_Deep_Space_Communications_Complex.jpg',
+    pattern: 'circuit',
+  },
+  {
+    badge: '🚀 Defence & Missile Systems',
+    title: 'Built For The Battlefield. Trusted By The Best.',
+    description:
+      'Our RF and electronic components meet the rigorous demands of defence systems — from missile guidance electronics to radar subsystems — engineered for zero failure in the field.',
+    accentColor: '#f59e0b',
+    stat1: { value: 'MIL-SPEC', label: 'Certified Components' },
+    stat2: { value: '30+', label: 'Defence Programmes' },
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Telecommunication_tower_Gerbrandy.jpg/800px-Telecommunication_tower_Gerbrandy.jpg',
     pattern: 'dots',
+  },
+  {
+    badge: '🗼 Telecom Infrastructure',
+    title: 'Powering Global Telecom Networks From The Ground Up.',
+    description:
+      'Our passive and active RF components form the backbone of cellular towers and telecom infrastructure across continents — reliable, weatherproof, and built to last.',
+    accentColor: '#8b5cf6',
+    stat1: { value: '10K+', label: 'Towers Equipped' },
+    stat2: { value: '99.9%', label: 'Network Uptime' },
+    image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=1400&q=80',
+    pattern: 'grid',
   },
 ];
 
@@ -85,6 +107,8 @@ const HeroCarousel = () => {
   const fallbackGradients = [
     'from-[#0a1628] via-[#0d2147] to-[#112a5c]',
     'from-[#071a2e] via-[#0c2a4a] to-[#0f3460]',
+    'from-[#0a1f12] via-[#0d2e1a] to-[#0f3d22]',
+    'from-[#1a1200] via-[#2e1f00] to-[#3d2a00]',
     'from-[#0f0f23] via-[#1a1a3e] to-[#1e1e5a]',
   ];
 
@@ -137,7 +161,6 @@ const HeroCarousel = () => {
             <div className="container mx-auto relative z-10" style={{ paddingLeft: 'clamp(16px, 5vw, 48px)', paddingRight: 'clamp(16px, 5vw, 48px)' }}>
               <div className="max-w-xl text-white">
 
-                {/* Badge */}
                 <span
                   className="inline-flex items-center gap-1.5 rounded-full font-semibold border border-white/20 backdrop-blur-sm"
                   style={{
@@ -151,7 +174,6 @@ const HeroCarousel = () => {
                   {slide.badge}
                 </span>
 
-                {/* Title */}
                 <h2
                   className="font-bold leading-tight tracking-tight text-white"
                   style={{
@@ -162,7 +184,6 @@ const HeroCarousel = () => {
                   {slide.title}
                 </h2>
 
-                {/* Description */}
                 <p
                   className="opacity-75 max-w-lg leading-relaxed"
                   style={{
@@ -173,7 +194,6 @@ const HeroCarousel = () => {
                   {slide.description}
                 </p>
 
-                {/* Stats */}
                 <div className="flex items-center" style={{ gap: 'clamp(12px, 2.5vw, 24px)', marginBottom: 'clamp(12px, 2vw, 28px)' }}>
                   <div>
                     <div className="font-bold" style={{ fontSize: 'clamp(14px, 2.2vw, 28px)', color: slide.accentColor }}>
@@ -194,7 +214,6 @@ const HeroCarousel = () => {
                   </div>
                 </div>
 
-                {/* CTAs */}
                 <div className="flex flex-wrap" style={{ gap: 'clamp(6px, 1vw, 10px)' }}>
                   <button
                     onClick={() => navigate('/products')}

@@ -8,29 +8,29 @@ const QUICK_LINKS = [
   { label: 'Home',           path: '/home' },
   { label: 'About Us',       path: '/about' },
   { label: 'Products',       path: '/products' },
-  { label: 'Features',       path: '/features' },
-  { label: 'News & Updates', path: '/news' },
+  { label: 'News & Updates', path: '/features' },
+  { label: 'Contact Us',     path: '/contact' }, // ← added
 ];
 
 const PRODUCT_CATS = [
-  { label: 'RF & Microwave Components', path: '/products' },
-  { label: 'Test & Measurement',        path: '/products' },
-  { label: 'Sensors & Measurement',     path: '/products' },
-  { label: 'Thin Film & Electronics',   path: '/products' },
-  { label: 'Antennas',                  path: '/products' },
-  { label: 'Sri & Co Manufacture',      path: '/products' },
+  { label: 'RF & Microwave Components', path: '/products/RF%20%26%20Microwave%20Components%20and%20Solutions' },
+  { label: 'Test & Measurement',        path: '/products/Test%20%26%20Measurement' },
+  { label: 'Electronics Sensors',       path: '/products/Electronics%20Sensors' },
+  { label: 'Special Materials',         path: '/products/Special%20Materials' },
+  { label: 'RCP & HIL',                 path: '/products/RCP%20%26%20HIL' },
+  { label: 'Sri & Co Manufacture',      path: '/products/Sri%20%26%20Co%20Manufacture%20Product' },
 ];
 
 const LEGAL = [
-  { label: 'Privacy Policy',  href: '#' },
+  { label: 'Privacy Policy',   href: '#' },
   { label: 'Terms of Service', href: '#' },
-  { label: 'Cookie Policy',   href: '#' },
+  { label: 'Cookie Policy',    href: '#' },
 ];
 
 const Footer = () => (
   <footer className="bg-gray-950 text-gray-400">
 
-    {/* ── MAIN GRID ──────────────────────────────────────────────────── */}
+    {/* ── MAIN GRID ── */}
     <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-10">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
 
@@ -76,7 +76,7 @@ const Footer = () => (
           </ul>
         </div>
 
-        {/* Product categories */}
+        {/* Product categories — now link directly to each category page */}
         <div className="flex flex-col gap-4">
           <h3 className="text-white text-xs font-semibold uppercase tracking-widest">Products</h3>
           <ul className="flex flex-col gap-2.5">
@@ -129,7 +129,7 @@ const Footer = () => (
 
           {/* CTA */}
           <Link
-            to="/about"
+            to="/contact"
             className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-sky-400
                        border border-sky-400/30 rounded-lg px-4 py-2.5 w-fit
                        hover:bg-sky-400/10 transition-colors duration-200 group"
@@ -142,10 +142,10 @@ const Footer = () => (
       </div>
     </div>
 
-    {/* ── DIVIDER ────────────────────────────────────────────────────── */}
+    {/* ── DIVIDER ── */}
     <div className="border-t border-gray-800/60" />
 
-    {/* ── BOTTOM BAR ─────────────────────────────────────────────────── */}
+    {/* ── BOTTOM BAR ── */}
     <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-4 sm:py-5">
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
         <p className="text-[10px] sm:text-xs text-gray-600 order-2 sm:order-1">

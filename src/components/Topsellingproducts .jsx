@@ -1,13 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import ProductCard from "./ProductCard";
-import { products } from '@/data/products1';
+import { products } from '@/data/products2';
 
 const CATEGORY_ID = "Sri & Co Manufacture Product";
 
 const InHouseProducts = () => {
+  const navigate = useNavigate();
   const inHouseProducts = products.filter(p => p.categoryId === CATEGORY_ID);
 
   if (inHouseProducts.length === 0) return null;
+
+  const handleProductClick = (product) => {
+    const slug = product.name.toLowerCase().replace(/\s+/g, '-');
+    navigate(`/products/${encodeURIComponent(product.categoryId)}/${slug}`, { state: { product } });
+  };
 
   return (
     <section className="py-10 sm:py-12 bg-white">
@@ -35,7 +42,7 @@ const InHouseProducts = () => {
           <div className="flex gap-3 sm:gap-8 pb-3 sm:pb-4">
             {inHouseProducts.map((product) => (
               <div key={product.id} className="flex-shrink-0" style={{ width: 'clamp(200px, 55vw, 300px)' }}>
-                <ProductCard product={product} />
+                <ProductCard product={product} onClick={handleProductClick} />
               </div>
             ))}
           </div>

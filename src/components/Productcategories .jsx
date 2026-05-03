@@ -1,52 +1,45 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// These match the categoryIds in products2.js exactly
 const categories = [
   {
-    categoryId: 'rf-microwave',
-    title: 'RF & Microwave',
-    description: 'Connectors, cables, passive and microwave components for high-frequency RF applications.',
-    subcategories: ['RF Connectors & Adapters', 'RF Cables & Assemblies', 'Passive Components', 'Microwave Components'],
+    categoryId: 'RF & Microwave Components and Solutions',
+    title: 'RF & Microwave Components and Solutions',
+    description: 'Connectors, cables, amplifiers, filters, waveguides, antennas and thin-film components for high-frequency RF applications.',
+    subcategories: ['RF Connectors & Adapters', 'RF Amplifiers', 'Antenna Solutions', 'Waveguide & High-Frequency Components'],
     gradientFrom: '#0284c7', gradientTo: '#0369a1',
     image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80',
   },
   {
-    categoryId: 'electronics-sensors',
-    title: 'Electronics & Sensors',
-    description: 'Precision sensing solutions for temperature, pressure, RF, and environmental measurement.',
-    subcategories: ['Temperature Sensors', 'Pressure Sensors', 'RF Sensors', 'Environmental Sensors'],
-    gradientFrom: '#059669', gradientTo: '#0f766e',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80',
-  },
-  {
-    categoryId: 'emi-emc',
-    title: 'EMI & EMC',
-    description: 'Anechoic chambers, RF absorbers, shield boxes, and thermal test enclosures for compliance testing.',
-    subcategories: ['EMI & EMC Anechoic Chambers', 'Semi-Anechoic Chambers', 'RF Absorbers', 'RF Shield Boxes', 'RF Thermal Test Boxes'],
-    gradientFrom: '#4f46e5', gradientTo: '#3730a3',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80',
-  },
-  {
-    categoryId: 'environmental-chambers',
-    title: 'Environmental Chambers',
-    description: 'Full range of climatic, thermal shock, altitude, vibration, and specialty test chambers.',
-    subcategories: ['Temperature Chambers', 'Humidity Chambers', 'Thermal Shock Chambers', 'Altitude Chambers', 'Vibration Chambers', 'Salt Spray Chambers'],
+    categoryId: 'Test & Measurement',
+    title: 'Test & Measurement',
+    description: 'Anechoic chambers, RF absorbers, shielded enclosures, scanner systems and EMC solutions for compliance testing.',
+    subcategories: ['EMC / EMI Test Chambers', 'RF Shielded Enclosures & Boxes', 'RF Scanner Systems', 'Microwave Absorbers'],
     gradientFrom: '#0891b2', gradientTo: '#0e7490',
     image: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=600&q=80',
   },
   {
-    categoryId: 'special-materials',
+    categoryId: 'Electronics Sensors',
+    title: 'Electronics Sensors',
+    description: 'Precision sensing solutions for pressure, load, temperature, position, vibration and environmental measurement.',
+    subcategories: ['Pressure Sensors', 'Load Cells', 'Temperature Sensors', 'Accelerometers'],
+    gradientFrom: '#059669', gradientTo: '#0f766e',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80',
+  },
+  {
+    categoryId: 'Special Materials',
     title: 'Special Materials',
-    description: 'Advanced lightweight and thermal materials including PMI foam, carbon fibre, and thermal shielding.',
-    subcategories: ['PMI Foam', 'Carbon Fiber Materials', 'Solimide Materials', 'Thermal Shielding Solutions'],
+    description: 'Advanced lightweight and thermal materials including carbon fibre, Rohacell PMI foam, Solimide and thermal shielding.',
+    subcategories: ['Carbon Fiber Sheet', 'Rohacell', 'Solimide', 'Thermal Shielding Solution'],
     gradientFrom: '#7c3aed', gradientTo: '#6d28d9',
     image: 'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&w=600&q=80',
   },
   {
-    categoryId: 'rcp-hil',
+    categoryId: 'RCP & HIL',
     title: 'RCP & HIL',
-    description: 'Rapid Control Prototyping and Hardware-in-the-Loop systems for real-time simulation.',
-    subcategories: ['Rapid Control Prototyping (RCP)', 'Hardware-in-the-Loop (HIL)'],
+    description: 'Rapid Control Prototyping and Hardware-in-the-Loop systems for real-time simulation and embedded control validation.',
+    subcategories: ['Rapid Control Prototyping System', 'Hardware-in-the-Loop System'],
     gradientFrom: '#475569', gradientTo: '#1e293b',
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
   },
@@ -65,7 +58,6 @@ const CategoryCard = ({ cat, onClick }) => {
                  w-[72vw] sm:w-[44vw] md:w-auto md:flex-1"
       style={{ minWidth: 0, aspectRatio: '3/4' }}
     >
-      {/* Background */}
       {!imgError ? (
         <img
           src={cat.image}
@@ -81,31 +73,24 @@ const CategoryCard = ({ cat, onClick }) => {
         />
       )}
 
-      {/* Colour tint overlay using card's own gradient for brand feel */}
       <div
         className="absolute inset-0 opacity-30"
         style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
       />
-
-      {/* Permanent dark scrim — heavier at bottom */}
       <div
         className="absolute inset-0"
         style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.90) 40%, rgba(0,0,0,0.10) 100%)' }}
       />
 
-      {/* ── BASE STATE ── */}
+      {/* Base state */}
       <div className="absolute inset-0 flex flex-col justify-end p-3.5 sm:p-4
                       transition-opacity duration-300 group-hover:opacity-0">
-        <span
-          className="mb-2 self-start text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest
-                     px-2 py-0.5 rounded-full border border-white/25 text-white/60"
-        >
+        <span className="mb-2 self-start text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest
+                         px-2 py-0.5 rounded-full border border-white/25 text-white/60">
           {cat.subcategories.length} subcategories
         </span>
-        <h3
-          className="text-white font-bold leading-tight drop-shadow"
-          style={{ fontSize: 'clamp(13px, 2.2vw, 18px)', letterSpacing: '-0.01em' }}
-        >
+        <h3 className="text-white font-bold leading-tight drop-shadow"
+            style={{ fontSize: 'clamp(13px, 2.2vw, 18px)', letterSpacing: '-0.01em' }}>
           {cat.title}
         </h3>
         <p className="mt-1 text-white/60 leading-relaxed line-clamp-2 hidden sm:block"
@@ -114,44 +99,27 @@ const CategoryCard = ({ cat, onClick }) => {
         </p>
       </div>
 
-      {/* ── HOVER STATE ── */}
+      {/* Hover state */}
       <div
         className="absolute inset-0 flex flex-col justify-between p-3.5 sm:p-4
                    opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0
                    transition-all duration-300 ease-out"
-        style={{
-          background: 'rgba(0,0,0,0.78)',
-          backdropFilter: 'blur(14px)',
-          WebkitBackdropFilter: 'blur(14px)',
-        }}
+        style={{ background: 'rgba(0,0,0,0.78)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)' }}
       >
-        {/* Accent bar */}
-        <div
-          className="h-0.5 w-8 rounded-full mb-3"
-          style={{ background: `linear-gradient(90deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
-        />
+        <div className="h-0.5 w-8 rounded-full mb-3"
+             style={{ background: `linear-gradient(90deg, ${cat.gradientFrom}, ${cat.gradientTo})` }} />
 
         <div className="flex-1 flex flex-col">
-          <h3
-            className="text-white font-bold leading-tight mb-3"
-            style={{ fontSize: 'clamp(13px, 2.2vw, 18px)', letterSpacing: '-0.01em' }}
-          >
+          <h3 className="text-white font-bold leading-tight mb-3"
+              style={{ fontSize: 'clamp(13px, 2.2vw, 18px)', letterSpacing: '-0.01em' }}>
             {cat.title}
           </h3>
-
           <ul className="space-y-1.5 sm:space-y-2 flex-1">
             {shown.map((sub, i) => (
               <li key={i} className="flex items-start gap-2">
-                <span
-                  className="flex-shrink-0 mt-1.5 rounded-full"
-                  style={{
-                    width: 3, height: 3,
-                    background: cat.gradientFrom,
-                    boxShadow: `0 0 4px ${cat.gradientFrom}`,
-                  }}
-                />
-                <span className="text-white/80 leading-snug"
-                      style={{ fontSize: 'clamp(8px, 1vw, 11px)' }}>
+                <span className="flex-shrink-0 mt-1.5 rounded-full"
+                      style={{ width: 3, height: 3, background: cat.gradientFrom, boxShadow: `0 0 4px ${cat.gradientFrom}` }} />
+                <span className="text-white/80 leading-snug" style={{ fontSize: 'clamp(8px, 1vw, 11px)' }}>
                   {sub}
                 </span>
               </li>
@@ -164,11 +132,9 @@ const CategoryCard = ({ cat, onClick }) => {
           </ul>
         </div>
 
-        <div
-          className="mt-3 inline-flex items-center gap-1.5 self-start font-semibold text-white
-                     border border-white/25 rounded-lg px-2.5 py-1 hover:bg-white/10 transition-colors"
-          style={{ fontSize: 'clamp(9px, 1vw, 11px)' }}
-        >
+        <div className="mt-3 inline-flex items-center gap-1.5 self-start font-semibold text-white
+                        border border-white/25 rounded-lg px-2.5 py-1 hover:bg-white/10 transition-colors"
+             style={{ fontSize: 'clamp(9px, 1vw, 11px)' }}>
           Explore →
         </div>
       </div>
@@ -177,22 +143,17 @@ const CategoryCard = ({ cat, onClick }) => {
 };
 
 const ProductCategories = () => {
-  const navigate   = useNavigate();
-  const scrollRef  = useRef(null);
+  const navigate  = useNavigate();
+  const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Track scroll position to update dots
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-
     const onScroll = () => {
-      const scrollLeft = el.scrollLeft;
-      const cardWidth  = el.scrollWidth / categories.length;
-      const idx        = Math.round(scrollLeft / cardWidth);
-      setActiveIndex(Math.min(idx, categories.length - 1));
+      const cardWidth = el.scrollWidth / categories.length;
+      setActiveIndex(Math.min(Math.round(el.scrollLeft / cardWidth), categories.length - 1));
     };
-
     el.addEventListener('scroll', onScroll, { passive: true });
     return () => el.removeEventListener('scroll', onScroll);
   }, []);
@@ -200,15 +161,13 @@ const ProductCategories = () => {
   const scrollTo = (i) => {
     const el = scrollRef.current;
     if (!el) return;
-    const cardWidth = el.scrollWidth / categories.length;
-    el.scrollTo({ left: cardWidth * i, behavior: 'smooth' });
+    el.scrollTo({ left: (el.scrollWidth / categories.length) * i, behavior: 'smooth' });
   };
 
   return (
     <section className="py-10 sm:py-14 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6">
 
-        {/* Header */}
         <div className="text-center mb-6 sm:mb-10">
           <p className="text-xs sm:text-sm font-semibold text-sky-600 uppercase tracking-widest mb-1 sm:mb-2">
             What we offer
@@ -217,31 +176,26 @@ const ProductCategories = () => {
             Our Product Range
           </h2>
           <p className="text-gray-500 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Specialised components and solutions across RF, microwave, sensors, chambers, and
+            Specialised components and solutions across RF, microwave, sensors, test chambers, and
             advanced materials — engineered for performance-critical applications.
           </p>
         </div>
 
-        {/* Card grid — desktop: all 6 in a row | mobile: horizontal scroll */}
         <div
           ref={scrollRef}
-          className="flex gap-3 sm:gap-3 md:gap-4
-                     overflow-x-auto md:overflow-x-visible
-                     pb-2 md:pb-0
-                     snap-x snap-mandatory md:snap-none"
+          className="flex gap-3 md:gap-4 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0 snap-x snap-mandatory md:snap-none"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
         >
           {categories.map((cat) => (
             <div key={cat.categoryId} className="snap-start md:flex-1 min-w-0">
               <CategoryCard
                 cat={cat}
-                onClick={() => navigate(`/products/${cat.categoryId}`)}
+                onClick={() => navigate(`/products/${encodeURIComponent(cat.categoryId)}`)}
               />
             </div>
           ))}
         </div>
 
-        {/* Scroll indicator dots — mobile only */}
         <div className="flex md:hidden justify-center gap-1.5 mt-4">
           {categories.map((_, i) => (
             <button
@@ -249,16 +203,11 @@ const ProductCategories = () => {
               onClick={() => scrollTo(i)}
               aria-label={`Go to ${categories[i].title}`}
               className="transition-all duration-300 rounded-full"
-              style={{
-                width:  i === activeIndex ? 20 : 6,
-                height: 6,
-                background: i === activeIndex ? '#0284c7' : '#cbd5e1',
-              }}
+              style={{ width: i === activeIndex ? 20 : 6, height: 6, background: i === activeIndex ? '#0284c7' : '#cbd5e1' }}
             />
           ))}
         </div>
 
-        {/* CTA */}
         <div className="text-center mt-6 sm:mt-10">
           <button
             onClick={() => navigate('/products')}

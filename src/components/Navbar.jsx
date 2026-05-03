@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, Check, Search } from 'lucide-react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { products, categories } from '@/data/products1';
+import { products, categories } from '@/data/products2';
 import SearchBar from './Searchbar';
 import logo from '../assets/logo.png';
 
@@ -42,7 +42,8 @@ const NAV_ITEMS = [
   { label: 'Home',           path: '/home' },
   { label: 'About Us',       path: '/about' },
   { label: 'Products',       path: '/products' },
-  { label: 'News & Updates',       path: '/features' },
+  { label: 'News & Updates', path: '/features' },
+  { label: 'Contact Us',     path: '/contact' }, // ← added
 ];
 
 export const SocialIcons = ({ size = 'sm' }) => {
@@ -83,14 +84,12 @@ const Navbar = () => {
   const mobileWrapperRef = useRef(null);
   const navigate         = useNavigate();
 
-  /* scroll shadow */
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 4);
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  /* mobile search */
   useEffect(() => {
     const q = mobileQuery.trim().toLowerCase();
     if (!q) { setMobileResults([]); setMobileOpen(false); return; }
@@ -101,7 +100,6 @@ const Navbar = () => {
     setMobileOpen(matched.length > 0);
   }, [mobileQuery, mobileCat]);
 
-  /* outside click */
   useEffect(() => {
     const h = (e) => {
       if (mobileWrapperRef.current && !mobileWrapperRef.current.contains(e.target)) {
@@ -112,7 +110,6 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', h);
   }, []);
 
-  /* close mobile menu on lg */
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
     const h  = (e) => { if (e.matches) setIsMenuOpen(false); };
@@ -123,13 +120,13 @@ const Navbar = () => {
   const goToProduct = (product) => {
     const slug = product.name.toLowerCase().replace(/\s+/g, '-');
     setMobileQuery(''); setMobileOpen(false); setIsMenuOpen(false);
-    navigate(`/products/${product.categoryId}/${slug}`, { state: { product } });
+    navigate(`/products/${encodeURIComponent(product.categoryId)}/${slug}`, { state: { product } });
   };
 
   return (
     <div className={`w-full sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-lg' : 'shadow-md'}`}>
 
-      {/* ── TOP BAR ─────────────────────────────────────────────────── */}
+      {/* ── TOP BAR ── */}
       <div className="bg-white border-b border-gray-100 px-3 sm:px-6 py-2.5 sm:py-3.5">
         <div className="max-w-[1400px] mx-auto flex items-center gap-2 sm:gap-6">
 
@@ -144,41 +141,36 @@ const Navbar = () => {
               />
               <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-white" />
             </div>
-            <div className="min-w-0">
-              <div className="font-bold text-gray-900 text-xs sm:text-base leading-tight whitespace-nowrap tracking-tight">
-                Sri and Co
-              </div>
-              <div className="text-gray-400 text-[9px] sm:text-[11px] whitespace-nowrap tracking-wider uppercase font-medium">
-                Techno Solutions
-              </div>
+            <div className="hidden sm:block">
+              <p className="text-sm font-bold text-gray-900 leading-tight">Sri and Co</p>
+              <p className="text-[10px] text-gray-400 tracking-widest uppercase">Techno Solutions</p>
             </div>
           </Link>
 
           {/* Desktop search */}
-          <div className="hidden lg:block flex-1 min-w-0 max-w-2xl">
+          <div className="flex-1 hidden lg:block">
             <SearchBar />
           </div>
 
-          {/* Desktop social */}
-          <div className="hidden lg:flex items-center gap-3 flex-shrink-0 ml-auto">
-            <SocialIcons size="sm" />
+          {/* Desktop social + hamburger */}
+          <div className="flex items-center gap-3 sm:gap-4 ml-auto lg:ml-0">
+            <div className="hidden lg:flex">
+              <SocialIcons size="sm" />
+            </div>
+            <button
+              onClick={() => setIsMenuOpen(p => !p)}
+              className="lg:hidden p-1.5 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
 
-          {/* Hamburger */}
-          <button
-            className="lg:hidden ml-auto p-1.5 sm:p-2 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen
-              ? <X size={20} strokeWidth={2} />
-              : <Menu size={20} strokeWidth={2} />}
-          </button>
         </div>
 
-        {/* ── MOBILE SEARCH ──────────────────────────────────────────── */}
-        <div className="lg:hidden mt-2.5 max-w-[1400px] mx-auto" ref={mobileWrapperRef}>
-          <div className="flex border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm focus-within:border-sky-400 focus-within:shadow-sky-100 focus-within:shadow-md transition-all">
+        {/* Mobile search */}
+        <div className="lg:hidden mt-2" ref={mobileWrapperRef}>
+          <div className="flex border border-gray-200 rounded-lg overflow-hidden bg-white">
             <div className="flex items-center pl-3 text-gray-400 flex-shrink-0">
               <Search size={14} />
             </div>
@@ -208,9 +200,8 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Mobile category dropdown */}
           {mobileCatOpen && (
-            <div className="mt-1.5 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[110] relative animate-[fadeSlideDown_0.15s_ease]">
+            <div className="mt-1.5 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[110] relative">
               <div className="px-3 py-2 bg-gray-50 border-b border-gray-100">
                 <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Filter by Category</span>
               </div>
@@ -241,7 +232,6 @@ const Navbar = () => {
             </div>
           )}
 
-          {/* Mobile results */}
           {mobileOpen && (
             <div className="mt-1.5 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[100] relative">
               <div className="px-3 py-2 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
@@ -286,13 +276,12 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ── NAV BAR ─────────────────────────────────────────────────── */}
+      {/* ── NAV BAR ── */}
       <nav className={`bg-gray-900 text-white ${isMenuOpen ? 'block' : 'hidden'} lg:block`}>
         <div className="max-w-[1400px] mx-auto px-3 sm:px-6">
           <ul className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-
             <div className="flex flex-col lg:flex-row">
-              {NAV_ITEMS.map((item, i) => (
+              {NAV_ITEMS.map((item) => (
                 <li key={item.label} className="border-b lg:border-b-0 border-gray-800/60">
                   <NavLink
                     to={item.path}
@@ -311,8 +300,6 @@ const Navbar = () => {
                 </li>
               ))}
             </div>
-
-            {/* Social — mobile only (desktop is in top bar) */}
             <li className="lg:hidden px-4 py-3 border-t border-gray-800/60">
               <SocialIcons size="sm" />
             </li>

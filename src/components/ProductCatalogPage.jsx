@@ -8,13 +8,18 @@ const ProductCatalogPage = () => {
   const { category } = useParams();
   const navigate = useNavigate();
 
+  // Decode URI in case category has special characters
+  const decodedCategory = decodeURIComponent(category);
+
   // Find category metadata
-  const categoryData = categories.find(c => c.categoryId === category);
-  const categoryTitle = categoryData ? categoryData.value : category;
+  const categoryData = categories.find(c => c.categoryId === decodedCategory);
+  const categoryTitle = categoryData ? categoryData.value : decodedCategory;
 
   // Filter options for the current category
-  const categorySubcategories = subcategories.filter(s => s.categoryId === category);
-  const categorySubSubcategories = subSubcategories ? subSubcategories.filter(ss => ss.categoryId === category) : [];
+  const categorySubcategories = subcategories.filter(s => s.categoryId === decodedCategory);
+  const categorySubSubcategories = subSubcategories
+    ? subSubcategories.filter(ss => ss.categoryId === decodedCategory)
+    : [];
 
   // State for filters
   const [selectedSubcategory, setSelectedSubcategory] = useState('all');
@@ -25,7 +30,7 @@ const ProductCatalogPage = () => {
   const hasLevel3 = selectedSubObj?.hasSubSubcategories || false;
 
   // Available SubSubcategories based on selection
-  const availableSubSubcategories = hasLevel3 
+  const availableSubSubcategories = hasLevel3
     ? categorySubSubcategories.filter(ss => ss.subcategoryId === selectedSubcategory)
     : [];
 
@@ -33,7 +38,7 @@ const ProductCatalogPage = () => {
   useEffect(() => {
     setSelectedSubcategory('all');
     setSelectedSubSubcategory('all');
-  }, [category]);
+  }, [decodedCategory]);
 
   // If subcategory changes, reset the subSubcategory
   useEffect(() => {
@@ -42,7 +47,7 @@ const ProductCatalogPage = () => {
 
   // Derived filtered products
   const filteredProducts = products.filter(p => {
-    if (p.categoryId !== category) return false;
+    if (p.categoryId !== decodedCategory) return false;
     if (selectedSubcategory !== 'all') {
       if (p.subcategoryId !== selectedSubcategory) return false;
       if (hasLevel3 && selectedSubSubcategory !== 'all') {
@@ -54,7 +59,7 @@ const ProductCatalogPage = () => {
 
   const handleProductClick = (product) => {
     const productSlug = product.name.toLowerCase().replace(/\s+/g, '-');
-    navigate(`/products/${category}/${productSlug}`, { state: { product } });
+    navigate(`/products/${encodeURIComponent(decodedCategory)}/${productSlug}`, { state: { product } });
   };
 
   const handleBackClick = () => navigate('/products');
