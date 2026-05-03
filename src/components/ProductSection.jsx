@@ -1,3 +1,4 @@
+// src/components/ProductSection.jsx
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "./ProductCard";
@@ -14,7 +15,6 @@ const ProductSection = ({ title, products, category }) => {
 
   return (
     <div>
-      {/* Section header */}
       <div className="flex items-center justify-between mb-3 sm:mb-6">
         <h2 className="text-sm sm:text-lg md:text-xl font-bold text-gray-900">{title}</h2>
         <button

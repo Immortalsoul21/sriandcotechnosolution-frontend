@@ -3,7 +3,7 @@ import HeroCarousel from "../components/Herocarousel";
 import AboutCompany from "../components/Aboutcompany ";
 import ProductCategories from "../components/Productcategories ";
 import TopSellingProducts from "../components/Topsellingproducts ";
-import Newsletter from "../components/Newsletter ";
+
 import BrandMarquee from "../components/Brandmarquee "
 const Home = () => {
   return (
@@ -12,7 +12,7 @@ const Home = () => {
       <AboutCompany />
       <ProductCategories />
       <TopSellingProducts />
-      <Newsletter />
+ 
       <BrandMarquee />
     </div>
   );

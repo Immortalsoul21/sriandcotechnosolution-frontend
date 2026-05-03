@@ -43,7 +43,8 @@ const NAV_ITEMS = [
   { label: 'About Us',       path: '/about' },
   { label: 'Products',       path: '/products' },
   { label: 'News & Updates', path: '/features' },
-  { label: 'Contact Us',     path: '/contact' }, // ← added
+  { label: 'Careers',        path: '/careers' },
+  { label: 'Contact Us',     path: '/contact' },
 ];
 
 export const SocialIcons = ({ size = 'sm' }) => {
