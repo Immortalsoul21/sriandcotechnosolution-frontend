@@ -32,9 +32,10 @@ const BrandMarquee = () => {
   const allBrands = [...brands, ...brands];
 
   return (
+    // UPDATED header: "Our Clients" (was "Trusted Partners & Suppliers")
     <section className="py-5 sm:py-8 bg-white border-y border-gray-100 overflow-hidden">
       <p className="text-center text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3 sm:mb-6">
-        Trusted Partners &amp; Suppliers
+        Our Clients
       </p>
 
       <div className="relative">

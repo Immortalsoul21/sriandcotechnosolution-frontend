@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// DATA POINTS removed from all stat fields per instructions — replaced with qualitative labels
 const slides = [
   {
     badge: '🌐 Trusted Worldwide',
     title: 'Connecting The World Through Precision Components',
     description:
-      'With a presence in 150+ countries, we deliver RF, Microwave & Electronic Components to aerospace, defence, and industrial sectors — on time, every time.',
+      'With a presence across global markets, we deliver RF, Microwave & Electronic Components to aerospace, defence, and industrial sectors — on time, every time.',
     accentColor: '#0ea5e9',
-    stat1: { value: '150+', label: 'Countries Served' },
-    stat2: { value: '25+', label: 'Years of Excellence' },
+    // REMOVED numerical stat values — replaced with qualitative messaging
+    stat1: { value: 'Global', label: 'Reach & Presence' },
+    stat2: { value: 'Decades', label: 'Of Excellence' },
     image: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1400&q=80',
     pattern: 'circuit',
   },
@@ -19,8 +21,8 @@ const slides = [
     description:
       'All products are sourced exclusively from authorised manufacturers — ISO-certified, tested to spec, and ready for the most demanding environments.',
     accentColor: '#06b6d4',
-    stat1: { value: '100%', label: 'Certified Supply Chain' },
-    stat2: { value: '50K+', label: 'Components in Stock' },
+    stat1: { value: 'ISO', label: 'Certified Supply Chain' },
+    stat2: { value: 'Wide', label: 'Component Range' },
     image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80',
     pattern: 'grid',
   },
@@ -28,10 +30,10 @@ const slides = [
     badge: '📡 Antenna Solutions',
     title: 'High-Performance Antenna Systems For Every Mission.',
     description:
-      'From military-grade phased arrays to precision microwave antennas, our components power the most critical communication and surveillance systems worldwide.',
+      'From military-grade phased arrays to precision microwave antennas, our components power the most critical communication and surveillance systems worldwide. Connecting Satellites (Sat-Com) through mission-critical components.',
     accentColor: '#10b981',
     stat1: { value: '5G+', label: 'Ready Components' },
-    stat2: { value: '40GHz+', label: 'Frequency Range' },
+    stat2: { value: 'Wideband', label: 'Frequency Coverage' },
     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Goldstone_Deep_Space_Communications_Complex.jpg/1280px-Goldstone_Deep_Space_Communications_Complex.jpg',
     pattern: 'circuit',
   },
@@ -39,10 +41,10 @@ const slides = [
     badge: '🚀 Defence & Missile Systems',
     title: 'Built For The Battlefield. Trusted By The Best.',
     description:
-      'Our RF and electronic components meet the rigorous demands of defence systems — from missile guidance electronics to radar subsystems — engineered for zero failure in the field.',
+      'Our RF and electronic components meet the rigorous demands of defence systems — from missile guidance electronics to radar subsystems — engineered for zero failure in the field. Powering the defence and aerospace from ground up.',
     accentColor: '#f59e0b',
     stat1: { value: 'MIL-SPEC', label: 'Certified Components' },
-    stat2: { value: '30+', label: 'Defence Programmes' },
+    stat2: { value: 'Multi-Programme', label: 'Defence Support' },
     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Telecommunication_tower_Gerbrandy.jpg/800px-Telecommunication_tower_Gerbrandy.jpg',
     pattern: 'dots',
   },
@@ -52,10 +54,22 @@ const slides = [
     description:
       'Our passive and active RF components form the backbone of cellular towers and telecom infrastructure across continents — reliable, weatherproof, and built to last.',
     accentColor: '#8b5cf6',
-    stat1: { value: '10K+', label: 'Towers Equipped' },
-    stat2: { value: '99.9%', label: 'Network Uptime' },
+    stat1: { value: 'Proven', label: 'Tower Deployments' },
+    stat2: { value: 'High', label: 'Network Uptime' },
     image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=1400&q=80',
     pattern: 'grid',
+  },
+  {
+    // UPDATED: PMI Foam slide (was Rohacell)
+    badge: '🧪 Special Materials',
+    title: 'Advanced PMI Foam & Specialty Materials For Critical Applications.',
+    description:
+      'PMI Foam (formerly known as Rohacell), carbon fibre, Solimide and thermal shielding solutions — engineered for lightweight, high-performance structures in aerospace and defence.',
+    accentColor: '#7c3aed',
+    stat1: { value: 'Lightweight', label: 'PMI Foam Solutions' },
+    stat2: { value: 'Thermal', label: 'Shielding Materials' },
+    image: 'https://images.unsplash.com/photo-1562114808-b4b33cf4d38a?auto=format&fit=crop&w=1400&q=80',
+    pattern: 'dots',
   },
 ];
 
@@ -110,6 +124,7 @@ const HeroCarousel = () => {
     'from-[#0a1f12] via-[#0d2e1a] to-[#0f3d22]',
     'from-[#1a1200] via-[#2e1f00] to-[#3d2a00]',
     'from-[#0f0f23] via-[#1a1a3e] to-[#1e1e5a]',
+    'from-[#1a0a2e] via-[#2a0d4a] to-[#3d1169]',
   ];
 
   useEffect(() => {
@@ -194,9 +209,10 @@ const HeroCarousel = () => {
                   {slide.description}
                 </p>
 
+                {/* STAT LABELS — no numerical data points per instructions */}
                 <div className="flex items-center" style={{ gap: 'clamp(12px, 2.5vw, 24px)', marginBottom: 'clamp(12px, 2vw, 28px)' }}>
                   <div>
-                    <div className="font-bold" style={{ fontSize: 'clamp(14px, 2.2vw, 28px)', color: slide.accentColor }}>
+                    <div className="font-bold" style={{ fontSize: 'clamp(11px, 1.8vw, 20px)', color: slide.accentColor }}>
                       {slide.stat1.value}
                     </div>
                     <div className="text-white/55" style={{ fontSize: 'clamp(8px, 1vw, 11px)', marginTop: 2 }}>
@@ -205,7 +221,7 @@ const HeroCarousel = () => {
                   </div>
                   <div className="bg-white/20" style={{ width: 1, height: 'clamp(24px, 3vw, 40px)' }} />
                   <div>
-                    <div className="font-bold" style={{ fontSize: 'clamp(14px, 2.2vw, 28px)', color: slide.accentColor }}>
+                    <div className="font-bold" style={{ fontSize: 'clamp(11px, 1.8vw, 20px)', color: slide.accentColor }}>
                       {slide.stat2.value}
                     </div>
                     <div className="text-white/55" style={{ fontSize: 'clamp(8px, 1vw, 11px)', marginTop: 2 }}>
@@ -224,7 +240,8 @@ const HeroCarousel = () => {
                       backgroundColor: slide.accentColor,
                     }}
                   >
-                    Explore Products →
+                    {/* UPDATED: "Product Store" → "All Products" */}
+                    Explore All Products →
                   </button>
                   <button
                     onClick={() => navigate('/about')}

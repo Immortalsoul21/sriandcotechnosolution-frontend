@@ -1,9 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProductCard from "./ProductCard";
+import ProductCard from './ProductCard';
 import { products } from '@/data/products2';
 
-const CATEGORY_ID = "Sri & Co Manufacture Product";
+// UPDATED: Category ID updated to match new branding
+const CATEGORY_ID = 'Sri & Co Manufacture Product';
 
 const InHouseProducts = () => {
   const navigate = useNavigate();
@@ -23,16 +24,22 @@ const InHouseProducts = () => {
         <div className="flex justify-center mb-2 sm:mb-3">
           <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-[10px] sm:text-xs font-semibold uppercase tracking-wider">
             <span className="w-1.5 h-1.5 rounded-full bg-sky-500 inline-block" />
-            Made by Sri and Co
+            {/* UPDATED: "Made by Sri and Co" label */}
+            Sri And Co Manufactured Products
           </span>
         </div>
 
+        {/* UPDATED heading: "Our Manufactured Products" → sub-title describes Cable Assembly, Antenna and RF Passive Components */}
         <h2 className="text-xl sm:text-4xl font-bold text-center mb-2 sm:mb-3 text-gray-900">
-          Our Manufactured Products
+          Cable Assembly, Antenna &amp; RF Passive Components
         </h2>
-        <p className="text-xs sm:text-base text-gray-500 text-center max-w-2xl mx-auto mb-6 sm:mb-10">
-          Precision-engineered components designed and built in-house — combining decades of expertise
-          with rigorous quality standards for mission-critical applications.
+        <p className="text-xs sm:text-base text-gray-500 text-center max-w-2xl mx-auto mb-1 sm:mb-2">
+          {/* UPDATED manufacturing description */}
+          Our manufacturing unit assembles RF and microwave coaxial cables, antennas and RF passive components — combining decades of expertise with rigorous quality standards for mission-critical applications.
+        </p>
+        {/* UPDATED tagline */}
+        <p className="text-xs sm:text-sm font-semibold text-sky-600 text-center mb-6 sm:mb-10">
+          Powering The Defence And Aerospace From Ground Up
         </p>
 
         <div

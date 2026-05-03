@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Globe, Package, Zap, DollarSign, Handshake } from "lucide-react";
 
 // ── Asset imports (your actual image files) ──────────────────────────────────
-import MOQ        from "../assets/MOQ.png";
-import Pricing    from "../assets/Pricing.png";
-import Quick      from "../assets/Quick.png";
-import Import     from "../assets/Import .png";
+import MOQ         from "../assets/MOQ.png";
+import Pricing     from "../assets/Pricing.png";
+import Quick       from "../assets/Quick.png";
+import Import      from "../assets/Import .png";
 import Independent from "../assets/Independent Distribution.png";
 
 const images = [Quick, Import, MOQ, Pricing, Independent];
@@ -94,10 +94,9 @@ export default function Services() {
       >
         <div className="w-full max-w-[1728px] flex flex-col items-center relative pt-6 sm:pt-4 pb-14 px-4">
 
-          {/* Title */}
+          {/* Title — no data points */}
           <div className="text-center max-w-4xl px-4 sm:px-6 relative z-50">
-            <h1 className="font-bold text-4xl sm:text-5xl lg:text-[77px] lg:leading-[60px]
-                           tracking-tight text-black mb-6 sm:mb-8">
+            <h1 className="font-bold text-4xl sm:text-5xl lg:text-[77px] lg:leading-[60px] tracking-tight text-black mb-6 sm:mb-8">
               <span className="text-[#3036AE]">O</span>ur{" "}
               <span className="text-[#3036AE]">S</span>pecialized{" "}
               <span className="text-[#3036AE]">S</span>ervices
@@ -114,18 +113,8 @@ export default function Services() {
           <div className="hidden md:block relative w-full max-w-[1200px] h-[460px] mt-12">
 
             {/* Arrows */}
-            <button
-              onClick={prevSlide}
-              className="absolute left-[-60px] lg:left-[-100px] top-1/2 -translate-y-1/2 z-50
-                         w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/70 backdrop-blur-md
-                         flex items-center justify-center text-2xl shadow-md hover:bg-white transition"
-            >‹</button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-[-60px] lg:right-[-100px] top-1/2 -translate-y-1/2 z-50
-                         w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/70 backdrop-blur-md
-                         flex items-center justify-center text-2xl shadow-md hover:bg-white transition"
-            >›</button>
+            <button onClick={prevSlide} className="absolute left-[-60px] lg:left-[-100px] top-1/2 -translate-y-1/2 z-50 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/70 backdrop-blur-md flex items-center justify-center text-2xl shadow-md hover:bg-white transition">‹</button>
+            <button onClick={nextSlide} className="absolute right-[-60px] lg:right-[-100px] top-1/2 -translate-y-1/2 z-50 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/70 backdrop-blur-md flex items-center justify-center text-2xl shadow-md hover:bg-white transition">›</button>
 
             {/* Frames */}
             <div className="relative w-full h-full overflow-hidden">
@@ -139,12 +128,7 @@ export default function Services() {
             {/* Dots */}
             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
               {images.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrent(i)}
-                  className={`rounded-full transition-all duration-300
-                    ${i === current ? "w-6 h-2.5 bg-[#3036AE]" : "w-2.5 h-2.5 bg-gray-400"}`}
-                />
+                <button key={i} onClick={() => setCurrent(i)} className={`rounded-full transition-all duration-300 ${i === current ? "w-6 h-2.5 bg-[#3036AE]" : "w-2.5 h-2.5 bg-gray-400"}`} />
               ))}
             </div>
           </div>
@@ -152,11 +136,7 @@ export default function Services() {
           {/* ── Mobile: stacked image cards ──────────────────────────────────── */}
           <div className="md:hidden w-full mt-8 flex flex-col gap-4">
             {serviceDetails.map((s, i) => (
-              <div
-                key={i}
-                className={`h-44 rounded-2xl overflow-hidden bg-gradient-to-br ${s.gradient}
-                            flex flex-col items-center justify-center text-white gap-2 px-6 text-center`}
-              >
+              <div key={i} className={`h-44 rounded-2xl overflow-hidden bg-gradient-to-br ${s.gradient} flex flex-col items-center justify-center text-white gap-2 px-6 text-center`}>
                 <div className="text-3xl">{s.icon}</div>
                 <span className="text-lg font-bold">{s.label}</span>
               </div>
@@ -171,6 +151,7 @@ export default function Services() {
 
       {/* ── Service Detail Cards ─────────────────────────────────────────────── */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+        {/* UPDATED: "What We Offer" — Title Case */}
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-2">
           What We Offer
         </h2>
@@ -180,13 +161,8 @@ export default function Services() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {serviceDetails.map((s, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-gray-100
-                         hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${s.gradient}
-                              flex items-center justify-center mb-4 shadow-md`}>
+            <div key={i} className="bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${s.gradient} flex items-center justify-center mb-4 shadow-md`}>
                 {s.icon}
               </div>
               <h3 className="text-base font-bold text-gray-900 mb-2">{s.label}</h3>
@@ -200,7 +176,7 @@ export default function Services() {
       <div className="bg-white border-t border-gray-100">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-14 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-            Ready to Source Smarter?
+            Ready To Source Smarter?
           </h2>
           <p className="text-gray-500 mb-8 text-sm sm:text-base leading-relaxed">
             Get in touch with our team for a tailored quote or browse our full product catalogue.
@@ -208,15 +184,14 @@ export default function Services() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={() => navigate('/products')}
-              className="px-8 py-3 bg-[#3036AE] text-white rounded-lg font-semibold
-                         hover:bg-blue-800 transition-colors text-sm sm:text-base"
+              className="px-8 py-3 bg-[#3036AE] text-white rounded-lg font-semibold hover:bg-blue-800 transition-colors text-sm sm:text-base"
             >
-              Browse Products
+              {/* UPDATED: "Product Store" → "All Products" */}
+              Browse All Products
             </button>
             <button
               onClick={() => navigate('/about')}
-              className="px-8 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold
-                         hover:bg-gray-50 transition-colors text-sm sm:text-base"
+              className="px-8 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors text-sm sm:text-base"
             >
               About Us
             </button>
