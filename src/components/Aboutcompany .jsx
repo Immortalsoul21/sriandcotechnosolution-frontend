@@ -68,7 +68,16 @@ const images = [
 ];
 
 /* ── Pasternack wordmark SVG ── */
+
 const PasternackLogo = () => (
+  <img
+    src="https://www.bing.com/th/id/OIP.h9BiA6NLKzJgPdO4WUx0igHaHa?w=193&h=193&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"
+    alt="Pasternack Logo"
+    className="h-54 sm:h-58 w-auto object-contain"
+  />
+);
+
+{/*const PasternackLogo = () => (
   <svg
     viewBox="0 0 280 60"
     xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +90,7 @@ const PasternackLogo = () => (
     <text x="261" y="20" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="10" fill="#0057A8">®</text>
     <text x="58" y="54" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="9" fill="#5a7fa8" letterSpacing="1.8">AN INFINITE ELECTRONICS BRAND</text>
   </svg>
-);
+);*/}
 
 const ShieldCheckIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5">
@@ -163,15 +172,17 @@ const AboutCompany = () => {
             {/* UPDATED tagline & description */}
             <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3 sm:mb-5">
               Sri and Co Techno Solutions is a trusted manufacturer and distributor of antennas,
-              electronics, electrical, RF, and microwave components. From manufacturing to precision
-              sourcing, we ensure high-performance delivery with strong R&D and technical precision.
+              electronics, electrical, RF, and microwave components. We specialise in delivering
+              hihg-quality precision components to space, aerospace, defense, R&D and industrial
+              sectors.
             </p>
-            <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3 sm:mb-5">
+            {/* <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3 sm:mb-5">
               Powering the defence and aerospace sectors from the ground up — connecting satellites
               (Sat-Com) through mission-critical components trusted by engineers and enterprises
               across the globe.
-            </p>
+            </p> */}
             <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
+              Our manufacturing unit assembles RF and Microwave Coaxial cables.
               Our sourcing network spans globally certified manufacturers, ensuring every component
               we supply meets the strictest performance and reliability standards.
             </p>
@@ -179,7 +190,7 @@ const AboutCompany = () => {
             <ul className="space-y-2 sm:space-y-3 mb-7 sm:mb-9">
               {[
                 'ISO-certified supply chain with traceability',
-                'Authorised distributor for 30+ global brands',
+                'Distributor for global brands',
                 'Serving aerospace, defence & industrial sectors',
               ].map((point, i) => (
                 <li key={i} className="flex items-start gap-2.5 sm:gap-3">
@@ -259,9 +270,9 @@ const AboutCompany = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-400" />
                   </span>
-                  {/* UPDATED: "Trusted Partnership – Trusted Brand" */}
+                  {/* UPDATED: "Trusted Brand" */}
                   <span className="text-sky-300 text-[10px] sm:text-xs font-semibold uppercase tracking-widest">
-                    Trusted Partnership – Trusted Brand
+                    Trusted Brand
                   </span>
                 </div>
                 <h3 className="text-xl sm:text-3xl font-bold text-white leading-tight">
@@ -326,7 +337,7 @@ const AboutCompany = () => {
                 Pasternack® is a registered trademark of Infinite Electronics International, Inc.
               </p>
               <a href="https://www.pasternack.com" target="_blank" rel="noopener noreferrer"
-                 className="inline-flex items-center gap-1.5 text-sky-400 hover:text-sky-300 text-[11px] sm:text-xs font-semibold transition-colors duration-200">
+                className="inline-flex items-center gap-1.5 text-sky-400 hover:text-sky-300 text-[11px] sm:text-xs font-semibold transition-colors duration-200">
                 Visit Pasternack.com
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />

@@ -22,47 +22,59 @@ const FEATURED_WEBINAR = {
 
 const WEBINARS = [
   { id: 1, day: '24', month: 'APR', title: 'Smart Automation for Modern Industries', time: '11:00 AM IST', duration: '90 min', tag: 'Live Webinar', tagCls: 'bg-sky-100 text-sky-800' },
-  { id: 2, day: '08', month: 'MAY', title: 'PLC Programming: Basics to Advanced',    time: '3:00 PM IST',  duration: '60 min', tag: 'Workshop',    tagCls: 'bg-violet-100 text-violet-800' },
-  { id: 3, day: '22', month: 'MAY', title: 'SCADA Systems & IIoT Integration',       time: '11:00 AM IST', duration: '75 min', tag: 'Webinar',     tagCls: 'bg-emerald-100 text-emerald-800' },
-  { id: 4, day: '10', month: 'JUN', title: 'Energy Savings with Modern VFDs',        time: '2:00 PM IST',  duration: '60 min', tag: 'Webinar',     tagCls: 'bg-amber-100 text-amber-800' },
+  { id: 2, day: '08', month: 'MAY', title: 'PLC Programming: Basics to Advanced', time: '3:00 PM IST', duration: '60 min', tag: 'Workshop', tagCls: 'bg-violet-100 text-violet-800' },
+  { id: 3, day: '22', month: 'MAY', title: 'SCADA Systems & IIoT Integration', time: '11:00 AM IST', duration: '75 min', tag: 'Webinar', tagCls: 'bg-emerald-100 text-emerald-800' },
+  { id: 4, day: '10', month: 'JUN', title: 'Energy Savings with Modern VFDs', time: '2:00 PM IST', duration: '60 min', tag: 'Webinar', tagCls: 'bg-amber-100 text-amber-800' },
 ];
 
 const NEWS = [
-  { id: 1, cat: 'product',  catLabel: 'Product Launch', date: 'Apr 10, 2026', hot: true,
+  {
+    id: 1, cat: 'product', catLabel: 'Product Launch', date: 'Apr 10, 2026', hot: true,
     title: 'New High-Efficiency VFD Series Now Available',
-    excerpt: 'Our latest variable frequency drive range delivers up to 40% energy savings with built-in IoT connectivity and remote diagnostics.' },
-  { id: 2, cat: 'company',  catLabel: 'Partnership',    date: 'Apr 5, 2026',  hot: false,
+    excerpt: 'Our latest variable frequency drive range delivers up to 40% energy savings with built-in IoT connectivity and remote diagnostics.'
+  },
+  {
+    id: 2, cat: 'company', catLabel: 'Partnership', date: 'Apr 5, 2026', hot: false,
     title: 'Sri and Co Extends Siemens India Partnership for 2026–28',
-    excerpt: 'Renewed and expanded strategic partnership covering new product lines and service territories across South India.' },
-  { id: 3, cat: 'industry', catLabel: 'Industry',       date: 'Mar 28, 2026', hot: false,
+    excerpt: 'Renewed and expanded strategic partnership covering new product lines and service territories across South India.'
+  },
+  {
+    id: 3, cat: 'industry', catLabel: 'Industry', date: 'Mar 28, 2026', hot: false,
     title: 'Industry 4.0 Reshaping Manufacturing in South India',
-    excerpt: 'Smart factory technologies, predictive maintenance, and digital twins are transforming the production floor in Bangalore, Chennai, and Hyderabad.' },
-  { id: 4, cat: 'company',  catLabel: 'Certification',  date: 'Mar 20, 2026', hot: false,
+    excerpt: 'Smart factory technologies, predictive maintenance, and digital twins are transforming the production floor in Bangalore, Chennai, and Hyderabad.'
+  },
+  {
+    id: 4, cat: 'company', catLabel: 'Certification', date: 'Mar 20, 2026', hot: false,
     title: 'ISO 9001:2015 Recertification Successfully Completed',
-    excerpt: 'After a rigorous third-party audit, Sri and Co Techno Solutions retains its ISO 9001:2015 certification.' },
-  { id: 5, cat: 'tips',     catLabel: 'Tech Tip',       date: 'Mar 15, 2026', hot: false,
+    excerpt: 'After a rigorous third-party audit, Sri and Co Techno Solutions retains its ISO 9001:2015 certification.'
+  },
+  {
+    id: 5, cat: 'tips', catLabel: 'Tech Tip', date: 'Mar 15, 2026', hot: false,
     title: '5 Ways to Extend the Life of Your Industrial Drives',
-    excerpt: 'Practical maintenance tips covering thermal management, cable routing, parameter tuning, and scheduled servicing.' },
-  { id: 6, cat: 'company',  catLabel: 'Expansion',      date: 'Mar 8, 2026',  hot: false,
+    excerpt: 'Practical maintenance tips covering thermal management, cable routing, parameter tuning, and scheduled servicing.'
+  },
+  {
+    id: 6, cat: 'company', catLabel: 'Expansion', date: 'Mar 8, 2026', hot: false,
     title: 'New Branch Opening in Hyderabad — May 2026',
-    excerpt: "Better serving Telangana and Andhra Pradesh with a fully operational branch in Hyderabad's industrial corridor." },
+    excerpt: "Better serving Telangana and Andhra Pradesh with a fully operational branch in Hyderabad's industrial corridor."
+  },
 ];
 
 const NEWS_STATS = [
-  { value: '24+', label: 'Webinars hosted',        Icon: Radio },
+  { value: '24+', label: 'Webinars hosted', Icon: Radio },
   { value: '6k+', label: 'Newsletter subscribers', Icon: Users },
-  { value: '38',  label: 'Articles published',     Icon: BookOpen },
-  { value: '12',  label: 'Product launches',       Icon: Zap },
+  { value: '38', label: 'Articles published', Icon: BookOpen },
+  { value: '12', label: 'Product launches', Icon: Zap },
 ];
 
-const TOPICS  = ['VFD','PLC','SCADA','IIoT','Automation','Energy Savings','Industry 4.0','Drives','HMI','Panel Boards','RF Components','Microwave'];
-const FILTERS = ['All','Product','Company','Industry','Tips'];
+const TOPICS = ['VFD', 'PLC', 'SCADA', 'IIoT', 'Automation', 'Energy Savings', 'Industry 4.0', 'Drives', 'HMI', 'Panel Boards', 'RF Components', 'Microwave'];
+const FILTERS = ['All', 'Product', 'Company', 'Industry', 'Tips'];
 
 const CAT_CLS = {
-  product:  'bg-emerald-100 text-emerald-800',
-  company:  'bg-sky-100 text-sky-800',
+  product: 'bg-emerald-100 text-emerald-800',
+  company: 'bg-sky-100 text-sky-800',
   industry: 'bg-violet-100 text-violet-800',
-  tips:     'bg-amber-100 text-amber-800',
+  tips: 'bg-amber-100 text-amber-800',
 };
 
 const TICKER = [
@@ -97,22 +109,10 @@ const FEATURES_LIST = [
     gradient: 'from-yellow-500 to-orange-500',
   },
   {
-    icon: <ShieldCheck className="w-6 h-6 text-white" />,
-    title: 'Certified Suppliers',
-    description: 'We work exclusively with authorised manufacturers and ISO-certified suppliers, eliminating counterfeit risk from your supply chain.',
-    gradient: 'from-green-500 to-green-700',
-  },
-  {
     icon: <Headphones className="w-6 h-6 text-white" />,
     title: 'Dedicated Support',
     description: 'Our expert technical team is available to help with component selection, datasheet interpretation, and system integration advice.',
     gradient: 'from-pink-500 to-rose-600',
-  },
-  {
-    icon: <BarChart3 className="w-6 h-6 text-white" />,
-    title: 'Inventory Transparency',
-    description: 'Real-time stock levels and lead time visibility across thousands of SKUs, so you can plan your procurement with confidence.',
-    gradient: 'from-cyan-500 to-teal-600',
   },
   {
     icon: <Wrench className="w-6 h-6 text-white" />,
@@ -130,9 +130,9 @@ const FEATURES_LIST = [
 
 const FEATURES_STATS = [
   { value: '50,000+', label: 'SKUs Available' },
-  { value: '20+',     label: 'Years Experience' },
-  { value: '98%',     label: 'On-Time Delivery' },
-  { value: '150+',    label: 'Countries Served' },
+  { value: '20+', label: 'Years Experience' },
+  { value: '98%', label: 'On-Time Delivery' },
+  { value: '150+', label: 'Countries Served' },
 ];
 
 // ─── COUNTDOWN HOOK ───────────────────────────────────────────────────────────
@@ -158,7 +158,7 @@ function useCountdown(target) {
 // ─── NEWS TICKER ─────────────────────────────────────────────────────────────
 
 function NewsTicker() {
-  const text    = TICKER.join('  ·  ');
+  const text = TICKER.join('  ·  ');
   const doubled = `${text}      ${text}`;
   return (
     <div className="bg-gray-900 flex items-center overflow-hidden h-9">
@@ -233,7 +233,7 @@ function HeroBanner() {
           <div className="flex flex-col gap-2">
             <p className="text-[10px] text-gray-600 uppercase tracking-widest font-semibold">Starts in</p>
             <div className="flex gap-2">
-              {[['d','Days'],['h','Hrs'],['m','Min'],['s','Sec']].map(([k,lbl]) => (
+              {[['d', 'Days'], ['h', 'Hrs'], ['m', 'Min'], ['s', 'Sec']].map(([k, lbl]) => (
                 <div key={k} className="flex flex-col items-center bg-white/[0.08] border border-white/10 rounded-xl px-3 py-2.5 min-w-[52px]">
                   <span className="text-2xl font-bold text-white tabular-nums leading-none">{cd[k]}</span>
                   <span className="text-[9px] text-gray-500 uppercase tracking-wider mt-1">{lbl}</span>
@@ -337,7 +337,7 @@ function UpcomingWebinars() {
 // ─── NEWSLETTER ───────────────────────────────────────────────────────────────
 
 function Newsletter() {
-  const [email, setEmail]         = useState('');
+  const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   return (
     <div className="bg-gray-900 rounded-2xl p-6 sm:p-8 mt-8">
@@ -400,7 +400,7 @@ function SectionDivider({ title, subtitle }) {
 // ─── MAIN COMBINED PAGE ───────────────────────────────────────────────────────
 
 const Features = () => {
-  const navigate        = useNavigate();
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('All');
 
   const filtered = activeFilter === 'All'
@@ -472,9 +472,9 @@ const Features = () => {
               </h2>
               {[
                 { label: 'Browse All Products', path: '/products' },
-                { label: 'About Us',             path: '/about' },
-                { label: 'Features Overview',    path: '/features' },
-                { label: 'Contact & Support',    path: '/about' },
+                { label: 'About Us', path: '/about' },
+                { label: 'Features Overview', path: '/features' },
+                { label: 'Contact & Support', path: '/about' },
               ].map(link => (
                 <Link
                   key={link.label}
@@ -514,7 +514,7 @@ const Features = () => {
 
       <SectionDivider
         title={<>Features Built For <br /><span className="text-blue-400">Modern Engineering</span></>}
-        subtitle="From precision sourcing to global delivery, every feature of our platform is designed to keep your projects moving without compromise."
+        subtitle="From manufacturing to precision sourcing and global delivery, every feature of our platform is designed to keep your projects moving without compromise."
       />
 
       {/* Features stats bar */}
@@ -531,7 +531,7 @@ const Features = () => {
 
       {/* Feature cards */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {FEATURES_LIST.map((feature, i) => (
             <div
               key={i}

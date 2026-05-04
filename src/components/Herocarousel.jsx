@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 const slides = [
   {
     badge: '🌐 Trusted Worldwide',
-    title: 'Connecting The World Through Precision Components',
+    title: 'Connecting The Satellites (Sat-Com) Through Mission-Critical Components',
     description:
-      'With a presence across global markets, we deliver RF, Microwave & Electronic Components to aerospace, defence, and industrial sectors — on time, every time.',
+      'With a presence across global markets, we deliver RF, Microwave & Electronic Components to space, aerospace, defence, and industrial sectors — on time, every time.',
     accentColor: '#0ea5e9',
     // REMOVED numerical stat values — replaced with qualitative messaging
-    stat1: { value: 'Global', label: 'Reach & Presence' },
-    stat2: { value: 'Decades', label: 'Of Excellence' },
+    stat1: { value: '', label: '' },
+    stat2: { value: '', label: '' },
     image: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1400&q=80',
     pattern: 'circuit',
   },
@@ -21,8 +21,8 @@ const slides = [
     description:
       'All products are sourced exclusively from authorised manufacturers — ISO-certified, tested to spec, and ready for the most demanding environments.',
     accentColor: '#06b6d4',
-    stat1: { value: 'ISO', label: 'Certified Supply Chain' },
-    stat2: { value: 'Wide', label: 'Component Range' },
+    stat1: { value: '', label: '' },
+    stat2: { value: '', label: '' },
     image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80',
     pattern: 'grid',
   },
@@ -32,8 +32,8 @@ const slides = [
     description:
       'From military-grade phased arrays to precision microwave antennas, our components power the most critical communication and surveillance systems worldwide. Connecting Satellites (Sat-Com) through mission-critical components.',
     accentColor: '#10b981',
-    stat1: { value: '5G+', label: 'Ready Components' },
-    stat2: { value: 'Wideband', label: 'Frequency Coverage' },
+    stat1: { value: '', label: '' },
+    stat2: { value: '', label: '' },
     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Goldstone_Deep_Space_Communications_Complex.jpg/1280px-Goldstone_Deep_Space_Communications_Complex.jpg',
     pattern: 'circuit',
   },
@@ -43,33 +43,21 @@ const slides = [
     description:
       'Our RF and electronic components meet the rigorous demands of defence systems — from missile guidance electronics to radar subsystems — engineered for zero failure in the field. Powering the defence and aerospace from ground up.',
     accentColor: '#f59e0b',
-    stat1: { value: 'MIL-SPEC', label: 'Certified Components' },
-    stat2: { value: 'Multi-Programme', label: 'Defence Support' },
+    stat1: { value: '', label: '' },
+    stat2: { value: '', label: '' },
     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Telecommunication_tower_Gerbrandy.jpg/800px-Telecommunication_tower_Gerbrandy.jpg',
     pattern: 'dots',
   },
   {
-    badge: '🗼 Telecom Infrastructure',
-    title: 'Powering Global Telecom Networks From The Ground Up.',
+    badge: '🗼 Defense and Aerospace Infrastructure',
+    title: 'Powering Defence and Aerospace From The Ground Up.',
     description:
-      'Our passive and active RF components form the backbone of cellular towers and telecom infrastructure across continents — reliable, weatherproof, and built to last.',
+      'Our passive and active RF components form the backbone of defence and aerospace technologies across continents — reliable, weatherproof, and built to last.',
     accentColor: '#8b5cf6',
-    stat1: { value: 'Proven', label: 'Tower Deployments' },
-    stat2: { value: 'High', label: 'Network Uptime' },
+    stat1: { value: '', label: '' },
+    stat2: { value: '', label: '' },
     image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=1400&q=80',
     pattern: 'grid',
-  },
-  {
-    // UPDATED: PMI Foam slide (was Rohacell)
-    badge: '🧪 Special Materials',
-    title: 'Advanced PMI Foam & Specialty Materials For Critical Applications.',
-    description:
-      'PMI Foam (formerly known as Rohacell), carbon fibre, Solimide and thermal shielding solutions — engineered for lightweight, high-performance structures in aerospace and defence.',
-    accentColor: '#7c3aed',
-    stat1: { value: 'Lightweight', label: 'PMI Foam Solutions' },
-    stat2: { value: 'Thermal', label: 'Shielding Materials' },
-    image: 'https://images.unsplash.com/photo-1562114808-b4b33cf4d38a?auto=format&fit=crop&w=1400&q=80',
-    pattern: 'dots',
   },
 ];
 
@@ -160,8 +148,8 @@ const HeroCarousel = () => {
             )}
 
             {slide.pattern === 'circuit' && <CircuitPattern />}
-            {slide.pattern === 'grid'    && <GridPattern />}
-            {slide.pattern === 'dots'    && <DotsPattern />}
+            {slide.pattern === 'grid' && <GridPattern />}
+            {slide.pattern === 'dots' && <DotsPattern />}
 
             <div
               className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full opacity-20 pointer-events-none"

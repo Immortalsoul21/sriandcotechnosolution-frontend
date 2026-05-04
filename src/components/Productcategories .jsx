@@ -126,7 +126,7 @@ const CategoryCard = ({ cat, onClick }) => {
 };
 
 const ProductCategories = () => {
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -159,8 +159,8 @@ const ProductCategories = () => {
             Our Product Range
           </h2>
           <p className="text-gray-500 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Specialised components and solutions across RF, microwave, sensors, test chambers, and
-            advanced materials — engineered for performance-critical applications.
+            Specialised components and solutions across RF, Microwave, Sensors, Test and Measurement Chambers, and
+            Advanced Materials — engineered for performance-critical applications.
           </p>
         </div>
 
