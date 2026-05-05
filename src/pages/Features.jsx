@@ -10,14 +10,16 @@ import {
 // ─── NEWS DATA ────────────────────────────────────────────────────────────────
 
 const FEATURED_WEBINAR = {
-  title: 'Smart Automation for Modern Industries',
-  subtitle: 'PLCs, SCADA, VFDs & IIoT — Live deep-dive with our senior engineers.',
-  date: 'Thursday, April 24, 2026',
+  title: 'ROHACELL® Lightweight Engineering',
+  subtitle: 'Material intelligence for engineers building the future of defense and aerospace systems.',
+  date: 'Wednesday, May 6, 2026',
   time: '11:00 AM IST',
-  duration: '90 min',
-  presenter: 'Er. Ramesh Kumar',
+  duration: '120 min',
+  presenter: 'Dr. Alexander Roth',
   seats: 142,
-  target: new Date('2026-04-24T11:00:00+05:30'),
+  target: new Date('2026-05-06T11:00:00+05:30'),
+  registerLink: 'https://lnkd.in/dimzu7fY',
+  learnMoreLink: 'https://www.linkedin.com/feed/update/urn:li:share:7456178826050478081/',
 };
 
 const WEBINARS = [
@@ -221,12 +223,12 @@ function HeroBanner() {
               {FEATURED_WEBINAR.seats} registered
             </p>
             <div className="flex flex-wrap gap-3">
-              <button className="inline-flex items-center gap-2 bg-white text-gray-900 text-sm font-bold px-6 py-2.5 rounded-xl hover:bg-sky-50 transition-colors shadow-lg">
-                <Play size={14} className="fill-gray-900" /> Register Free
-              </button>
-              <button className="inline-flex items-center gap-2 border border-white/20 text-white text-sm px-6 py-2.5 rounded-xl hover:bg-white/10 transition-colors">
+              <a href={FEATURED_WEBINAR.registerLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white text-gray-900 text-sm font-bold px-6 py-2.5 rounded-xl hover:bg-sky-50 transition-colors shadow-lg">
+                <Play size={14} className="fill-gray-900" /> Register Now
+              </a>
+              <a href={FEATURED_WEBINAR.learnMoreLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-white/20 text-white text-sm px-6 py-2.5 rounded-xl hover:bg-white/10 transition-colors">
                 Learn more <ArrowRight size={13} />
-              </button>
+              </a>
             </div>
           </div>
 
@@ -411,12 +413,13 @@ const Features = () => {
     <div className="min-h-screen bg-gray-50">
 
       {/* ══════════════ NEWS & UPDATES SECTION ══════════════ */}
-
+      {/*
       <NewsTicker />
+      */}
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-8">
 
-        {/* Breadcrumb + header */}
+        {/*
         <div className="mb-7">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-1.5">
             <Link to="/home" className="hover:text-sky-500 transition-colors">Home</Link>
@@ -431,13 +434,13 @@ const Features = () => {
             Latest from Sri and Co Techno Solutions — webinars, product news &amp; industry insights.
           </p>
         </div>
+        */}
 
         <HeroBanner />
-        <NewsStatsRow />
 
+        {/*
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-          {/* Left: news feed */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-5 flex-wrap">
               <Filter size={13} className="text-gray-400 flex-shrink-0" />
@@ -462,7 +465,6 @@ const Features = () => {
             </div>
           </div>
 
-          {/* Right: sidebar */}
           <div className="flex flex-col gap-4">
             <UpcomingWebinars />
 
@@ -508,17 +510,18 @@ const Features = () => {
         </div>
 
         <Newsletter />
+        */}
       </div>
 
       {/* ══════════════ FEATURES SECTION ══════════════ */}
 
       <SectionDivider
-        title={<>Features Built For <br /><span className="text-blue-400">Modern Engineering</span></>}
+        title={<>From Manufacturing to <br /><span className="text-blue-400">Precision Sourcing</span></>}
         subtitle="From manufacturing to precision sourcing and global delivery, every feature of our platform is designed to keep your projects moving without compromise."
       />
 
       {/* Features stats bar */}
-      <div className="bg-blue-600 text-white">
+      {/* <div className="bg-blue-600 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
           {FEATURES_STATS.map((s) => (
             <div key={s.label}>
@@ -527,7 +530,7 @@ const Features = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Feature cards */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
