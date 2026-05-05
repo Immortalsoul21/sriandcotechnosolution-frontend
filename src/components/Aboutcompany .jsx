@@ -1,12 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const stats = [
-  { value: '20+',  label: 'Years Experience' },
-  { value: '150+', label: 'Countries Served' },
-  { value: '5000+',label: 'Products Available' },
-  { value: '98%',  label: 'Customer Satisfaction' },
-];
+// ── REMOVED: data points / stats bar (per instructions) ──
 
 const features = [
   {
@@ -16,7 +11,7 @@ const features = [
       </svg>
     ),
     title: 'Manufacturing',
-    description: 'Own manufactured line of electronic & RF components with full in-house quality control.',
+    description: 'Our manufacturing unit assembles RF and microwave coaxial cables, antennas and RF passive components with full in-house quality control.',
   },
   {
     icon: (
@@ -54,6 +49,16 @@ const features = [
     title: 'Expert Support',
     description: 'Dedicated technical team available for product selection, specs, and after-sales.',
   },
+  // ── ADDED: 100% Customer Satisfaction card ──
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5 sm:w-6 sm:h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V2.75a.75.75 0 01.75-.75 2.25 2.25 0 012.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
+      </svg>
+    ),
+    title: '100% Customer Satisfaction',
+    description: 'Committed to delivering on every promise — from accurate specifications to on-time delivery and responsive after-sales support.',
+  },
 ];
 
 const images = [
@@ -62,93 +67,57 @@ const images = [
   'https://images.unsplash.com/photo-1565688534245-05d6b5be184a?auto=format&fit=crop&w=800&q=80',
 ];
 
-/* ── Pasternack wordmark SVG (faithful recreation of their blue wordmark) ── */
+/* ── Pasternack wordmark SVG ── */
+
 const PasternackLogo = () => (
+  <img
+    src="https://www.bing.com/th/id/OIP.h9BiA6NLKzJgPdO4WUx0igHaHa?w=193&h=193&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"
+    alt="Pasternack Logo"
+    className="h-54 sm:h-58 w-auto object-contain"
+  />
+);
+
+{/*const PasternackLogo = () => (
   <svg
     viewBox="0 0 280 60"
     xmlns="http://www.w3.org/2000/svg"
     className="h-9 sm:h-11 w-auto"
     aria-label="Pasternack"
   >
-    {/* Blue square icon mark */}
     <rect x="0" y="6" width="48" height="48" rx="4" fill="#0057A8" />
-    <text
-      x="24"
-      y="38"
-      textAnchor="middle"
-      fontFamily="Arial, sans-serif"
-      fontWeight="900"
-      fontSize="28"
-      fill="#ffffff"
-      letterSpacing="-1"
-    >
-      P
-    </text>
-    {/* Wordmark */}
-    <text
-      x="58"
-      y="40"
-      fontFamily="Arial Black, Arial, sans-serif"
-      fontWeight="900"
-      fontSize="22"
-      fill="#0057A8"
-      letterSpacing="0.5"
-    >
-      PASTERNACK
-    </text>
-    {/* Registered trademark */}
-    <text
-      x="261"
-      y="20"
-      fontFamily="Arial, sans-serif"
-      fontWeight="400"
-      fontSize="10"
-      fill="#0057A8"
-    >
-      ®
-    </text>
-    {/* Tagline */}
-    <text
-      x="58"
-      y="54"
-      fontFamily="Arial, sans-serif"
-      fontWeight="400"
-      fontSize="9"
-      fill="#5a7fa8"
-      letterSpacing="1.8"
-    >
-      AN INFINITE ELECTRONICS BRAND
-    </text>
+    <text x="24" y="38" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="28" fill="#ffffff" letterSpacing="-1">P</text>
+    <text x="58" y="40" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="22" fill="#0057A8" letterSpacing="0.5">PASTERNACK</text>
+    <text x="261" y="20" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="10" fill="#0057A8">®</text>
+    <text x="58" y="54" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="9" fill="#5a7fa8" letterSpacing="1.8">AN INFINITE ELECTRONICS BRAND</text>
   </svg>
-);
+);*/}
 
-/* ── Trust badge icons ── */
 const ShieldCheckIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5">
-    <path strokeLinecap="round" strokeLinejoin="round"
-      d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
   </svg>
 );
 
 const LinkIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5">
-    <path strokeLinecap="round" strokeLinejoin="round"
-      d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
   </svg>
 );
 
 const StarIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-    <path fillRule="evenodd"
-      d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-      clipRule="evenodd" />
+    <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
   </svg>
 );
 
+// ── UPDATED trust points:
+// - "Authorised Supply Chain" → "Supply Chain"
+// - "This partnership reflects" (was "refects") ──
 const trustPoints = [
   {
     icon: <ShieldCheckIcon />,
-    label: 'Authorised Supply Chain',
+    // UPDATED: "Authorized supply chain" → "Supply Chain"
+    label: 'Supply Chain',
     desc: 'Every Pasternack product we offer is sourced through verified, authorised channels — guaranteeing full traceability and authenticity.',
   },
   {
@@ -159,12 +128,12 @@ const trustPoints = [
   {
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5">
-        <path strokeLinecap="round" strokeLinejoin="round"
-          d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
       </svg>
     ),
-    label: 'ISO-Certified Quality',
-    desc: "Pasternack's ISO 9001:2015-certified quality standards flow directly into every component we deliver to your doorstep.",
+    // ISO Certification details from their website
+    label: 'ISO 9001:2015 Certified',
+    desc: "Pasternack's ISO 9001:2015-certified quality standards flow directly into every component we deliver — ensuring consistent, verified performance.",
   },
 ];
 
@@ -183,39 +152,37 @@ const AboutCompany = () => {
             <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
               <img src={images[0]} alt="RF lab equipment" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute -top-4 -right-4 sm:-top-5 sm:-right-6
-                            w-28 h-28 sm:w-40 sm:h-40
-                            rounded-xl overflow-hidden shadow-xl border-4 border-white z-10">
+            <div className="absolute -top-4 -right-4 sm:-top-5 sm:-right-6 w-28 h-28 sm:w-40 sm:h-40 rounded-xl overflow-hidden shadow-xl border-4 border-white z-10">
               <img src={images[1]} alt="Electronic components" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute -bottom-4 -left-4 sm:-bottom-5 sm:-left-6
-                            w-28 h-28 sm:w-36 sm:h-36
-                            rounded-xl overflow-hidden shadow-xl border-4 border-white z-10">
+            <div className="absolute -bottom-4 -left-4 sm:-bottom-5 sm:-left-6 w-28 h-28 sm:w-36 sm:h-36 rounded-xl overflow-hidden shadow-xl border-4 border-white z-10">
               <img src={images[2]} alt="Industrial manufacturing" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute bottom-6 right-4 sm:bottom-8 sm:right-6 z-20
-                            bg-sky-600 text-white rounded-xl px-3 py-2 sm:px-4 sm:py-3
-                            shadow-lg text-center">
-              <p className="text-xl sm:text-3xl font-bold leading-none">20+</p>
-              <p className="text-[9px] sm:text-xs font-medium mt-0.5 opacity-90 whitespace-nowrap">Years of Excellence</p>
-            </div>
+            {/* REMOVED: data point badge (20+ Years of Excellence) per instructions */}
           </div>
 
           {/* Text content */}
           <div className="flex-1 min-w-0">
             <p className="text-xs sm:text-sm font-semibold text-sky-600 uppercase tracking-widest mb-2">
-              Who we are
+              Who We Are
             </p>
             <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 leading-tight mb-4 sm:mb-6">
               India's Trusted Partner for RF & Electronic Components
             </h2>
+            {/* UPDATED tagline & description */}
             <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3 sm:mb-5">
-              Sri and Co Techno Solutions has been a leading distributor of electronics and RF
-              components for over two decades. We specialise in delivering high-quality, precision
-              components to manufacturers, engineers, and enterprises across aerospace, defence,
-              and industrial sectors.
+              Sri and Co Techno Solutions is a trusted manufacturer and distributor of antennas,
+              electronics, electrical, RF, and microwave components. We specialise in delivering
+              hihg-quality precision components to space, aerospace, defense, R&D and industrial
+              sectors.
             </p>
+            {/* <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3 sm:mb-5">
+              Powering the defence and aerospace sectors from the ground up — connecting satellites
+              (Sat-Com) through mission-critical components trusted by engineers and enterprises
+              across the globe.
+            </p> */}
             <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
+              Our manufacturing unit assembles RF and Microwave Coaxial cables.
               Our sourcing network spans globally certified manufacturers, ensuring every component
               we supply meets the strictest performance and reliability standards.
             </p>
@@ -223,14 +190,12 @@ const AboutCompany = () => {
             <ul className="space-y-2 sm:space-y-3 mb-7 sm:mb-9">
               {[
                 'ISO-certified supply chain with traceability',
-                'Authorised distributor for 30+ global brands',
+                'Distributor for global brands',
                 'Serving aerospace, defence & industrial sectors',
               ].map((point, i) => (
                 <li key={i} className="flex items-start gap-2.5 sm:gap-3">
-                  <span className="flex-shrink-0 mt-0.5 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-sky-100
-                                   flex items-center justify-center">
-                    <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-sky-600" viewBox="0 0 24 24"
-                         fill="none" stroke="currentColor" strokeWidth={3}>
+                  <span className="flex-shrink-0 mt-0.5 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-sky-100 flex items-center justify-center">
+                    <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                     </svg>
                   </span>
@@ -241,68 +206,45 @@ const AboutCompany = () => {
 
             <button
               onClick={() => navigate('/about')}
-              className="px-6 sm:px-8 py-2.5 sm:py-3 bg-sky-600 text-white rounded-lg font-semibold
-                         text-sm transition-all duration-300 hover:bg-sky-700 hover:shadow-lg hover:-translate-y-0.5"
+              className="px-6 sm:px-8 py-2.5 sm:py-3 bg-sky-600 text-white rounded-lg font-semibold text-sm transition-all duration-300 hover:bg-sky-700 hover:shadow-lg hover:-translate-y-0.5"
             >
               Learn More About Us →
             </button>
           </div>
         </div>
 
-        {/* ── STATS BAR ── */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-14 sm:mb-20">
-          {stats.map((s, i) => (
-            <div key={i}
-                 className="rounded-xl sm:rounded-2xl bg-gray-50 border border-gray-100
-                            px-4 py-5 sm:px-6 sm:py-7 text-center">
-              <p className="text-2xl sm:text-4xl font-bold text-sky-600 leading-none mb-1 sm:mb-2">
-                {s.value}
-              </p>
-              <p className="text-gray-500 text-[10px] sm:text-sm font-medium">{s.label}</p>
-            </div>
-          ))}
-        </div>
+        {/* ── STATS BAR REMOVED per instructions ── */}
 
         {/* ── FEATURE CARDS ── */}
         <div className="text-center mb-7 sm:mb-10">
           <p className="text-xs sm:text-sm font-semibold text-sky-600 uppercase tracking-widest mb-1">
-            Why choose us
+            Why Choose Us
           </p>
           <h3 className="text-xl sm:text-3xl font-bold text-gray-900">
             Built on Trust. Backed by Expertise.
           </h3>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-14 sm:mb-20">
+        {/* 6 cards: 2 cols mobile, 3 cols sm, 6 cols lg */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-14 sm:mb-20">
           {features.map((feature, index) => (
             <div
               key={index}
               onClick={() => navigate('/about')}
-              className="group p-4 sm:p-6 bg-gray-50 rounded-xl sm:rounded-2xl cursor-pointer
-                         border border-transparent
-                         transition-all duration-300
-                         hover:-translate-y-1 sm:hover:-translate-y-2
-                         hover:bg-sky-50 hover:border-sky-200 hover:shadow-lg
-                         flex flex-col items-start gap-3 sm:gap-4"
+              className="group p-4 sm:p-6 bg-gray-50 rounded-xl sm:rounded-2xl cursor-pointer border border-transparent transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 hover:bg-sky-50 hover:border-sky-200 hover:shadow-lg flex flex-col items-start gap-3 sm:gap-4"
             >
-              <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-white border border-gray-200
-                              flex items-center justify-center text-sky-600
-                              group-hover:bg-sky-600 group-hover:text-white group-hover:border-sky-600
-                              transition-all duration-300 shadow-sm flex-shrink-0">
+              <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-sky-600 group-hover:bg-sky-600 group-hover:text-white group-hover:border-sky-600 transition-all duration-300 shadow-sm flex-shrink-0">
                 {feature.icon}
               </div>
               <div>
-                <h4 className="text-xs sm:text-sm font-bold text-gray-900 mb-1 sm:mb-1.5
-                               group-hover:text-sky-700 transition-colors duration-300 leading-tight">
+                <h4 className="text-xs sm:text-sm font-bold text-gray-900 mb-1 sm:mb-1.5 group-hover:text-sky-700 transition-colors duration-300 leading-tight">
                   {feature.title}
                 </h4>
                 <p className="text-gray-500 text-[9px] sm:text-xs leading-relaxed hidden sm:block">
                   {feature.description}
                 </p>
               </div>
-              <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold
-                               text-sky-500 opacity-0 group-hover:opacity-100
-                               transition-opacity duration-300 mt-auto">
+              <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold text-sky-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-auto">
                 Learn more →
               </span>
             </div>
@@ -314,45 +256,23 @@ const AboutCompany = () => {
         ══════════════════════════════════════════════════ */}
         <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden">
 
-          {/* Background: deep navy with subtle diagonal stripe texture */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(135deg, #0a1628 0%, #0d2145 50%, #0a1e3d 100%)',
-            }}
-          />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #0a1628 0%, #0d2145 50%, #0a1e3d 100%)' }} />
+          <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #0ea5e9, transparent 70%)' }} />
+          <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #38bdf8, transparent 70%)' }} />
+          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
-          {/* Decorative circle glows */}
-          <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full opacity-10"
-               style={{ background: 'radial-gradient(circle, #0ea5e9, transparent 70%)' }} />
-          <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full opacity-10"
-               style={{ background: 'radial-gradient(circle, #38bdf8, transparent 70%)' }} />
-
-          {/* Subtle grid pattern overlay */}
-          <div
-            className="absolute inset-0 opacity-[0.04]"
-            style={{
-              backgroundImage:
-                'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)',
-              backgroundSize: '40px 40px',
-            }}
-          />
-
-          {/* Content */}
           <div className="relative z-10 px-6 py-10 sm:px-12 sm:py-14">
 
-            {/* Top label row */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 sm:mb-10">
               <div>
-                <div className="inline-flex items-center gap-2 bg-sky-500/15 border border-sky-400/20
-                                rounded-full px-3 py-1 mb-3">
-                  {/* Pulse dot */}
+                <div className="inline-flex items-center gap-2 bg-sky-500/15 border border-sky-400/20 rounded-full px-3 py-1 mb-3">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-400" />
                   </span>
+                  {/* UPDATED: "Trusted Brand" */}
                   <span className="text-sky-300 text-[10px] sm:text-xs font-semibold uppercase tracking-widest">
-                    Trusted Partnership
+                    Trusted Brand
                   </span>
                 </div>
                 <h3 className="text-xl sm:text-3xl font-bold text-white leading-tight">
@@ -360,9 +280,7 @@ const AboutCompany = () => {
                 </h3>
               </div>
 
-              {/* Star rating pill */}
-              <div className="flex items-center gap-1.5 bg-white/5 border border-white/10
-                              rounded-full px-4 py-2 self-start sm:self-auto">
+              <div className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-full px-4 py-2 self-start sm:self-auto">
                 {[...Array(5)].map((_, i) => (
                   <span key={i} className="text-amber-400"><StarIcon /></span>
                 ))}
@@ -370,14 +288,10 @@ const AboutCompany = () => {
               </div>
             </div>
 
-            {/* Main card body */}
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start lg:items-center">
 
-              {/* Logo card */}
               <div className="flex-shrink-0">
-                <div className="bg-white rounded-2xl px-6 py-5 sm:px-8 sm:py-6 shadow-2xl
-                                border border-white/10 inline-block
-                                transition-transform duration-300 hover:-translate-y-1">
+                <div className="bg-white rounded-2xl px-6 py-5 sm:px-8 sm:py-6 shadow-2xl border border-white/10 inline-block transition-transform duration-300 hover:-translate-y-1">
                   <PasternackLogo />
                   <p className="text-[10px] text-gray-400 mt-3 font-medium tracking-wide text-center">
                     pasternack.com
@@ -385,28 +299,22 @@ const AboutCompany = () => {
                 </div>
               </div>
 
-              {/* Divider (horizontal on mobile, vertical on desktop) */}
               <div className="hidden lg:block w-px self-stretch bg-white/10" />
               <div className="lg:hidden w-full h-px bg-white/10" />
 
-              {/* Description + trust points */}
               <div className="flex-1 min-w-0">
+                {/* FIXED: "partnership refects" → "association reflects" */}
                 <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
                   We are proud to be in association with <span className="text-white font-semibold">Pasternack</span> —
                   a globally recognised leader in RF, microwave, and millimeter-wave components
-                  since 1972. This partnership reflects our commitment to offering our customers
+                  since 1972. This association reflects our commitment to offering our customers
                   access to the highest-calibre, ISO 9001:2015-certified products from one of
                   the industry's most trusted names.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {trustPoints.map((tp, i) => (
-                    <div
-                      key={i}
-                      className="group bg-white/5 hover:bg-white/10 border border-white/10
-                                 hover:border-sky-400/30 rounded-xl p-4 sm:p-5
-                                 transition-all duration-300"
-                    >
+                    <div key={i} className="group bg-white/5 hover:bg-white/10 border border-white/10 hover:border-sky-400/30 rounded-xl p-4 sm:p-5 transition-all duration-300">
                       <div className="flex items-center gap-2.5 mb-2">
                         <span className="text-sky-400 group-hover:text-sky-300 transition-colors">
                           {tp.icon}
@@ -424,25 +332,15 @@ const AboutCompany = () => {
               </div>
             </div>
 
-            {/* Bottom strip */}
-            <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-white/10
-                            flex flex-col sm:flex-row items-start sm:items-center
-                            justify-between gap-3">
+            <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <p className="text-white/40 text-[10px] sm:text-xs">
                 Pasternack® is a registered trademark of Infinite Electronics International, Inc.
               </p>
-              <a
-                href="https://www.pasternack.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sky-400 hover:text-sky-300
-                           text-[11px] sm:text-xs font-semibold transition-colors duration-200"
-              >
+              <a href="https://www.pasternack.com" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sky-400 hover:text-sky-300 text-[11px] sm:text-xs font-semibold transition-colors duration-200">
                 Visit Pasternack.com
-                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                 </svg>
               </a>
             </div>

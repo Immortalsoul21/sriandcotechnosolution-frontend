@@ -77,7 +77,7 @@ const Footer = () => (
           </ul>
         </div>
 
-        {/* Product categories — now link directly to each category page */}
+        {/* Product categories */}
         <div className="flex flex-col gap-4">
           <h3 className="text-white text-xs font-semibold uppercase tracking-widest">Products</h3>
           <ul className="flex flex-col gap-2.5">
@@ -105,25 +105,25 @@ const Footer = () => (
                 <MapPin size={13} className="text-sky-400" />
               </div>
               <span className="text-xs sm:text-sm leading-relaxed text-gray-500">
-                123 Electronics Plaza, Bangalore,<br />Karnataka 560001, India
+                No 35, 16th Cross, Oil Mill Rd,<br />Mangala Layout, Kammanahalli,<br />Bengaluru – 560084
               </span>
             </li>
             <li className="flex items-center gap-3">
               <div className="w-7 h-7 rounded-lg bg-gray-800 flex items-center justify-center flex-shrink-0">
                 <Phone size={13} className="text-sky-400" />
               </div>
-              <a href="tel:+919999999999"
+              <a href="tel:+919353961627"
                  className="text-xs sm:text-sm text-gray-500 hover:text-sky-400 transition-colors">
-                +91 XXXXX XXXXX
+                +91 9353961627
               </a>
             </li>
             <li className="flex items-center gap-3">
               <div className="w-7 h-7 rounded-lg bg-gray-800 flex items-center justify-center flex-shrink-0">
                 <Mail size={13} className="text-sky-400" />
               </div>
-              <a href="mailto:info@sriandco.com"
+              <a href="mailto:sales@sriandcotechno.com"
                  className="text-xs sm:text-sm text-gray-500 hover:text-sky-400 transition-colors">
-                info@sriandco.com
+                sales@sriandcotechno.com
               </a>
             </li>
           </ul>

@@ -30,7 +30,7 @@
 // 1. TOP-LEVEL CATEGORIES
 // ─────────────────────────────────────────────────────────────────
 export const categories = [
-  { categoryId: "Sri & Co Manufacture Product", value: "Sri & Co Manufacture Product" },
+  { categoryId: "Sri & Co Manufacture Product", value: "Sri & Co Manufactured Product" },
   { categoryId: "RF & Microwave Components and Solutions", value: "RF & Microwave Components and Solutions" },
   { categoryId: "Test & Measurement", value: "Test & Measurement" },
   { categoryId: "Electronics Sensors", value: "Electronics Sensors" },
