@@ -116,10 +116,10 @@ const HeroCarousel = () => {
   ];
 
   useEffect(() => {
-    console.log('[HeroCarousel] setInterval started with 20000ms (20s)');
     const id = setInterval(() => setCurrent(p => (p + 1) % slides.length), 20000);
     return () => clearInterval(id);
   }, []);
+
 
 
   return (
@@ -258,7 +258,7 @@ const HeroCarousel = () => {
           className="h-full"
           style={{
             backgroundColor: slides[current].accentColor,
-            animation: 'hero-progress 1s linear forwards',
+            animation: 'hero-progress 20s linear forwards',
           }}
         />
       </div>
