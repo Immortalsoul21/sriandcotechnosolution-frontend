@@ -3820,7 +3820,7 @@ export const products = [
   {
     id: 174,
     productId: "MAT-ROHACELL",
-    name: "Rohacell",
+    name: "PMI Foam",
     description: "Rigid polymethacrylimide (PMI) structural foam core for sandwich composite panels in radome and aerospace structures.",
     image: "/images/product/Special Materials/Materials/Rohacell.png",
     categoryId: "Special Materials",
@@ -3829,7 +3829,7 @@ export const products = [
   {
     id: 1174,
     productId: "MAT-ROHACELL",
-    name: "Rohacell",
+    name: "PMI Foam",
     description: "Rigid polymethacrylimide (PMI) structural foam core for sandwich composite panels in radome and aerospace structures.",
     image: "/images/product/Special Materials/Materials/Rohacell.png",
     categoryId: "Sri & Co Manufacture Product",

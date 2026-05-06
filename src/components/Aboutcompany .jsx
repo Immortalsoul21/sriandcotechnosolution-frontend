@@ -171,10 +171,10 @@ const AboutCompany = () => {
             </h2>
             {/* UPDATED tagline & description */}
             <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3 sm:mb-5">
-              Sri and Co Techno Solutions is a trusted manufacturer and distributor of antennas,
-              electronics, electrical, RF, and microwave components. We specialise in delivering
-              hihg-quality precision components to space, aerospace, defense, R&D and industrial
-              sectors.
+              Sri and Co Techno Solutions is a trusted Manufacturer and Distributor of Antennas,
+              Electronics, Electrical, RF & Microwave Components. We specialise in delivering
+              high-quality precision components to Space, Aerospace, Defense, R&D and Industrial
+              Sectors.
             </p>
             {/* <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3 sm:mb-5">
               Powering the defence and aerospace sectors from the ground up — connecting satellites
@@ -306,7 +306,7 @@ const AboutCompany = () => {
                 {/* FIXED: "partnership refects" → "association reflects" */}
                 <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
                   We are proud to be in association with <span className="text-white font-semibold">Pasternack</span> —
-                  a globally recognised leader in RF, microwave, and millimeter-wave components
+                  a globally recognised leader in RF, Microwave, and Millimeter-wave Components
                   since 1972. This association reflects our commitment to offering our customers
                   access to the highest-calibre, ISO 9001:2015-certified products from one of
                   the industry's most trusted names.
