@@ -37,7 +37,7 @@ const categories = [
     subcategories: ['Carbon Fiber Sheet', 'PMI Foam', 'Solimide', 'Thermal Shielding Solution'],
     gradientFrom: '#7c3aed', gradientTo: '#6d28d9',
     // UPDATED: Special Materials card image (changed from abstract to materials-relevant image)
-    image: 'https://images.unsplash.com/photo-1562114808-b4b33cf4d38a?auto=format&fit=crop&w=600&q=80',
+    image: "/images/product/Special Materials/Materials/Carbon firber.png",
   },
   {
     categoryId: 'RCP & HIL',

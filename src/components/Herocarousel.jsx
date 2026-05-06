@@ -34,7 +34,7 @@ const slides = [
     accentColor: '#10b981',
     stat1: { value: '', label: '' },
     stat2: { value: '', label: '' },
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Goldstone_Deep_Space_Communications_Complex.jpg/1280px-Goldstone_Deep_Space_Communications_Complex.jpg',
+    image: '/images/product/RF & Microwave Components and Solutions/Antenna Solutions/Special Purpose Antennas/Phased Array Antennas.png',
     pattern: 'circuit',
   },
   {
@@ -45,7 +45,7 @@ const slides = [
     accentColor: '#f59e0b',
     stat1: { value: '', label: '' },
     stat2: { value: '', label: '' },
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Telecommunication_tower_Gerbrandy.jpg/800px-Telecommunication_tower_Gerbrandy.jpg',
+    image: '/images/product/RF & Microwave Components and Solutions/Antenna Solutions/Millimeter Wave Antennas/77 GHz Radar Antennas.png',
     pattern: 'dots',
   },
   {
