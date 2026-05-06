@@ -9,7 +9,7 @@ const categories = [
     description: 'Connectors, cables, amplifiers, filters, waveguides, antennas and thin-film components for high-frequency RF applications.',
     subcategories: ['RF Connectors & Adapters', 'RF Amplifiers', 'Antenna Solutions', 'Waveguide & High-Frequency Components'],
     gradientFrom: '#0284c7', gradientTo: '#0369a1',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80',
+    image: "/images/product/RF & Microwave Components and Solutions/RF Connectors & Adapters/TNC - SMB - SMC - MCX - MMCX.jpeg",
   },
   {
     categoryId: 'Test & Measurement',
@@ -17,7 +17,7 @@ const categories = [
     description: 'Anechoic chambers, RF absorbers, shielded enclosures, scanner systems and EMC solutions for compliance testing.',
     subcategories: ['EMC / EMI Test Chambers', 'RF Shielded Enclosures & Boxes', 'RF Scanner Systems', 'Microwave Absorbers'],
     gradientFrom: '#0891b2', gradientTo: '#0e7490',
-    image: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=600&q=80',
+    image: "/images/product/Test & Measurement Solutions/EMC  EMI Test Chambers/Anechoic Chambers.png",
   },
   {
     categoryId: 'Electronics Sensors',
@@ -25,7 +25,7 @@ const categories = [
     description: 'Precision sensing solutions for pressure, load, temperature, position, vibration and environmental measurement.',
     subcategories: ['Pressure Sensors', 'Load Cells', 'Temperature Sensors', 'Accelerometers'],
     gradientFrom: '#059669', gradientTo: '#0f766e',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80',
+    image: "/images/product/Electronics Sensors/Additional Sensor Solutions/Displacement Sensors.png",
   },
   {
     categoryId: 'Special Materials',
@@ -37,7 +37,7 @@ const categories = [
     subcategories: ['Carbon Fiber Sheet', 'PMI Foam', 'Solimide', 'Thermal Shielding Solution'],
     gradientFrom: '#7c3aed', gradientTo: '#6d28d9',
     // UPDATED: Special Materials card image (changed from abstract to materials-relevant image)
-    image: "/images/product/Special Materials/Materials/Carbon firber.png",
+    image: "/images/product/Special Materials/Materials/Rohacell.png",
   },
   {
     categoryId: 'RCP & HIL',
@@ -45,7 +45,7 @@ const categories = [
     description: 'Rapid Control Prototyping and Hardware-in-the-Loop systems for real-time simulation and embedded control validation.',
     subcategories: ['Rapid Control Prototyping System', 'Hardware-in-the-Loop System'],
     gradientFrom: '#475569', gradientTo: '#1e293b',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
+    image: "/images/product/RCP and HIL/Hardware-in-the-Loop (HIL)/Hardware-in-the-Loop (HIL).png",
   },
 ];
 
