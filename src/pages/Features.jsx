@@ -185,6 +185,8 @@ function NewsTicker() {
 
 function HeroBanner() {
   const cd = useCountdown(FEATURED_WEBINAR.target);
+  const isExpired = FEATURED_WEBINAR.target.getTime() <= Date.now();
+
   return (
     <div
       className="relative overflow-hidden rounded-2xl mb-8"
@@ -195,55 +197,69 @@ function HeroBanner() {
       <div className="absolute bottom-5 left-[55%] w-64 h-64 rounded-full border border-white/5 pointer-events-none" />
 
       <div className="relative z-10 p-6 sm:p-8 lg:p-10">
-        <div className="flex flex-wrap items-center gap-3 mb-6">
-          <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/90 text-white text-[10px] font-bold uppercase tracking-wider">
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-            Live Webinar
-          </span>
-          <span className="text-xs text-sky-300/80 font-medium">
-            <Calendar size={11} className="inline mr-1 align-middle" />
-            {FEATURED_WEBINAR.date}
-          </span>
-          <span className="text-xs text-gray-500 font-medium">
-            <Clock size={11} className="inline mr-1 align-middle" />
-            {FEATURED_WEBINAR.time} · {FEATURED_WEBINAR.duration}
-          </span>
-        </div>
-
-        <div className="flex flex-col xl:flex-row gap-8 xl:items-end">
-          <div className="flex-1">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-3 tracking-tight">
-              {FEATURED_WEBINAR.title}
-            </h1>
-            <p className="text-sm text-gray-400 leading-relaxed mb-2 max-w-xl">{FEATURED_WEBINAR.subtitle}</p>
-            <p className="text-xs text-gray-500 mb-7">
-              Presented by <span className="text-gray-300 font-medium">{FEATURED_WEBINAR.presenter}</span>
-              <span className="mx-2 text-gray-700">·</span>
-              <Users size={11} className="inline mr-1 align-middle text-gray-500" />
-              {FEATURED_WEBINAR.seats} registered
+        {isExpired ? (
+          <div className="flex flex-col items-center justify-center text-center py-8">
+            <Calendar size={40} className="text-sky-400 mb-4 opacity-80" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 tracking-tight">
+              Our latest webinar has successfully concluded.
+            </h2>
+            <p className="text-base text-gray-400 max-w-lg mx-auto">
+              Please stay tuned for our future events and upcoming webinars. We look forward to welcoming you to our next session!
             </p>
-            <div className="flex flex-wrap gap-3">
-              <a href={FEATURED_WEBINAR.registerLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white text-gray-900 text-sm font-bold px-6 py-2.5 rounded-xl hover:bg-sky-50 transition-colors shadow-lg">
-                <Play size={14} className="fill-gray-900" /> Register Now
-              </a>
-              <a href={FEATURED_WEBINAR.learnMoreLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-white/20 text-white text-sm px-6 py-2.5 rounded-xl hover:bg-white/10 transition-colors">
-                Learn more <ArrowRight size={13} />
-              </a>
-            </div>
           </div>
+        ) : (
+          <>
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/90 text-white text-[10px] font-bold uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                Live Webinar
+              </span>
+              <span className="text-xs text-sky-300/80 font-medium">
+                <Calendar size={11} className="inline mr-1 align-middle" />
+                {FEATURED_WEBINAR.date}
+              </span>
+              <span className="text-xs text-gray-500 font-medium">
+                <Clock size={11} className="inline mr-1 align-middle" />
+                {FEATURED_WEBINAR.time} · {FEATURED_WEBINAR.duration}
+              </span>
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <p className="text-[10px] text-gray-600 uppercase tracking-widest font-semibold">Starts in</p>
-            <div className="flex gap-2">
-              {[['d', 'Days'], ['h', 'Hrs'], ['m', 'Min'], ['s', 'Sec']].map(([k, lbl]) => (
-                <div key={k} className="flex flex-col items-center bg-white/[0.08] border border-white/10 rounded-xl px-3 py-2.5 min-w-[52px]">
-                  <span className="text-2xl font-bold text-white tabular-nums leading-none">{cd[k]}</span>
-                  <span className="text-[9px] text-gray-500 uppercase tracking-wider mt-1">{lbl}</span>
+            <div className="flex flex-col xl:flex-row gap-8 xl:items-end">
+              <div className="flex-1">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-3 tracking-tight">
+                  {FEATURED_WEBINAR.title}
+                </h1>
+                <p className="text-sm text-gray-400 leading-relaxed mb-2 max-w-xl">{FEATURED_WEBINAR.subtitle}</p>
+                <p className="text-xs text-gray-500 mb-7">
+                  Presented by <span className="text-gray-300 font-medium">{FEATURED_WEBINAR.presenter}</span>
+                  <span className="mx-2 text-gray-700">·</span>
+                  <Users size={11} className="inline mr-1 align-middle text-gray-500" />
+                  {FEATURED_WEBINAR.seats} registered
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <a href={FEATURED_WEBINAR.registerLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white text-gray-900 text-sm font-bold px-6 py-2.5 rounded-xl hover:bg-sky-50 transition-colors shadow-lg">
+                    <Play size={14} className="fill-gray-900" /> Register Now
+                  </a>
+                  <a href={FEATURED_WEBINAR.learnMoreLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-white/20 text-white text-sm px-6 py-2.5 rounded-xl hover:bg-white/10 transition-colors">
+                    Learn more <ArrowRight size={13} />
+                  </a>
                 </div>
-              ))}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <p className="text-[10px] text-gray-600 uppercase tracking-widest font-semibold">Starts in</p>
+                <div className="flex gap-2">
+                  {[['d', 'Days'], ['h', 'Hrs'], ['m', 'Min'], ['s', 'Sec']].map(([k, lbl]) => (
+                    <div key={k} className="flex flex-col items-center bg-white/[0.08] border border-white/10 rounded-xl px-3 py-2.5 min-w-[52px]">
+                      <span className="text-2xl font-bold text-white tabular-nums leading-none">{cd[k]}</span>
+                      <span className="text-[9px] text-gray-500 uppercase tracking-wider mt-1">{lbl}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </div>
   );

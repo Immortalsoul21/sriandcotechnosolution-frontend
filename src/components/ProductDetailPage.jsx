@@ -157,7 +157,7 @@ Best regards,
                 <p className="text-sm text-gray-600 leading-relaxed">{description}</p>
               </div>
 
-              <div className="px-5 py-3">
+              {/* <div className="px-5 py-3">
                 <h4 className="text-sm font-bold text-gray-800 mb-2">Lifecycle:</h4>
                 <div className="flex items-center gap-2">
                   <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-green-500 text-white text-[9px] font-bold leading-none">
@@ -168,9 +168,9 @@ Best regards,
                     {lifecycle === "New Product" ? "New from this manufacturer." : lifecycle}
                   </span>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="px-5 py-3">
+              {/* <div className="px-5 py-3">
                 <h4 className="text-sm font-bold text-gray-800 mb-2">Shipping Alert:</h4>
                 <div className="flex items-start gap-2">
                   <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
@@ -178,7 +178,7 @@ Best regards,
                     This item may require additional fees and documentation. Customs delays may also occur.
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* ── GET QUOTATION BUTTON ── */}

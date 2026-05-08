@@ -143,8 +143,8 @@ const Navbar = () => {
               <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-white" />
             </div>
             <div className="hidden sm:block">
-              <p className="text-sm font-bold text-gray-900 leading-tight">Sri and Co</p>
-              <p className="text-[10px] text-gray-400 tracking-widest uppercase">Techno Solutions</p>
+              <p className="text-sm font-bold text-[#00AEEF] leading-tight">Sri and Co</p>
+              <p className="text-[10px] font-bold text-black tracking-widest uppercase">Techno Solutions</p>
             </div>
           </Link>
 

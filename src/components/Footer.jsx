@@ -51,7 +51,7 @@ const Footer = () => (
           </Link>
 
           <p className="text-xs sm:text-sm leading-relaxed text-gray-500 max-w-[260px]">
-            Leading distributor of RF, Microwave &amp; Electronic Components for
+            Leading manufacturer & distributor of RF, Microwave &amp; Electronic Components for
             Aerospace, Defence &amp; Industrial sectors across India.
           </p>
 
