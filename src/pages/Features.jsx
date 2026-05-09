@@ -4,7 +4,7 @@ import {
   Bell, Calendar, ChevronRight, Clock, ExternalLink,
   Rss, Tag, Play, Filter, Mail,
   Globe, ShieldCheck, Headphones, BarChart3, Wrench, Package,
-  Zap, ArrowRight, Phone, MapPin,
+  Zap, ArrowRight, Phone, MapPin, CheckCircle2, XCircle,
 } from 'lucide-react';
 
 // ─── WEBINAR DATA ─────────────────────────────────────────────────────────────
@@ -13,13 +13,13 @@ const FEATURED_WEBINAR = {
   title: 'ROHACELL® for Aerospace, Defense & High-Performance Structures',
   subtitle:
     'Material intelligence for engineers building mission-critical systems — live deep-dive with Dr. Alexander Roth, Head of Aerospace Performance Foams, Evonik, Germany.',
-  date: 'Tuesday, 6th May 2025',
+  date: 'Tuesday, 6th May 2026',
   time: '11:00 AM – 1:00 PM IST',
   duration: '120 min',
   presenter: 'Dr. Alexander Roth',
   presenterTitle: 'Head of Aerospace Performance Foams, Evonik, Germany',
   registerUrl: 'https://lnkd.in/dimzu7fY',
-  target: new Date('2025-05-06T11:00:00+05:30'),
+  target: new Date('2025-05-06T11:00:00+05:30'), // past date → always expired in 2026
 };
 
 const LEARN_POINTS = [
@@ -38,8 +38,6 @@ const APPLICATIONS = [
   { label: 'Marine',                desc: 'Antenna supports and lightweight structures for harsh environments.' },
 ];
 
-// Bug fix #1: Icons stored as component references, not pre-rendered JSX.
-// Pre-rendering JSX outside a component can cause stale React context issues.
 const FEATURES_LIST = [
   {
     Icon: Zap,
@@ -62,15 +60,13 @@ const FEATURES_LIST = [
   {
     Icon: Package,
     title: 'Sustainable',
-    description: 'Recyclable and environment-friendly — advanced materials built to meet tomorrow\'s engineering and sustainability standards.',
+    description: "Recyclable and environment-friendly — advanced materials built to meet tomorrow's engineering and sustainability standards.",
     gradient: 'from-amber-500 to-amber-700',
   },
 ];
 
-// ─── TICKER ───────────────────────────────────────────────────────────────────
+// ─── TICKER DATA ──────────────────────────────────────────────────────────────
 
-// Bug fix #2: Replaced Unicode curly apostrophe (') with escaped straight apostrophe (\')
-// to avoid potential encoding issues in some bundlers/environments.
 const TICKER = [
   'ROHACELL\u00AE Webinar \u2014 6th May | 11 AM IST \u2014 Register Now',
   'In high-performance systems, weight is a liability',
@@ -80,23 +76,18 @@ const TICKER = [
   '+91 9353961627 \u00B7 sales@sriandcotechno.com',
 ];
 
-// ─── TICKER CSS ───────────────────────────────────────────────────────────────
+// ─── TICKER CSS (module-level, injected once) ─────────────────────────────────
 
-// Bug fix #3: CSS injected once at module level instead of inside a component,
-// preventing duplicate <style> tags being inserted on every render.
-const tickerStyle = document.createElement('style');
-tickerStyle.textContent = '@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}';
 if (!document.head.querySelector('[data-ticker-style]')) {
-  tickerStyle.setAttribute('data-ticker-style', '');
-  document.head.appendChild(tickerStyle);
+  const s = document.createElement('style');
+  s.setAttribute('data-ticker-style', '');
+  s.textContent = '@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}';
+  document.head.appendChild(s);
 }
 
 // ─── COUNTDOWN HOOK ───────────────────────────────────────────────────────────
 
 function useCountdown(target) {
-  // Bug fix #4: calc moved outside state initializer and wrapped in useCallback
-  // to avoid redefining it on every render, and the useEffect now has a stable
-  // dependency reference preventing unnecessary re-subscriptions.
   const calc = useCallback(() => {
     const diff = Math.max(0, target - Date.now());
     return {
@@ -104,14 +95,12 @@ function useCountdown(target) {
       h: String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0'),
       m: String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0'),
       s: String(Math.floor((diff % 60000) / 1000)).padStart(2, '0'),
+      expired: diff === 0,
     };
   }, [target]);
 
   const [cd, setCd] = useState(calc);
 
-  // Bug fix #5: Added [calc] dependency array to useEffect.
-  // Previously missing dependency array caused the interval to be
-  // re-registered after every render instead of only when target changes.
   useEffect(() => {
     const t = setInterval(() => setCd(calc()), 1000);
     return () => clearInterval(t);
@@ -120,7 +109,7 @@ function useCountdown(target) {
   return cd;
 }
 
-// ─── NEWS TICKER ─────────────────────────────────────────────────────────────
+// ─── NEWS TICKER ──────────────────────────────────────────────────────────────
 
 function NewsTicker() {
   const text    = TICKER.join('  \u00B7  ');
@@ -129,10 +118,11 @@ function NewsTicker() {
     <div className="bg-gray-900 flex items-center overflow-hidden h-9">
       <div className="flex-shrink-0 flex items-center gap-2 px-4 border-r border-gray-700 h-full">
         <Rss size={11} className="text-sky-400" />
-        <span className="text-[10px] font-bold text-sky-400 uppercase tracking-widest whitespace-nowrap">Latest</span>
+        <span className="text-[10px] font-bold text-sky-400 uppercase tracking-widest whitespace-nowrap">
+          Latest
+        </span>
       </div>
       <div className="overflow-hidden flex-1 px-4">
-        {/* Bug fix #6: Removed inline <style> tag from here (moved to module level above) */}
         <span
           className="inline-block text-[11px] text-gray-400 whitespace-nowrap"
           style={{ animation: 'ticker 40s linear infinite' }}
@@ -148,24 +138,35 @@ function NewsTicker() {
 
 function HeroBanner() {
   const cd = useCountdown(FEATURED_WEBINAR.target);
-  const isExpired = FEATURED_WEBINAR.target.getTime() <= Date.now();
+  const isExpired = cd.expired;
 
   return (
     <div
       className="relative overflow-hidden rounded-2xl mb-8"
       style={{ background: 'linear-gradient(135deg,#080f1e 0%,#0c2340 50%,#0f3d6e 100%)' }}
     >
+      {/* decorative rings */}
       <div className="absolute -top-16 -right-16 w-72 h-72 rounded-full border border-white/5 pointer-events-none" />
       <div className="absolute -top-8  -right-8  w-48 h-48 rounded-full border border-white/5 pointer-events-none" />
       <div className="absolute bottom-5 left-[55%] w-64 h-64 rounded-full border border-white/5 pointer-events-none" />
 
       <div className="relative z-10 p-6 sm:p-8 lg:p-10">
+
         {/* Tags row */}
         <div className="flex flex-wrap items-center gap-3 mb-6">
-          <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/90 text-white text-[10px] font-bold uppercase tracking-wider">
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-            Live Webinar
-          </span>
+          {/* Live / Ended badge */}
+          {isExpired ? (
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-600/80 text-white text-[10px] font-bold uppercase tracking-wider">
+              <XCircle size={11} className="text-gray-300" />
+              Webinar Ended
+            </span>
+          ) : (
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/90 text-white text-[10px] font-bold uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+              Live Webinar
+            </span>
+          )}
+
           <span className="text-xs text-sky-300/80 font-medium">
             <Calendar size={11} className="inline mr-1 align-middle" />
             {FEATURED_WEBINAR.date}
@@ -186,7 +187,9 @@ function HeroBanner() {
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-tight mb-3 tracking-tight">
               {FEATURED_WEBINAR.title}
             </h1>
-            <p className="text-sm text-gray-400 leading-relaxed mb-2 max-w-xl">{FEATURED_WEBINAR.subtitle}</p>
+            <p className="text-sm text-gray-400 leading-relaxed mb-2 max-w-xl">
+              {FEATURED_WEBINAR.subtitle}
+            </p>
             <p className="text-xs text-gray-500 mb-5">
               Presented by{' '}
               <span className="text-gray-300 font-medium">{FEATURED_WEBINAR.presenter}</span>
@@ -198,41 +201,103 @@ function HeroBanner() {
             <ul className="mb-7 space-y-1.5">
               {LEARN_POINTS.map((pt, i) => (
                 <li key={i} className="flex items-start gap-2 text-xs text-gray-400">
-                  <span className="text-sky-400 mt-0.5 flex-shrink-0">&#10004;</span>
+                  <CheckCircle2 size={13} className="text-sky-400 mt-0.5 flex-shrink-0" />
                   {pt}
                 </li>
               ))}
             </ul>
 
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={FEATURED_WEBINAR.registerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white text-gray-900 text-sm font-bold px-6 py-2.5 rounded-xl hover:bg-sky-50 transition-colors shadow-lg"
-              >
-                <Play size={14} className="fill-gray-900" /> Register Free
-              </a>
-              <a
-                href="tel:+919353961627"
-                className="inline-flex items-center gap-2 border border-white/20 text-white text-sm px-6 py-2.5 rounded-xl hover:bg-white/10 transition-colors"
-              >
-                <Phone size={13} /> +91 93539 61627
-              </a>
-            </div>
+            {/* CTA buttons */}
+            {isExpired ? (
+              <div className="space-y-4">
+                {/* Stay tuned banner */}
+                <div className="flex items-start gap-3 bg-white/[0.07] border border-sky-500/30 rounded-xl px-4 py-3.5">
+                  <Bell size={16} className="text-sky-400 flex-shrink-0 mt-0.5 animate-pulse" />
+                  <div>
+                    <p className="text-sm font-bold text-white leading-snug">
+                      Stay Tuned for Our Upcoming Seminar!
+                    </p>
+                    <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">
+                      This session has concluded. Our next expert seminar is on the way —
+                      reach out to be the first to know when it&apos;s announced.
+                    </p>
+                  </div>
+                </div>
+                {/* Secondary action buttons */}
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href="mailto:sales@sriandcotechno.com?subject=Notify me about upcoming seminars"
+                    className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-colors shadow-lg"
+                  >
+                    <Mail size={14} /> Notify Me
+                  </a>
+                  <a
+                    href="tel:+919353961627"
+                    className="inline-flex items-center gap-2 border border-white/20 text-white text-sm px-6 py-2.5 rounded-xl hover:bg-white/10 transition-colors"
+                  >
+                    <Phone size={13} /> +91 93539 61627
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={FEATURED_WEBINAR.registerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-white text-gray-900 text-sm font-bold px-6 py-2.5 rounded-xl hover:bg-sky-50 transition-colors shadow-lg"
+                >
+                  <Play size={14} className="fill-gray-900" /> Register Free
+                </a>
+                <a
+                  href="tel:+919353961627"
+                  className="inline-flex items-center gap-2 border border-white/20 text-white text-sm px-6 py-2.5 rounded-xl hover:bg-white/10 transition-colors"
+                >
+                  <Phone size={13} /> +91 93539 61627
+                </a>
+              </div>
+            )}
           </div>
 
-          {/* Countdown */}
+          {/* Countdown / Stay Tuned block */}
           <div className="flex flex-col gap-2">
-            <p className="text-[10px] text-gray-600 uppercase tracking-widest font-semibold">Starts in</p>
-            <div className="flex gap-2">
-              {[['d','Days'],['h','Hrs'],['m','Min'],['s','Sec']].map(([k, lbl]) => (
-                <div key={k} className="flex flex-col items-center bg-white/[0.08] border border-white/10 rounded-xl px-3 py-2.5 min-w-[52px]">
-                  <span className="text-2xl font-bold text-white tabular-nums leading-none">{cd[k]}</span>
-                  <span className="text-[9px] text-gray-500 uppercase tracking-wider mt-1">{lbl}</span>
+            {isExpired ? (
+              <div className="flex flex-col items-center justify-center bg-white/[0.06] border border-sky-500/25 rounded-2xl px-6 py-6 min-w-[200px] text-center">
+                <div className="w-10 h-10 rounded-full bg-sky-500/20 flex items-center justify-center mb-3">
+                  <Bell size={18} className="text-sky-400 animate-pulse" />
                 </div>
-              ))}
-            </div>
+                <span className="text-sm font-bold text-white leading-snug">
+                  Stay Tuned!
+                </span>
+                <span className="text-[11px] text-sky-400 font-medium mt-1">
+                  Next seminar coming soon
+                </span>
+                <span className="text-[10px] text-gray-600 mt-2 leading-snug">
+                  Follow us or drop us a message to get notified first.
+                </span>
+              </div>
+            ) : (
+              <>
+                <p className="text-[10px] text-gray-600 uppercase tracking-widest font-semibold">
+                  Starts in
+                </p>
+                <div className="flex gap-2">
+                  {[['d','Days'],['h','Hrs'],['m','Min'],['s','Sec']].map(([k, lbl]) => (
+                    <div
+                      key={k}
+                      className="flex flex-col items-center bg-white/[0.08] border border-white/10 rounded-xl px-3 py-2.5 min-w-[52px]"
+                    >
+                      <span className="text-2xl font-bold text-white tabular-nums leading-none">
+                        {cd[k]}
+                      </span>
+                      <span className="text-[9px] text-gray-500 uppercase tracking-wider mt-1">
+                        {lbl}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -263,6 +328,9 @@ function ApplicationsCard() {
 // ─── CONTACT SIDEBAR CARD ─────────────────────────────────────────────────────
 
 function ContactCard() {
+  const cd = useCountdown(FEATURED_WEBINAR.target);
+  const isExpired = cd.expired;
+
   return (
     <div className="bg-gray-900 rounded-2xl p-5">
       <h2 className="text-sm font-bold text-white flex items-center gap-2 mb-4">
@@ -284,19 +352,29 @@ function ContactCard() {
           sales@sriandcotechno.com
         </a>
       </div>
-      <a
-        href={FEATURED_WEBINAR.registerUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-5 w-full flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors"
-      >
-        Register for Webinar <ArrowRight size={12} />
-      </a>
+
+      {isExpired ? (
+        <a
+          href="mailto:sales@sriandcotechno.com"
+          className="mt-5 w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors"
+        >
+          Contact Us for Next Session <Mail size={12} />
+        </a>
+      ) : (
+        <a
+          href={FEATURED_WEBINAR.registerUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 w-full flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors"
+        >
+          Register for Webinar <ArrowRight size={12} />
+        </a>
+      )}
     </div>
   );
 }
 
-// ─── QUICK LINKS SIDEBAR ─────────────────────────────────────────────────────
+// ─── QUICK LINKS SIDEBAR ──────────────────────────────────────────────────────
 
 function QuickLinks() {
   return (
@@ -307,7 +385,6 @@ function QuickLinks() {
       {[
         { label: 'Browse All Products', path: '/products' },
         { label: 'About Us',            path: '/about' },
-      
         { label: 'Contact & Support',   path: '/about' },
       ].map(link => (
         <Link
@@ -326,9 +403,6 @@ function QuickLinks() {
 
 // ─── SECTION DIVIDER ─────────────────────────────────────────────────────────
 
-// Bug fix #7: title prop typed as React.ReactNode so JSX children are valid.
-// The original code passed JSX with <br/> inside a prop — this is fine in React
-// but made explicit here for clarity. No functional change, just cleaner.
 function SectionDivider({ title, subtitle }) {
   return (
     <div className="bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 text-white py-14 sm:py-20 px-4 sm:px-6 mt-0">
@@ -353,26 +427,8 @@ const Features = () => {
     <div className="min-h-screen bg-gray-50">
 
       <NewsTicker />
-      
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-8">
-
-        {/*
-        <div className="mb-7">
-          <div className="flex items-center gap-2 text-xs text-gray-400 mb-1.5">
-            <Link to="/home" className="hover:text-sky-500 transition-colors">Home</Link>
-            <ChevronRight size={12} />
-            <span className="text-gray-600 font-medium">Webinars &amp; News</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2.5">
-            <Rss size={22} className="text-sky-500" />
-            Upcoming Webinar
-          </h1>
-          <p className="text-sm text-gray-500 mt-1.5">
-            Sri and Co Techno Solutions — live expert sessions on advanced materials &amp; industrial engineering.
-          </p>
-        </div>
-        */}
 
         <HeroBanner />
 
@@ -422,7 +478,7 @@ const Features = () => {
         </div>
       </div>
 
-      {/* ══════════════ FEATURES SECTION ══════════════ */}
+      {/* ══ FEATURES SECTION ══ */}
 
       <SectionDivider
         title={
@@ -435,7 +491,6 @@ const Features = () => {
       />
 
       {/* Feature cards */}
-      {/* Bug fix #8: Icon rendered as a component (<Icon />) instead of pre-rendered JSX stored in data. */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {FEATURES_LIST.map((feature, i) => {
