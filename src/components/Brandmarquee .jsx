@@ -68,12 +68,12 @@ const BrandLogo = ({ brand }) => {
 
   if (failed) return null;
   return (
-    <div className="flex-shrink-0 flex items-center justify-center w-24 sm:w-32">
+    <div className="flex-shrink-0 flex items-center justify-center w-32 sm:w-44">
       <img
         src={brand.logo}
         alt={brand.name}
         onError={() => setFailed(true)}
-        className="h-5 sm:h-8 w-auto max-w-[70px] sm:max-w-[110px] object-contain"
+        className="h-8 sm:h-14 w-auto max-w-[100px] sm:max-w-[160px] object-contain"
         loading="lazy"
         draggable={false}
       />
@@ -83,7 +83,6 @@ const BrandLogo = ({ brand }) => {
 
 const BrandMarquee = () => {
   return (
-    // UPDATED header: "Our Clients" (was "Trusted Partners & Suppliers")
     <section className="py-5 sm:py-8 bg-white border-y border-gray-100 overflow-hidden">
       <p className="text-center text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3 sm:mb-6">
         Our Clients
