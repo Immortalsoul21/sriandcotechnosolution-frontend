@@ -19,7 +19,7 @@ const FEATURED_WEBINAR = {
   presenter: 'Dr. Alexander Roth',
   presenterTitle: 'Head of Aerospace Performance Foams, Evonik, Germany',
   registerUrl: 'https://lnkd.in/dimzu7fY',
-  target: new Date('2025-05-06T11:00:00+05:30'), // past date → always expired in 2026
+  target: new Date('2025-05-06T11:00:00+05:30'),
 };
 
 const LEARN_POINTS = [
@@ -75,8 +75,6 @@ const TICKER = [
   "IF YOUR DESIGN CAN'T FAIL \u2014 YOUR MATERIAL CHOICE CAN'T EITHER",
   '+91 9353961627 \u00B7 sales@sriandcotechno.com',
 ];
-
-// ─── TICKER CSS (module-level, injected once) ─────────────────────────────────
 
 if (!document.head.querySelector('[data-ticker-style]')) {
   const s = document.createElement('style');
@@ -145,16 +143,12 @@ function HeroBanner() {
       className="relative overflow-hidden rounded-2xl mb-8"
       style={{ background: 'linear-gradient(135deg,#080f1e 0%,#0c2340 50%,#0f3d6e 100%)' }}
     >
-      {/* decorative rings */}
       <div className="absolute -top-16 -right-16 w-72 h-72 rounded-full border border-white/5 pointer-events-none" />
       <div className="absolute -top-8  -right-8  w-48 h-48 rounded-full border border-white/5 pointer-events-none" />
       <div className="absolute bottom-5 left-[55%] w-64 h-64 rounded-full border border-white/5 pointer-events-none" />
 
       <div className="relative z-10 p-6 sm:p-8 lg:p-10">
-
-        {/* Tags row */}
         <div className="flex flex-wrap items-center gap-3 mb-6">
-          {/* Live / Ended badge */}
           {isExpired ? (
             <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-600/80 text-white text-[10px] font-bold uppercase tracking-wider">
               <XCircle size={11} className="text-gray-300" />
@@ -166,7 +160,6 @@ function HeroBanner() {
               Live Webinar
             </span>
           )}
-
           <span className="text-xs text-sky-300/80 font-medium">
             <Calendar size={11} className="inline mr-1 align-middle" />
             {FEATURED_WEBINAR.date}
@@ -177,7 +170,6 @@ function HeroBanner() {
           </span>
         </div>
 
-        {/* Eyebrow */}
         <p className="text-[11px] font-bold text-sky-400 uppercase tracking-widest mb-2">
           ROHACELL® by Evonik
         </p>
@@ -197,7 +189,6 @@ function HeroBanner() {
               <span className="text-gray-500">{FEATURED_WEBINAR.presenterTitle}</span>
             </p>
 
-            {/* What you'll learn */}
             <ul className="mb-7 space-y-1.5">
               {LEARN_POINTS.map((pt, i) => (
                 <li key={i} className="flex items-start gap-2 text-xs text-gray-400">
@@ -207,10 +198,8 @@ function HeroBanner() {
               ))}
             </ul>
 
-            {/* CTA buttons */}
             {isExpired ? (
               <div className="space-y-4">
-                {/* Stay tuned banner */}
                 <div className="flex items-start gap-3 bg-white/[0.07] border border-sky-500/30 rounded-xl px-4 py-3.5">
                   <Bell size={16} className="text-sky-400 flex-shrink-0 mt-0.5 animate-pulse" />
                   <div>
@@ -223,7 +212,6 @@ function HeroBanner() {
                     </p>
                   </div>
                 </div>
-                {/* Secondary action buttons */}
                 <div className="flex flex-wrap gap-3">
                   <a
                     href="mailto:sales@sriandcotechno.com?subject=Notify me about upcoming seminars"
@@ -259,40 +247,29 @@ function HeroBanner() {
             )}
           </div>
 
-          {/* Countdown / Stay Tuned block */}
           <div className="flex flex-col gap-2">
             {isExpired ? (
               <div className="flex flex-col items-center justify-center bg-white/[0.06] border border-sky-500/25 rounded-2xl px-6 py-6 min-w-[200px] text-center">
                 <div className="w-10 h-10 rounded-full bg-sky-500/20 flex items-center justify-center mb-3">
                   <Bell size={18} className="text-sky-400 animate-pulse" />
                 </div>
-                <span className="text-sm font-bold text-white leading-snug">
-                  Stay Tuned!
-                </span>
-                <span className="text-[11px] text-sky-400 font-medium mt-1">
-                  Next seminar coming soon
-                </span>
+                <span className="text-sm font-bold text-white leading-snug">Stay Tuned!</span>
+                <span className="text-[11px] text-sky-400 font-medium mt-1">Next seminar coming soon</span>
                 <span className="text-[10px] text-gray-600 mt-2 leading-snug">
                   Follow us or drop us a message to get notified first.
                 </span>
               </div>
             ) : (
               <>
-                <p className="text-[10px] text-gray-600 uppercase tracking-widest font-semibold">
-                  Starts in
-                </p>
+                <p className="text-[10px] text-gray-600 uppercase tracking-widest font-semibold">Starts in</p>
                 <div className="flex gap-2">
                   {[['d','Days'],['h','Hrs'],['m','Min'],['s','Sec']].map(([k, lbl]) => (
                     <div
                       key={k}
                       className="flex flex-col items-center bg-white/[0.08] border border-white/10 rounded-xl px-3 py-2.5 min-w-[52px]"
                     >
-                      <span className="text-2xl font-bold text-white tabular-nums leading-none">
-                        {cd[k]}
-                      </span>
-                      <span className="text-[9px] text-gray-500 uppercase tracking-wider mt-1">
-                        {lbl}
-                      </span>
+                      <span className="text-2xl font-bold text-white tabular-nums leading-none">{cd[k]}</span>
+                      <span className="text-[9px] text-gray-500 uppercase tracking-wider mt-1">{lbl}</span>
                     </div>
                   ))}
                 </div>
@@ -321,82 +298,6 @@ function ApplicationsCard() {
           </div>
         ))}
       </div>
-    </div>
-  );
-}
-
-// ─── CONTACT SIDEBAR CARD ─────────────────────────────────────────────────────
-
-function ContactCard() {
-  const cd = useCountdown(FEATURED_WEBINAR.target);
-  const isExpired = cd.expired;
-
-  return (
-    <div className="bg-gray-900 rounded-2xl p-5">
-      <h2 className="text-sm font-bold text-white flex items-center gap-2 mb-4">
-        <Phone size={13} className="text-sky-400" /> Get in Touch
-      </h2>
-      <div className="space-y-3">
-        <a
-          href="tel:+919353961627"
-          className="flex items-center gap-2 text-xs text-gray-400 hover:text-sky-400 transition-colors"
-        >
-          <Phone size={11} className="text-sky-500 flex-shrink-0" />
-          +91 9353961627
-        </a>
-        <a
-          href="mailto:sales@sriandcotechno.com"
-          className="flex items-center gap-2 text-xs text-gray-400 hover:text-sky-400 transition-colors"
-        >
-          <Mail size={11} className="text-sky-500 flex-shrink-0" />
-          sales@sriandcotechno.com
-        </a>
-      </div>
-
-      {isExpired ? (
-        <a
-          href="mailto:sales@sriandcotechno.com"
-          className="mt-5 w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors"
-        >
-          Contact Us for Next Session <Mail size={12} />
-        </a>
-      ) : (
-        <a
-          href={FEATURED_WEBINAR.registerUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-5 w-full flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors"
-        >
-          Register for Webinar <ArrowRight size={12} />
-        </a>
-      )}
-    </div>
-  );
-}
-
-// ─── QUICK LINKS SIDEBAR ──────────────────────────────────────────────────────
-
-function QuickLinks() {
-  return (
-    <div className="bg-white border border-gray-100 rounded-2xl p-5">
-      <h2 className="text-sm font-bold text-gray-900 flex items-center gap-2 mb-4">
-        <ExternalLink size={13} className="text-sky-500" /> Quick Links
-      </h2>
-      {[
-        { label: 'Browse All Products', path: '/products' },
-        { label: 'About Us',            path: '/about' },
-        { label: 'Contact & Support',   path: '/about' },
-      ].map(link => (
-        <Link
-          key={link.label}
-          to={link.path}
-          className="flex items-center justify-between py-2.5 border-b border-gray-50 last:border-b-0
-                     text-xs text-gray-600 hover:text-sky-600 transition-colors group"
-        >
-          {link.label}
-          <ChevronRight size={12} className="text-gray-300 group-hover:text-sky-400 transition-colors" />
-        </Link>
-      ))}
     </div>
   );
 }
@@ -432,10 +333,8 @@ const Features = () => {
 
         <HeroBanner />
 
-        {/* Main grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-          {/* Left: intro copy */}
           <div className="lg:col-span-2 space-y-4">
             <div className="bg-white border border-gray-100 rounded-2xl p-6">
               <h2 className="text-base font-bold text-gray-900 mb-3">
@@ -470,15 +369,12 @@ const Features = () => {
             </div>
           </div>
 
+          {/* Sidebar — QuickLinks removed */}
           <div className="flex flex-col gap-4">
             <ApplicationsCard />
-            <ContactCard />
-            <QuickLinks />
           </div>
         </div>
       </div>
-
-      {/* ══ FEATURES SECTION ══ */}
 
       <SectionDivider
         title={
@@ -490,7 +386,6 @@ const Features = () => {
         subtitle="ROHACELL® combines ultra-lightweight design with extraordinary mechanical performance — purpose-built for aerospace, defense, UAV, and mission-critical applications."
       />
 
-      {/* Feature cards */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {FEATURES_LIST.map((feature, i) => {
@@ -513,27 +408,22 @@ const Features = () => {
         </div>
       </div>
 
-      {/* CTA */}
       <div className="bg-white border-t border-gray-100">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-14 sm:py-20 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-            Ready to Get Started?
-          </h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Ready to Get Started?</h2>
           <p className="text-gray-500 mb-8 leading-relaxed text-sm sm:text-base">
             Explore our full product catalogue or reach out to our team to discuss your requirements.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={() => navigate('/products')}
-              className="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold
-                         hover:bg-blue-700 transition-colors text-sm sm:text-base"
+              className="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm sm:text-base"
             >
               Browse Products
             </button>
             <button
               onClick={() => navigate('/about')}
-              className="px-8 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold
-                         hover:bg-gray-50 transition-colors text-sm sm:text-base"
+              className="px-8 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors text-sm sm:text-base"
             >
               Learn About Us
             </button>

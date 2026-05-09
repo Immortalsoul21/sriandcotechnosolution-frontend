@@ -22,12 +22,6 @@ const PRODUCT_CATS = [
   { label: 'Sri & Co Manufacture',      path: '/products/Sri%20%26%20Co%20Manufacture%20Product' },
 ];
 
-const LEGAL = [
-  { label: 'Privacy Policy',   href: '#' },
-  { label: 'Terms of Service', href: '#' },
-  { label: 'Cookie Policy',    href: '#' },
-];
-
 const Footer = () => (
   <footer className="bg-gray-950 text-gray-400">
 
@@ -51,7 +45,7 @@ const Footer = () => (
           </Link>
 
           <p className="text-xs sm:text-sm leading-relaxed text-gray-500 max-w-[260px]">
-            Leading manufacturer & distributor of RF, Microwave &amp; Electronic Components for
+            Leading manufacturer &amp; distributor of RF, Microwave &amp; Electronic Components for
             Aerospace, Defence &amp; Industrial sectors across India.
           </p>
 
@@ -112,8 +106,10 @@ const Footer = () => (
               <div className="w-7 h-7 rounded-lg bg-gray-800 flex items-center justify-center flex-shrink-0">
                 <Phone size={13} className="text-sky-400" />
               </div>
-              <a href="tel:+919353961627"
-                 className="text-xs sm:text-sm text-gray-500 hover:text-sky-400 transition-colors">
+              <a
+                href="tel:+919353961627"
+                className="text-xs sm:text-sm text-gray-500 hover:text-sky-400 transition-colors cursor-pointer"
+              >
                 +91 9353961627
               </a>
             </li>
@@ -121,8 +117,13 @@ const Footer = () => (
               <div className="w-7 h-7 rounded-lg bg-gray-800 flex items-center justify-center flex-shrink-0">
                 <Mail size={13} className="text-sky-400" />
               </div>
-              <a href="mailto:sales@sriandcotechno.com"
-                 className="text-xs sm:text-sm text-gray-500 hover:text-sky-400 transition-colors">
+              <a
+                href="mailto:sales@sriandcotechno.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => { e.preventDefault(); window.location.href = 'mailto:sales@sriandcotechno.com'; }}
+                className="text-xs sm:text-sm text-gray-500 hover:text-sky-400 transition-colors cursor-pointer"
+              >
                 sales@sriandcotechno.com
               </a>
             </li>
@@ -133,7 +134,7 @@ const Footer = () => (
             to="/contact"
             className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-sky-400
                        border border-sky-400/30 rounded-lg px-4 py-2.5 w-fit
-                       hover:bg-sky-400/10 transition-colors duration-200 group"
+                       hover:bg-sky-400/10 transition-colors duration-200 group cursor-pointer"
           >
             Get in Touch
             <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
@@ -152,14 +153,7 @@ const Footer = () => (
         <p className="text-[10px] sm:text-xs text-gray-600 order-2 sm:order-1">
           © {new Date().getFullYear()} Sri and Co Techno Solutions. All rights reserved.
         </p>
-        <div className="flex items-center gap-4 sm:gap-6 order-1 sm:order-2">
-          {LEGAL.map(l => (
-            <a key={l.label} href={l.href}
-               className="text-[10px] sm:text-xs text-gray-600 hover:text-gray-300 transition-colors">
-              {l.label}
-            </a>
-          ))}
-        </div>
+        <div className="flex items-center gap-4 sm:gap-6 order-1 sm:order-2" />
       </div>
     </div>
 
