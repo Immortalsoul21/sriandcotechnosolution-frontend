@@ -351,10 +351,11 @@ const Features = () => {
     <div className="min-h-screen bg-gray-50">
 
       <NewsTicker />
+      
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-8">
 
-        {/* Breadcrumb + header */}
+        {/*
         <div className="mb-7">
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-1.5">
             <Link to="/home" className="hover:text-sky-500 transition-colors">Home</Link>
@@ -369,6 +370,7 @@ const Features = () => {
             Sri and Co Techno Solutions — live expert sessions on advanced materials &amp; industrial engineering.
           </p>
         </div>
+        */}
 
         <HeroBanner />
 
@@ -410,7 +412,6 @@ const Features = () => {
             </div>
           </div>
 
-          {/* Right: sidebar */}
           <div className="flex flex-col gap-4">
             <ApplicationsCard />
             <ContactCard />

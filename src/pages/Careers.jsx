@@ -24,6 +24,11 @@ const Careers = () => {
       intro:
         'Help us tell the story of technology that keeps our nation safe and innovation moving. You\'ll turn complex electronic components into compelling campaigns that power the Indian defence sector.',
       bullets: [
+        'Freshers are welcome',
+        'Diploma in Electronics & Communication Engineering (ECE) or Electrical & Electronics Engineering (EEE)',
+        'Ability to work effectively in a team environment.',
+        'Basic understanding of RF or electronic components is a plus.',
+        'Strong communication and willingness to learn in a fast-paced environment.',
         'Translate high-tech jargon into creative social stories.',
         'Help launch campaigns for parts protecting India\'s future.',
         'Brainstorm with a team where your ideas (and jokes) matter.',
@@ -39,6 +44,11 @@ const Careers = () => {
       intro:
         'Step into the front lines of innovation by helping us deliver critical parts. You\'ll learn to build powerful partnerships—without the boring corporate-speak.',
       bullets: [
+        'Freshers are welcome',
+        'Diploma in Electronics & Communication Engineering (ECE) or Electrical & Electronics Engineering (EEE)',
+        'Ability to work effectively in a team environment.',
+        'Basic understanding of RF or electronic components is a plus.',
+        'Strong communication and willingness to learn in a fast-paced environment.',
         'Handle inquiries for high-tech national security components.',
         'Get a front-row seat to learning complex tech specs easily.',
         'Support systems to ensure mission-ready orders are on time.',
@@ -47,27 +57,6 @@ const Careers = () => {
       hoverStyles: 'hover:border-[#2563EB] hover:shadow-[0_20px_50px_rgba(37,99,235,0.3)]',
       bulletColor: 'text-[#2563EB]',
       type: 'Internship',
-    },
-  ];
-
-  // ── ADDED: Field Application Engineer (Fresher) role ──
-  const jobOpenings = [
-    {
-      id: 3,
-      title: 'Field Application Engineer',
-      tag: 'Fresher',
-      intro:
-        'Join our technical team as a Field Application Engineer and bridge the gap between our cutting-edge RF & microwave product portfolio and our customers\' real-world engineering needs.',
-      requirements: [
-        'Diploma in Electronics & Communication Engineering (ECE) or Electrical & Electronics Engineering (EEE).',
-        'Ability to work effectively in a team environment.',
-        'Basic understanding of RF or electronic components is a plus.',
-        'Strong communication and willingness to learn in a fast-paced environment.',
-      ],
-      image: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=400&h=250&fit=crop',
-      hoverStyles: 'hover:border-[#0ea5e9] hover:shadow-[0_20px_50px_rgba(14,165,233,0.3)]',
-      bulletColor: 'text-[#0ea5e9]',
-      type: 'Full Time',
     },
   ];
 
@@ -90,7 +79,7 @@ const Careers = () => {
         </p>
       </section>
 
-      {/* Video Placeholder */}
+      {/*{ Video Placeholder }
       <section className="max-w-5xl mx-auto px-6 mb-24 transition-all duration-700 animate-on-scroll opacity-0 translate-y-10">
         <div className="aspect-video w-full bg-white/50 backdrop-blur-sm rounded-[32px] border border-white/80 shadow-2xl flex items-center justify-center overflow-hidden group">
           <div className="text-gray-400 group-hover:scale-110 transition-transform duration-500">
@@ -99,60 +88,7 @@ const Careers = () => {
             </svg>
           </div>
         </div>
-      </section>
-
-      {/* ── FULL-TIME OPENINGS ── */}
-      <section className="max-w-6xl mx-auto px-6 pb-16">
-        <h2 className="text-3xl font-bold text-center mb-4">Full-Time Openings</h2>
-        <p className="text-gray-500 text-center mb-12 max-w-xl mx-auto">
-          Join our growing team and make a real impact in defence, aerospace, and RF technology.
-        </p>
-        <div className="grid md:grid-cols-1 gap-12 max-w-2xl mx-auto">
-          {jobOpenings.map((job) => (
-            <div
-              key={job.id}
-              className={`bg-white/80 backdrop-blur-md p-8 rounded-[32px] flex flex-col items-center border-b-0 border-transparent transition-all duration-500 ease-in-out animate-on-scroll opacity-0 translate-y-10 ${job.hoverStyles} hover:border-b-8 hover:-translate-y-2`}
-            >
-              <div className="rounded-2xl overflow-hidden mb-6 h-48 w-full shadow-sm">
-                <img src={job.image} alt={job.title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
-              </div>
-
-              {/* Tag + Title */}
-              <div className="flex items-center gap-3 mb-3">
-                <h3 className="text-2xl font-bold text-center">{job.title}</h3>
-                <span className="px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-bold uppercase tracking-wider">
-                  {job.tag}
-                </span>
-              </div>
-
-              <p className="text-sm text-gray-700 mb-6 text-center leading-relaxed italic px-2">
-                "{job.intro}"
-              </p>
-
-              <div className="text-left w-full mb-2">
-                <p className="text-sm font-bold text-gray-800 mb-3 uppercase tracking-wider">Requirements</p>
-              </div>
-              <ul className="text-left w-full space-y-3 mb-8 px-2">
-                {job.requirements.map((req, index) => (
-                  <li key={index} className="flex items-start text-sm text-gray-600">
-                    <span className={`mr-2 font-bold ${job.bulletColor}`}>→</span>
-                    <span>{req}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href="https://forms.gle/kAUCokaEEmsyynXh7"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block w-full text-center bg-[#0B1221] text-white py-4 rounded-xl font-bold hover:bg-[#2563EB] transition-colors duration-300 shadow-lg shadow-blue-900/10"
-              >
-                Apply Now
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
+      </section>*/}
 
       {/* ── INTERNSHIP OPENINGS ── */}
       <section className="max-w-6xl mx-auto px-6 pb-32">
