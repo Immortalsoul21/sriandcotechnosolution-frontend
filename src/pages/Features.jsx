@@ -148,6 +148,8 @@ function NewsTicker() {
 
 function HeroBanner() {
   const cd = useCountdown(FEATURED_WEBINAR.target);
+  const isExpired = FEATURED_WEBINAR.target.getTime() <= Date.now();
+
   return (
     <div
       className="relative overflow-hidden rounded-2xl mb-8"
