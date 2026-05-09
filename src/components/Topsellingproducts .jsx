@@ -29,7 +29,7 @@ const InHouseProducts = () => {
           </span>
         </div>
 
-        {/* UPDATED heading: "Our Manufactured Products" → sub-title describes Cable Assembly, Antenna and RF Passive Components */}
+        {/* UPDATED heading */}
         <h2 className="text-xl sm:text-4xl font-bold text-center mb-2 sm:mb-3 text-gray-900">
           Cable Assembly, Antenna &amp; RF Passive Components
         </h2>
@@ -37,19 +37,23 @@ const InHouseProducts = () => {
           {/* UPDATED manufacturing description */}
           Precision-engineered components designed and built in-house; combining expertise with rigorous quality standards for mission-critical applications.
         </p>
-        {/* UPDATED tagline 
-        <p className="text-xs sm:text-sm font-semibold text-sky-600 text-center mb-6 sm:mb-10">
-          Powering The Defence And Aerospace From Ground Up
-        </p>*/}
 
         <div
           className="overflow-x-auto -mx-3 sm:-mx-4 px-3 sm:px-4"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           <div className="flex gap-3 sm:gap-8 pb-3 sm:pb-4">
-            {inHouseProducts.map((product) => (
+            {inHouseProducts.map((product, i) => (
               <div key={product.id} className="flex-shrink-0" style={{ width: 'clamp(200px, 55vw, 300px)' }}>
-                <ProductCard product={product} onClick={handleProductClick} />
+                {/*
+                  First 2 cards are visible immediately on load — use eager loading.
+                  The rest lazy-load as the user scrolls horizontally.
+                */}
+                <ProductCard
+                  product={product}
+                  onClick={handleProductClick}
+                  eager={i < 2}
+                />
               </div>
             ))}
           </div>

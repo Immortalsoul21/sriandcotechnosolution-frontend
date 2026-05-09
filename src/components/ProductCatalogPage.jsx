@@ -113,11 +113,16 @@ const ProductCatalogPage = () => {
         <div className="w-full">
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3 sm:gap-4 md:gap-6">
-              {filteredProducts.map(product => (
+              {filteredProducts.map((product, i) => (
                 <ProductCard
                   key={product.id}
                   product={product}
                   onClick={handleProductClick}
+                  /*
+                    First 14 items (~2 rows on most screens) are above the fold
+                    on the catalog page — load them eagerly. Everything else lazy.
+                  */
+                  eager={i < 14}
                 />
               ))}
             </div>

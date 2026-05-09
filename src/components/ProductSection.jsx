@@ -28,9 +28,19 @@ const ProductSection = ({ title, products, category }) => {
 
       <div className="overflow-x-auto scrollbar-hide -mx-4 px-4 py-2">
         <div className="flex gap-4 md:gap-6 py-4">
-          {products.slice(0, 10).map(product => (
+          {products.slice(0, 10).map((product, i) => (
             <div key={product.id} className="flex-shrink-0 w-44 sm:w-56 md:w-72 lg:w-80">
-              <ProductCard product={product} onClick={handleProductClick} />
+              {/*
+                ProductSection is rendered inside LazySection (IntersectionObserver).
+                The section itself only mounts when near viewport, so all cards here
+                can use eager loading safely — the section won't even render until
+                the user is close to it.
+              */}
+              <ProductCard
+                product={product}
+                onClick={handleProductClick}
+                eager={i < 3}
+              />
             </div>
           ))}
         </div>

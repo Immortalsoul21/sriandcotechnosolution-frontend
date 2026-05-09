@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// These match the categoryIds in products2.js exactly
 const categories = [
   {
     categoryId: 'RF & Microwave Components and Solutions',
@@ -30,13 +29,9 @@ const categories = [
   {
     categoryId: 'Special Materials',
     title: 'Special Materials',
-    description:
-      // UPDATED: "Rohacell" → "PMI Foam" everywhere
-      'Advanced lightweight and thermal materials including carbon fibre, PMI Foam, Solimide and thermal shielding solutions.',
-    // UPDATED: subcategory name Rohacell → PMI Foam
+    description: 'Advanced lightweight and thermal materials including carbon fibre, PMI Foam, Solimide and thermal shielding solutions.',
     subcategories: ['Carbon Fiber Sheet', 'PMI Foam', 'Solimide', 'Thermal Shielding Solution'],
     gradientFrom: '#7c3aed', gradientTo: '#6d28d9',
-    // UPDATED: Special Materials card image (changed from abstract to materials-relevant image)
     image: "/images/product/Special Materials/Materials/Rohacell.png",
   },
   {
@@ -49,8 +44,9 @@ const categories = [
   },
 ];
 
-const CategoryCard = ({ cat, onClick }) => {
+const CategoryCard = ({ cat, onClick, eager = false }) => {
   const [imgError, setImgError] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const MAX_SUBS = 3;
   const shown = cat.subcategories.slice(0, MAX_SUBS);
   const extra = cat.subcategories.length - MAX_SUBS;
@@ -58,69 +54,103 @@ const CategoryCard = ({ cat, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className="group relative rounded-2xl overflow-hidden cursor-pointer select-none flex-shrink-0 w-[72vw] sm:w-[44vw] md:w-auto md:flex-1"
-      style={{ minWidth: 0, aspectRatio: '3/4' }}
+      className="group relative rounded-2xl overflow-hidden cursor-pointer select-none"
+      style={{
+        aspectRatio: 'var(--card-ratio, 16/9)',
+        width: '100%',
+      }}
     >
+      {/* Skeleton shimmer — shown until image loads (only when not errored) */}
+      {!loaded && !imgError && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse z-0" />
+      )}
+
       {!imgError ? (
         <img
           src={cat.image}
           alt={cat.title}
+          loading={eager ? 'eager' : 'lazy'}
+          decoding="async"
           onError={() => setImgError(true)}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          onLoad={() => setLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${loaded ? 'opacity-100' : 'opacity-0'}`}
           draggable={false}
         />
       ) : (
-        <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }} />
+        <div
+          className="absolute inset-0"
+          style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
+        />
       )}
 
-      <div className="absolute inset-0 opacity-30" style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }} />
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.90) 40%, rgba(0,0,0,0.10) 100%)' }} />
+      <div
+        className="absolute inset-0 opacity-30"
+        style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.92) 35%, rgba(0,0,0,0.15) 100%)' }}
+      />
 
-      {/* Base state */}
-      <div className="absolute inset-0 flex flex-col justify-end p-3.5 sm:p-4 transition-opacity duration-300 group-hover:opacity-0">
-        <span className="mb-2 self-start text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full border border-white/25 text-white/60">
+      {/* ── Base state (always visible on mobile, hidden on hover on desktop) ── */}
+      <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-4 transition-opacity duration-300 md:group-hover:opacity-0">
+        <span className="mb-1.5 self-start text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full border border-white/25 text-white/60">
           {cat.subcategories.length} subcategories
         </span>
-        <h3 className="text-white font-bold leading-tight drop-shadow" style={{ fontSize: 'clamp(13px, 2.2vw, 18px)', letterSpacing: '-0.01em' }}>
+        <h3 className="text-white font-bold leading-tight drop-shadow text-sm sm:text-base">
           {cat.title}
         </h3>
-        <p className="mt-1 text-white/60 leading-relaxed line-clamp-2 hidden sm:block" style={{ fontSize: 'clamp(9px, 1vw, 11px)' }}>
+        <p className="mt-1 text-white/60 leading-relaxed line-clamp-2 text-[11px] sm:text-xs">
           {cat.description}
         </p>
+        <span className="mt-2 self-start text-[10px] font-semibold text-white/50 border border-white/20 rounded-md px-2 py-0.5 md:hidden">
+          Tap to explore →
+        </span>
       </div>
 
-      {/* Hover state */}
+      {/* ── Hover state (desktop only) ── */}
       <div
-        className="absolute inset-0 flex flex-col justify-between p-3.5 sm:p-4 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out"
+        className="absolute inset-0 flex-col justify-between p-4 opacity-0 translate-y-2
+                   group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out
+                   hidden md:flex"
         style={{ background: 'rgba(0,0,0,0.78)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)' }}
       >
-        <div className="h-0.5 w-8 rounded-full mb-3" style={{ background: `linear-gradient(90deg, ${cat.gradientFrom}, ${cat.gradientTo})` }} />
-
+        <div
+          className="h-0.5 w-8 rounded-full mb-3"
+          style={{ background: `linear-gradient(90deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
+        />
         <div className="flex-1 flex flex-col">
-          <h3 className="text-white font-bold leading-tight mb-3" style={{ fontSize: 'clamp(13px, 2.2vw, 18px)', letterSpacing: '-0.01em' }}>
+          <h3 className="text-white font-bold leading-tight mb-3 text-base">
             {cat.title}
           </h3>
-          <ul className="space-y-1.5 sm:space-y-2 flex-1">
+          <ul className="space-y-2 flex-1">
             {shown.map((sub, i) => (
               <li key={i} className="flex items-start gap-2">
-                <span className="flex-shrink-0 mt-1.5 rounded-full" style={{ width: 3, height: 3, background: cat.gradientFrom, boxShadow: `0 0 4px ${cat.gradientFrom}` }} />
-                <span className="text-white/80 leading-snug" style={{ fontSize: 'clamp(8px, 1vw, 11px)' }}>
-                  {sub}
-                </span>
+                <span
+                  className="flex-shrink-0 mt-1.5 rounded-full"
+                  style={{ width: 3, height: 3, background: cat.gradientFrom, boxShadow: `0 0 4px ${cat.gradientFrom}` }}
+                />
+                <span className="text-white/80 leading-snug text-[11px]">{sub}</span>
               </li>
             ))}
             {extra > 0 && (
-              <li className="text-white/35 pl-3.5" style={{ fontSize: 'clamp(8px, 0.9vw, 10px)' }}>
-                +{extra} more
-              </li>
+              <li className="text-white/35 pl-3.5 text-[10px]">+{extra} more</li>
             )}
           </ul>
         </div>
-
-        <div className="mt-3 inline-flex items-center gap-1.5 self-start font-semibold text-white border border-white/25 rounded-lg px-2.5 py-1 hover:bg-white/10 transition-colors" style={{ fontSize: 'clamp(9px, 1vw, 11px)' }}>
+        <div className="mt-3 inline-flex items-center gap-1.5 self-start font-semibold text-white border border-white/25 rounded-lg px-2.5 py-1 hover:bg-white/10 transition-colors text-[11px]">
           Explore →
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 767px) {
+          .category-card-wrapper { --card-ratio: 16/9; }
+        }
+        @media (min-width: 768px) {
+          .category-card-wrapper { --card-ratio: 3/4; }
+        }
+      `}</style>
     </div>
   );
 };
@@ -148,11 +178,12 @@ const ProductCategories = () => {
   };
 
   return (
-    <section className="py-10 sm:py-14 bg-gray-50">
+    <section className="py-8 sm:py-14 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6">
 
-        <div className="text-center mb-6 sm:mb-10">
-          <p className="text-xs sm:text-sm font-semibold text-sky-600 uppercase tracking-widest mb-1 sm:mb-2">
+        {/* Section header */}
+        <div className="text-center mb-5 sm:mb-10">
+          <p className="text-xs font-semibold text-sky-600 uppercase tracking-widest mb-1 sm:mb-2">
             What We Offer
           </p>
           <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
@@ -164,39 +195,52 @@ const ProductCategories = () => {
           </p>
         </div>
 
-        <div
-          ref={scrollRef}
-          className="flex gap-3 md:gap-4 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0 snap-x snap-mandatory md:snap-none"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
-        >
-          {categories.map((cat) => (
-            <div key={cat.categoryId} className="snap-start md:flex-1 min-w-0">
+        {/*
+          ── MOBILE: vertical stacked list (full-width landscape cards) ──
+          ── DESKTOP (md+): horizontal row of 3/4 portrait cards ──
+        */}
+        <div className="block md:hidden space-y-3">
+          {categories.map((cat, i) => (
+            <div
+              key={cat.categoryId}
+              className="category-card-wrapper"
+              style={{ '--card-ratio': '16/9' }}
+            >
               <CategoryCard
                 cat={cat}
+                eager={i === 0} /* first card is above the fold — load eagerly */
                 onClick={() => navigate(`/products/${encodeURIComponent(cat.categoryId)}`)}
               />
             </div>
           ))}
         </div>
 
-        <div className="flex md:hidden justify-center gap-1.5 mt-4">
-          {categories.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => scrollTo(i)}
-              aria-label={`Go to ${categories[i].title}`}
-              className="transition-all duration-300 rounded-full"
-              style={{ width: i === activeIndex ? 20 : 6, height: 6, background: i === activeIndex ? '#0284c7' : '#cbd5e1' }}
-            />
+        {/* Desktop horizontal scroll / flex row */}
+        <div
+          ref={scrollRef}
+          className="hidden md:flex gap-4 overflow-x-auto pb-0 snap-x snap-mandatory md:snap-none"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+        >
+          {categories.map((cat, i) => (
+            <div
+              key={cat.categoryId}
+              className="category-card-wrapper snap-start flex-1 min-w-0"
+              style={{ '--card-ratio': '3/4', aspectRatio: '3/4' }}
+            >
+              <CategoryCard
+                cat={cat}
+                eager={i < 3} /* first 3 desktop cards visible immediately — load eagerly */
+                onClick={() => navigate(`/products/${encodeURIComponent(cat.categoryId)}`)}
+              />
+            </div>
           ))}
         </div>
 
         <div className="text-center mt-6 sm:mt-10">
           <button
             onClick={() => navigate('/products')}
-            className="px-7 sm:px-9 py-2.5 sm:py-3 bg-gray-900 text-white rounded-lg font-semibold text-sm transition-all duration-300 hover:bg-sky-600 hover:shadow-lg hover:-translate-y-0.5"
+            className="px-7 sm:px-9 py-3 bg-gray-900 text-white rounded-lg font-semibold text-sm transition-all duration-300 hover:bg-sky-600 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 w-full sm:w-auto"
           >
-            {/* UPDATED: "Product Store" → "All Products" */}
             Browse All Products →
           </button>
         </div>

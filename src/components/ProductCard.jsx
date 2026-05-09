@@ -1,40 +1,59 @@
 /**
  * ProductCard Component
- * A reusable card for displaying brief product information with hover effects.
+ * Optimized: lazy loading, async decoding, skeleton shimmer while loading.
  * NOTE: Shipping alert removed from all products per product page update instructions.
  */
-const ProductCard = ({ product, onClick }) => (
-  <div
-    onClick={() => onClick(product)}
-    className="group bg-white rounded-lg shadow-lg shadow-blue-900/5 overflow-hidden hover:shadow-2xl hover:shadow-blue-900/15 transition-all duration-300 cursor-pointer h-56 sm:h-64 flex flex-col"
-  >
-    {/* Top Section: Media and Badge Area */}
-    <div className={`relative h-40 sm:h-44 group-hover:h-full transition-all duration-500 ${product.bgColor || 'bg-gray-200'} flex items-center justify-center overflow-hidden`}>
-      {/* Dynamic Status Badge */}
-      {product.badge && (
-        <span className="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-10">
-          {product.badge}
-        </span>
-      )}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-        <span className="text-xl sm:text-2xl font-bold text-gray-800/20 uppercase tracking-wider px-2 text-center">
-          {product.name.split(' ')[product.name.split(' ').length - 1]}
-        </span>
+import { useState } from 'react';
+
+const ProductCard = ({ product, onClick, eager = false }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div
+      onClick={() => onClick(product)}
+      className="group bg-white rounded-lg shadow-lg shadow-blue-900/5 overflow-hidden hover:shadow-2xl hover:shadow-blue-900/15 transition-all duration-300 cursor-pointer h-56 sm:h-64 flex flex-col"
+    >
+      {/* Top Section: Media and Badge Area */}
+      <div
+        className={`relative h-40 sm:h-44 group-hover:h-full transition-all duration-500 ${product.bgColor || 'bg-gray-200'} flex items-center justify-center overflow-hidden`}
+      >
+        {/* Skeleton shimmer — shown until image loads */}
+        {!loaded && (
+          <div className="absolute inset-0 bg-gray-200 animate-pulse z-10" />
+        )}
+
+        {/* Dynamic Status Badge */}
+        {product.badge && (
+          <span className="absolute top-2 left-2 bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-10">
+            {product.badge}
+          </span>
+        )}
+
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+          <span className="text-xl sm:text-2xl font-bold text-gray-800/20 uppercase tracking-wider px-2 text-center">
+            {product.name.split(' ')[product.name.split(' ').length - 1]}
+          </span>
+        </div>
+
+        <img
+          src={product.image}
+          alt={product.name}
+          loading={eager ? 'eager' : 'lazy'}
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 relative z-0 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        />
       </div>
-      <img
-        src={product.image}
-        alt={product.name}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 relative z-0"
-      />
+
+      {/* Bottom Section: Summary Info (Hides on hover to show full image) */}
+      <div className="p-3 flex-grow flex flex-col items-center justify-center pb-4 transition-all duration-300 group-hover:h-0 group-hover:p-0 group-hover:opacity-0 group-hover:pointer-events-none overflow-hidden">
+        <h3 className="text-xs sm:text-sm font-medium text-gray-800 mb-1 truncate w-full text-center px-1">
+          {product.name}
+        </h3>
+        {/* REMOVED: shipping alert — no longer shown on product cards */}
+      </div>
     </div>
-    {/* Bottom Section: Summary Info (Hides on hover to show full image) */}
-    <div className="p-3 flex-grow flex flex-col items-center justify-center pb-4 transition-all duration-300 group-hover:h-0 group-hover:p-0 group-hover:opacity-0 group-hover:pointer-events-none overflow-hidden">
-      <h3 className="text-xs sm:text-sm font-medium text-gray-800 mb-1 truncate w-full text-center px-1">
-        {product.name}
-      </h3>
-      {/* REMOVED: shipping alert — no longer shown on product cards */}
-    </div>
-  </div>
-);
+  );
+};
 
 export default ProductCard;
