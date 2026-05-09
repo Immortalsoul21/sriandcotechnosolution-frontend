@@ -20,7 +20,7 @@ const features = [
       </svg>
     ),
     title: 'Global Reach',
-    description: 'Reliable shipping and logistics across 150+ countries with trusted freight partners.',
+    description: 'Reliable shipping and logistics worldwide with trusted freight partners.',
   },
   {
     icon: (
@@ -118,7 +118,7 @@ const trustPoints = [
     icon: <ShieldCheckIcon />,
     // UPDATED: "Authorized supply chain" → "Supply Chain"
     label: 'Supply Chain',
-    desc: 'Every Pasternack product we offer is sourced through verified, authorised channels — guaranteeing full traceability and authenticity.',
+    desc: 'Every Pasternack product we offer is sourced directly from OEMs — ensuring quality, reliability, and authenticity.',
   },
   {
     icon: <LinkIcon />,

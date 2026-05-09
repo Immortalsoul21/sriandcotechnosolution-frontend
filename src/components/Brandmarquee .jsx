@@ -56,26 +56,35 @@ const brands = [
   { name: 'IIT Kanpur', logo: logoIitKanpur },
   { name: 'IIT Guwahati', logo: logoIitGuwahati },
   { name: 'IIT Hyderabad', logo: logoIitHyderabad },
-  { name: 'IISc Bangalore', logo: logoIiscBangalore }
+  { name: 'IISc Bangalore', logo: logoIiscBangalore },
 ];
 
-const BrandLogo = ({ brand }) => {
+const BrandLogo = ({ brand, eager }) => {
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setFailed(false);
+    setLoaded(false);
   }, [brand.logo]);
 
   if (failed) return null;
+
   return (
-    <div className="flex-shrink-0 flex items-center justify-center w-32 sm:w-44">
+    <div className="flex-shrink-0 flex items-center justify-center w-36 sm:w-52">
+      {/* Skeleton shimmer while logo loads */}
+      {!loaded && (
+        <div className="h-10 sm:h-16 w-24 sm:w-36 rounded bg-gray-100 animate-pulse" />
+      )}
       <img
         src={brand.logo}
         alt={brand.name}
-        onError={() => setFailed(true)}
-        className="h-8 sm:h-14 w-auto max-w-[100px] sm:max-w-[160px] object-contain"
-        loading="lazy"
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
         draggable={false}
+        onError={() => setFailed(true)}
+        onLoad={() => setLoaded(true)}
+        className={`h-10 sm:h-16 w-auto max-w-[120px] sm:max-w-[180px] object-contain transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0 absolute'}`}
       />
     </div>
   );
@@ -83,24 +92,32 @@ const BrandLogo = ({ brand }) => {
 
 const BrandMarquee = () => {
   return (
-    <section className="py-5 sm:py-8 bg-white border-y border-gray-100 overflow-hidden">
-      <p className="text-center text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3 sm:mb-6">
+    <section className="py-6 sm:py-10 bg-white border-y border-gray-100 overflow-hidden">
+      <p className="text-center text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4 sm:mb-7">
         Our Clients
       </p>
 
       <div className="relative">
+        {/* Fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-10 sm:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
+        {/*
+          Speed increased to 45s (was 30s) — slower, more readable scroll.
+          Logo sizes bumped: h-10/h-16 (was h-8/h-14), container w-36/w-52 (was w-32/w-44).
+          First 6 logos use eager loading — they're visible in the viewport on arrival.
+          Rest are lazy.
+        */}
         <div className="flex w-max animate-brand-marquee">
-          <div className="flex items-center gap-4 sm:gap-8 pr-4 sm:pr-8">
+          <div className="flex items-center gap-6 sm:gap-10 pr-6 sm:pr-10">
             {brands.map((brand, i) => (
-              <BrandLogo key={`orig-${i}`} brand={brand} />
+              <BrandLogo key={`orig-${i}`} brand={brand} eager={i < 6} />
             ))}
           </div>
-          <div className="flex items-center gap-4 sm:gap-8 pr-4 sm:pr-8">
+          {/* Duplicate set for seamless loop — all lazy since they're off-screen initially */}
+          <div className="flex items-center gap-6 sm:gap-10 pr-6 sm:pr-10">
             {brands.map((brand, i) => (
-              <BrandLogo key={`dup-${i}`} brand={brand} />
+              <BrandLogo key={`dup-${i}`} brand={brand} eager={false} />
             ))}
           </div>
         </div>
@@ -112,7 +129,7 @@ const BrandMarquee = () => {
           100% { transform: translateX(-50%); }
         }
         .animate-brand-marquee {
-          animation: brand-marquee 30s linear infinite;
+          animation: brand-marquee 45s linear infinite;
         }
         .animate-brand-marquee:hover {
           animation-play-state: paused;

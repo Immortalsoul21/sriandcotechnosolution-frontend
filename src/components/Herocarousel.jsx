@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const slides = [
@@ -99,6 +99,51 @@ const DotsPattern = () => (
   </svg>
 );
 
+const fallbackGradients = [
+  'from-[#0a1628] via-[#0d2147] to-[#112a5c]',
+  'from-[#071a2e] via-[#0c2a4a] to-[#0f3460]',
+  'from-[#0a1f12] via-[#0d2e1a] to-[#0f3d22]',
+  'from-[#1a1200] via-[#2e1f00] to-[#3d2a00]',
+  'from-[#0f0f23] via-[#1a1a3e] to-[#1e1e5a]',
+];
+
+/**
+ * SlideImage — handles per-slide image state (loaded, error, lazy/eager).
+ * Slides 0 and 1 load eagerly (slide 0 is visible, slide 1 is preloaded).
+ * All others use lazy loading via IntersectionObserver.
+ */
+const SlideImage = ({ slide, index, imgErrors, onError }) => {
+  const [loaded, setLoaded] = useState(false);
+  // Slide 0: eager (LCP image — must load fast)
+  // Slide 1: eager (preload so it's ready when carousel auto-advances)
+  // Slides 2+: lazy
+  const isEager = index < 2;
+
+  if (imgErrors[index]) return null;
+
+  return (
+    <>
+      {/* Skeleton — dark shimmer matching the hero background while image loads */}
+      {!loaded && (
+        <div className="absolute inset-0 bg-gray-800 animate-pulse z-0" />
+      )}
+      <img
+        src={slide.image}
+        alt=""
+        aria-hidden="true"
+        loading={isEager ? 'eager' : 'lazy'}
+        decoding="async"
+        fetchpriority={index === 0 ? 'high' : 'auto'}
+        onError={() => onError(index)}
+        onLoad={() => setLoaded(true)}
+        className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+      />
+      {/* Text readability overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30 sm:from-black/85 sm:via-black/60 sm:to-black/10" />
+    </>
+  );
+};
+
 const HeroCarousel = () => {
   const [current, setCurrent] = useState(0);
   const [imgErrors, setImgErrors] = useState({});
@@ -106,18 +151,14 @@ const HeroCarousel = () => {
   const [touchEnd, setTouchEnd] = useState(null);
   const navigate = useNavigate();
 
-  const fallbackGradients = [
-    'from-[#0a1628] via-[#0d2147] to-[#112a5c]',
-    'from-[#071a2e] via-[#0c2a4a] to-[#0f3460]',
-    'from-[#0a1f12] via-[#0d2e1a] to-[#0f3d22]',
-    'from-[#1a1200] via-[#2e1f00] to-[#3d2a00]',
-    'from-[#0f0f23] via-[#1a1a3e] to-[#1e1e5a]',
-  ];
-
   useEffect(() => {
     const id = setInterval(() => setCurrent(p => (p + 1) % slides.length), 20000);
     return () => clearInterval(id);
   }, []);
+
+  const handleImgError = (index) => {
+    setImgErrors(e => ({ ...e, [index]: true }));
+  };
 
   // Swipe support for mobile
   const minSwipeDistance = 50;
@@ -162,25 +203,18 @@ const HeroCarousel = () => {
               paddingBottom: 'clamp(52px, 8vw, 64px)',
             }}
           >
-            {!imgErrors[i] && (
-              <>
-                <img
-                  src={slide.image}
-                  alt=""
-                  aria-hidden="true"
-                  onError={() => setImgErrors(e => ({ ...e, [i]: true }))}
-                  className="absolute inset-0 w-full h-full object-cover object-center"
-                />
-                {/* Stronger overlay on mobile so text is always readable */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30 sm:from-black/85 sm:via-black/60 sm:to-black/10" />
-              </>
-            )}
+            <SlideImage
+              slide={slide}
+              index={i}
+              imgErrors={imgErrors}
+              onError={handleImgError}
+            />
 
             {slide.pattern === 'circuit' && <CircuitPattern />}
             {slide.pattern === 'grid' && <GridPattern />}
             {slide.pattern === 'dots' && <DotsPattern />}
 
-            {/* Glow orb — hidden on very small screens to reduce clutter */}
+            {/* Glow orb */}
             <div
               className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full opacity-20 pointer-events-none hidden sm:block"
               style={{
@@ -214,7 +248,7 @@ const HeroCarousel = () => {
                   {slide.badge}
                 </span>
 
-                {/* Title — larger floor on mobile */}
+                {/* Title */}
                 <h2
                   className="font-bold leading-tight tracking-tight text-white"
                   style={{
@@ -225,7 +259,7 @@ const HeroCarousel = () => {
                   {slide.title}
                 </h2>
 
-                {/* Description — readable on mobile */}
+                {/* Description */}
                 <p
                   className="opacity-80 max-w-lg leading-relaxed"
                   style={{
@@ -236,11 +270,8 @@ const HeroCarousel = () => {
                   {slide.description}
                 </p>
 
-                {/* CTA buttons — stack on very small screens */}
-                <div
-                  className="flex flex-wrap"
-                  style={{ gap: 'clamp(8px, 1.5vw, 12px)' }}
-                >
+                {/* CTA buttons */}
+                <div className="flex flex-wrap" style={{ gap: 'clamp(8px, 1.5vw, 12px)' }}>
                   <button
                     onClick={() => navigate('/products')}
                     className="font-semibold text-white rounded-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
@@ -248,7 +279,6 @@ const HeroCarousel = () => {
                       fontSize: 'clamp(12px, 1.4vw, 14px)',
                       padding: 'clamp(9px, 1.2vw, 11px) clamp(16px, 2.5vw, 22px)',
                       backgroundColor: slide.accentColor,
-                      /* Full-width on tiny screens, auto otherwise */
                       width: 'auto',
                       minWidth: 'clamp(130px, 30vw, 160px)',
                     }}
@@ -285,7 +315,7 @@ const HeroCarousel = () => {
         />
       </div>
 
-      {/* Dot nav — slightly larger tap targets on mobile */}
+      {/* Dot nav */}
       <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
         {slides.map((_, i) => (
           <button
