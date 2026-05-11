@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://srindco-technosolution.vercel.app/sitemap.xml

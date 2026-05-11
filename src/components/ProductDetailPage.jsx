@@ -4,7 +4,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 const ProductDetailPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const product = location.state?.product;
+  const { category, productSlug } = useParams();
+  const product =
+    location.state?.product ||
+    products.find(
+      (item) =>
+        item.categoryId === decodeURIComponent(category || "") &&
+        toProductSlug(item.name) === productSlug,
+    );
 
   const handleBack = () => {
     navigate(-1);

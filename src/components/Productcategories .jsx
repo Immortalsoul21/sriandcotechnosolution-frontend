@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const categories = [
@@ -77,6 +78,10 @@ const CategoryCard = ({ cat, onClick, eager = false }) => {
           draggable={false}
         />
       ) : (
+        <div
+          className="absolute inset-0"
+          style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
+        />
         <div
           className="absolute inset-0"
           style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
