@@ -99,7 +99,7 @@ const Footer = () => (
                 <MapPin size={13} className="text-sky-400" />
               </div>
               <span className="text-xs sm:text-sm leading-relaxed text-gray-500">
-                No 35, 16th Cross, Oil Mill Rd,<br />Mangala Layout, Kammanahalli,<br />Bengaluru – 560084
+                Sri and Co Techno Solutions<br />New Ebenezer Institute of Technology Campus<br />19, Hennur Bagalur Main Rd, Ebenezer Nagar, Kothanur, Bengaluru, Karnataka 560077
               </span>
             </li>
             <li className="flex items-center gap-3">
