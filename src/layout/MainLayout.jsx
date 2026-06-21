@@ -1,10 +1,12 @@
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import PageSeo from '@/components/PageSeo';
 import { Outlet } from 'react-router-dom';
 
 export default function MainLayout() {
   return (
     <div className="min-h-screen flex flex-col">
+      <PageSeo />
       {/* Header */}
       <Navbar />
 
