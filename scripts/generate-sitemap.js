@@ -1,5 +1,5 @@
 import { writeFileSync } from 'node:fs';
-import { categories, products } from '../src/data/products1.js';
+import { categories, products } from '../src/data/products2.js';
 
 const SITE_URL = process.env.VITE_SITE_URL || 'https://srindco-technosolution.vercel.app';
 
