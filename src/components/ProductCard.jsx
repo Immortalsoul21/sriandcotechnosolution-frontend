@@ -40,6 +40,7 @@ const ProductCard = ({ product, onClick, eager = false }) => {
           alt={product.name}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
+          fetchpriority={eager ? 'high' : 'auto'}
           onLoad={() => setLoaded(true)}
           className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 relative z-0 ${loaded ? 'opacity-100' : 'opacity-0'}`}
         />

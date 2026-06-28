@@ -1,5 +1,5 @@
 import { AlertTriangle, Mail, ChevronRight } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const ProductDetailPage = () => {
   const location = useLocation();
