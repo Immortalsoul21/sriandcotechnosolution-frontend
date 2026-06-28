@@ -1,4 +1,4 @@
-import { categories, products } from '@/data/products1';
+import { categories, products } from '@/data/products2';
 import {
   SITE_NAME,
   SITE_DESCRIPTION,
