@@ -36,7 +36,6 @@ const brands = [
   { name: 'ECIL', logo: logoEcil },
   { name: 'TVS', logo: logoTvs },
   { name: 'SAMEER', logo: logoSameer },
-  { name: 'AMP', logo: 'https://commons.wikimedia.org/wiki/Special:FilePath/AMP_Logo.svg' },
   { name: 'Alpha Design Technologies', logo: logoAlphaDesign },
   { name: 'Honeywell', logo: logoHoneywell },
   { name: 'TUV Rheinland', logo: logoTuvRheinland },
@@ -60,31 +59,37 @@ const brands = [
 ];
 
 const BrandLogo = ({ brand, eager }) => {
-  const [failed, setFailed] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const [status, setStatus] = useState('loading'); // 'loading' | 'loaded' | 'failed'
 
   useEffect(() => {
-    setFailed(false);
-    setLoaded(false);
+    setStatus('loading');
   }, [brand.logo]);
 
-  if (failed) return null;
+  if (status === 'failed') return null;
 
   return (
     <div className="flex-shrink-0 flex items-center justify-center w-36 sm:w-52">
-      {/* Skeleton shimmer while logo loads */}
-      {!loaded && (
+      {/* Skeleton — only visible while loading */}
+      {status === 'loading' && (
         <div className="h-10 sm:h-16 w-24 sm:w-36 rounded bg-gray-100 animate-pulse" />
       )}
+
+      {/*
+        The image is always in the DOM so onLoad / onError fire reliably.
+        We hide it visually (not with `absolute`) while loading so it doesn't
+        collapse the container or fight with the skeleton.
+      */}
       <img
         src={brand.logo}
         alt={brand.name}
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
         draggable={false}
-        onError={() => setFailed(true)}
-        onLoad={() => setLoaded(true)}
-        className={`h-10 sm:h-16 w-auto max-w-[120px] sm:max-w-[180px] object-contain transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0 absolute'}`}
+        onError={() => setStatus('failed')}
+        onLoad={() => setStatus('loaded')}
+        className={`h-10 sm:h-16 w-auto max-w-[120px] sm:max-w-[180px] object-contain select-none
+          transition-opacity duration-300
+          ${status === 'loaded' ? 'opacity-100' : 'opacity-0 w-0 h-0 overflow-hidden pointer-events-none'}`}
       />
     </div>
   );
@@ -102,19 +107,14 @@ const BrandMarquee = () => {
         <div className="absolute left-0 top-0 bottom-0 w-10 sm:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-        {/*
-          Speed increased to 45s (was 30s) — slower, more readable scroll.
-          Logo sizes bumped: h-10/h-16 (was h-8/h-14), container w-36/w-52 (was w-32/w-44).
-          First 6 logos use eager loading — they're visible in the viewport on arrival.
-          Rest are lazy.
-        */}
         <div className="flex w-max animate-brand-marquee">
+          {/* Original set */}
           <div className="flex items-center gap-6 sm:gap-10 pr-6 sm:pr-10">
             {brands.map((brand, i) => (
               <BrandLogo key={`orig-${i}`} brand={brand} eager={i < 6} />
             ))}
           </div>
-          {/* Duplicate set for seamless loop — all lazy since they're off-screen initially */}
+          {/* Duplicate for seamless loop */}
           <div className="flex items-center gap-6 sm:gap-10 pr-6 sm:pr-10">
             {brands.map((brand, i) => (
               <BrandLogo key={`dup-${i}`} brand={brand} eager={false} />

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const categories = [
@@ -56,12 +55,9 @@ const CategoryCard = ({ cat, onClick, eager = false }) => {
     <div
       onClick={onClick}
       className="group relative rounded-2xl overflow-hidden cursor-pointer select-none"
-      style={{
-        aspectRatio: 'var(--card-ratio, 16/9)',
-        width: '100%',
-      }}
+      style={{ aspectRatio: 'var(--card-ratio, 16/9)', width: '100%' }}
     >
-      {/* Skeleton shimmer — shown until image loads (only when not errored) */}
+      {/* Skeleton shimmer — shown until image loads */}
       {!loaded && !imgError && (
         <div className="absolute inset-0 bg-gray-200 animate-pulse z-0" />
       )}
@@ -78,27 +74,26 @@ const CategoryCard = ({ cat, onClick, eager = false }) => {
           draggable={false}
         />
       ) : (
-        <div
-          className="absolute inset-0"
-          style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
-        />
+        // Single gradient fallback div when image fails
         <div
           className="absolute inset-0"
           style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
         />
       )}
 
+      {/* Colour tint overlay */}
       <div
         className="absolute inset-0 opacity-30"
         style={{ background: `linear-gradient(135deg, ${cat.gradientFrom}, ${cat.gradientTo})` }}
       />
+      {/* Bottom-up dark vignette */}
       <div
         className="absolute inset-0"
         style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.92) 35%, rgba(0,0,0,0.15) 100%)' }}
       />
 
-      {/* ── Base state (always visible on mobile, hidden on hover on desktop) ── */}
-      <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-4 transition-opacity duration-300 md:group-hover:opacity-0">
+      {/* ── Base state ── */}
+      <div className="absolute inset-0 flex flex-col justify-end p-4 transition-opacity duration-300 md:group-hover:opacity-0">
         <span className="mb-1.5 self-start text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full border border-white/25 text-white/60">
           {cat.subcategories.length} subcategories
         </span>
@@ -147,40 +142,12 @@ const CategoryCard = ({ cat, onClick, eager = false }) => {
           Explore →
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 767px) {
-          .category-card-wrapper { --card-ratio: 16/9; }
-        }
-        @media (min-width: 768px) {
-          .category-card-wrapper { --card-ratio: 3/4; }
-        }
-      `}</style>
     </div>
   );
 };
 
 const ProductCategories = () => {
   const navigate = useNavigate();
-  const scrollRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const cardWidth = el.scrollWidth / categories.length;
-      setActiveIndex(Math.min(Math.round(el.scrollLeft / cardWidth), categories.length - 1));
-    };
-    el.addEventListener('scroll', onScroll, { passive: true });
-    return () => el.removeEventListener('scroll', onScroll);
-  }, []);
-
-  const scrollTo = (i) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollTo({ left: (el.scrollWidth / categories.length) * i, behavior: 'smooth' });
-  };
 
   return (
     <section className="py-8 sm:py-14 bg-gray-50">
@@ -200,41 +167,36 @@ const ProductCategories = () => {
           </p>
         </div>
 
-        {/*
-          ── MOBILE: vertical stacked list (full-width landscape cards) ──
-          ── DESKTOP (md+): horizontal row of 3/4 portrait cards ──
-        */}
+        {/* Mobile: vertical stacked landscape cards */}
         <div className="block md:hidden space-y-3">
           {categories.map((cat, i) => (
             <div
               key={cat.categoryId}
-              className="category-card-wrapper"
               style={{ '--card-ratio': '16/9' }}
             >
               <CategoryCard
                 cat={cat}
-                eager={i === 0} /* first card is above the fold — load eagerly */
+                eager={i === 0}
                 onClick={() => navigate(`/products/${encodeURIComponent(cat.categoryId)}`)}
               />
             </div>
           ))}
         </div>
 
-        {/* Desktop horizontal scroll / flex row */}
+        {/* Desktop: horizontal row of portrait cards */}
         <div
-          ref={scrollRef}
-          className="hidden md:flex gap-4 overflow-x-auto pb-0 snap-x snap-mandatory md:snap-none"
+          className="hidden md:flex gap-4 overflow-x-auto pb-0"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
         >
           {categories.map((cat, i) => (
             <div
               key={cat.categoryId}
-              className="category-card-wrapper snap-start flex-1 min-w-0"
+              className="flex-1 min-w-0"
               style={{ '--card-ratio': '3/4', aspectRatio: '3/4' }}
             >
               <CategoryCard
                 cat={cat}
-                eager={i < 3} /* first 3 desktop cards visible immediately — load eagerly */
+                eager={i < 3}
                 onClick={() => navigate(`/products/${encodeURIComponent(cat.categoryId)}`)}
               />
             </div>
