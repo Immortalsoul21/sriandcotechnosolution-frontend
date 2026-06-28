@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import logoIsro from '../assets/logo/isro.svg';
 import logoDrdo from '../assets/logo/drdo.svg';
@@ -59,27 +59,28 @@ const brands = [
 ];
 
 const BrandLogo = ({ brand, eager }) => {
-  const [status, setStatus] = useState('loading'); // 'loading' | 'loaded' | 'failed'
+  const [status, setStatus] = useState('idle'); // 'idle' | 'loaded' | 'failed'
+  const imgRef = useRef(null);
 
   useEffect(() => {
-    setStatus('loading');
+    setStatus('idle');
+    // Handle already-cached images that fire onLoad before React attaches the handler
+    if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      setStatus('loaded');
+    }
   }, [brand.logo]);
 
   if (status === 'failed') return null;
 
   return (
-    <div className="flex-shrink-0 flex items-center justify-center w-36 sm:w-52">
+    <div className="flex-shrink-0 flex items-center justify-center w-36 sm:w-52 relative">
       {/* Skeleton — only visible while loading */}
-      {status === 'loading' && (
+      {status !== 'loaded' && (
         <div className="h-10 sm:h-16 w-24 sm:w-36 rounded bg-gray-100 animate-pulse" />
       )}
 
-      {/*
-        The image is always in the DOM so onLoad / onError fire reliably.
-        We hide it visually (not with `absolute`) while loading so it doesn't
-        collapse the container or fight with the skeleton.
-      */}
       <img
+        ref={imgRef}
         src={brand.logo}
         alt={brand.name}
         loading={eager ? 'eager' : 'lazy'}
@@ -88,8 +89,8 @@ const BrandLogo = ({ brand, eager }) => {
         onError={() => setStatus('failed')}
         onLoad={() => setStatus('loaded')}
         className={`h-10 sm:h-16 w-auto max-w-[120px] sm:max-w-[180px] object-contain select-none
-          transition-opacity duration-300
-          ${status === 'loaded' ? 'opacity-100' : 'opacity-0 w-0 h-0 overflow-hidden pointer-events-none'}`}
+          transition-opacity duration-300 absolute
+          ${status === 'loaded' ? 'opacity-100 static' : 'opacity-0 pointer-events-none'}`}
       />
     </div>
   );
